@@ -153,6 +153,12 @@ barplot(data$a,
 -   Environment pane
 -   Output pane
 
+## Quiz \# 1 ANSWERS
+
+1.  Environment tab in the Environment Pane
+2.  Plots tab of the Output pane
+3.  Source Pane
+
 ------------------------------------------------------------------------
 
 # Notebooks & Scripts
@@ -169,7 +175,7 @@ Through RStudio, you can use and render R code in a variety of ways including:
     -   Can contain text, code chunks, equations, tables
     -   Good when small bits of code are being run for a discrete task.
 
-Even though you will probably use scripts when you start out coding, for this workshop we are going to take advantage of the ability to have readable text along side runnable code.
+Even though you will probably use scripts when you start out coding, for this workshop we are going to work in a notebook to take advantage of the ability to have readable text along side runnable code.
 
 # Variables in R
 
@@ -194,13 +200,12 @@ You can find a list of reserved words [here](https://rdrr.io/r/base/Reserved.htm
 
 ## Will it Variable?
 
-For a variable to be useful, you must give it a value. To set a variable to a value, you use the assignment operator. You've seen this in math, for instance, $a+b=5$. In R, to assign a value to a variable we use "\<-". We'll talk more about variables later, but now you know the assignment operator!
+For a variable to be useful, you must give it a value. To set a variable to a value, you use the assignment operator. You've seen this in math, for instance, $a+b=5$. In R, to assign a value to a variable we use "\<-". We'll talk more about operators later, but now you know the assignment operator!
 
 The code box below shows some example variables. Use CMD/CTRL + RETURN/ENTER to run a line of code.
 
 ```{r Variables}
 
-# Set some variables
 bert  <-  5
 ernie <-  "Bert's Best Friend"
 mrs.wuff  <-  9.732
@@ -239,6 +244,15 @@ My_favoritePASSWORDofAlL.tymes <- 5
 
 ```
 
+## Quiz \# 2 Answers
+
+The acceptable passwords are:
+
+-   My_favoritePASSWORDofAlL.tymes
+-   PW6
+-   PW6_myfav
+-   If
+
 ------------------------------------------------------------------------
 
 # Data Types
@@ -262,11 +276,11 @@ We'll talk about 4 main data types:
 
 ## Numeric
 
-Numeric values can be described as integers, decimals (floating point numbers) and complex. We will leave complex numbers for another day and focus on integers and decimals.
+Numeric values can be described as integers, decimals (floating point numbers) and complex. We will focus on integers and decimals, but be aware that R can handle complex values too.
 
 Some languages aggressively distinguish between integers (whole numbers) and floating point (decimal) values. R does not. In R, when you store a number it is loaded as a `double`. This is just another word for decimal or floating point.
 
-In most situations, you don't have to worry about whether a number is an integer or a floating point value. However, it does recognize integers and doubles. It also has function that check or convert a number to an integer or float. Read more about numbers in R [here](https://www.burns-stat.com/documents/tutorials/impatient-r/more-r-key-objects/more-r-numbers/).
+In most situations, you don't have to worry about whether a number is an integer or a floating point value. However, it does recognize integers and doubles (floating point). It also has functions that check or convert a number to integers and floats. Read more about numbers in R [here](https://www.burns-stat.com/documents/tutorials/impatient-r/more-r-key-objects/more-r-numbers/).
 
 ------------------------------------------------------------------------
 
@@ -277,8 +291,14 @@ Let's look at some examples.
 myBelovedInteger <- -53
 BigInteger <- 1500225
 typeof(BigInteger)
+
+# Uncomment the line below.
+# Look for a red x to the left of the line number
+# Try to run the line of code.
+
 # NoCommasReally <- -22,550,675
-# Yes, really
+
+# Remember to re-comment the line because the error may keep the notebook from rendering.
 ```
 
 > REMEMBER: computers don't need commas in numbers. That's just to make them easier to read for us humans.
@@ -295,6 +315,7 @@ swimFloaties <- -25.11235813
 trickyFloat <- 198.0 # is it an integer or is it a double?
 typeof(trickyFloat) # everything is a double to R
 typeof(myPreciousFloat) # yup, still a double
+
 ```
 
 > Use the `typeof()` function to check what data type R thinks a variable is.
@@ -308,37 +329,39 @@ We've looked at the scary, scary numbers. Let's look at good old familiar text. 
 myFirstString <- "String"
 mySecondString <- "My second string"
 anotherString <- "Is this a string or a sentence? I'm not sure..."
+
 ughWhatNow <- 'She asked, "What if I want to put something in quotes?"'
 print(ughWhatNow)
+typeof(ughWhatNow)
+
 ughWhatNowPart2 <- "She asked, 'What if I want to put something in single quotes?'"
 print(ughWhatNowPart2)
-typeof(ughWhatNow)
+
 ```
 
-Compare how `ughWhatNow` is printed to how `ughWhatNowPart2` is printed. What is the difference? What is with that "\\"? And why did you put two of them between quotes? And WHY does only one print in the HTML version of the notebook?!?
+Compare how `ughWhatNow` is printed to how `ughWhatNowPart2` is printed. What is the difference? Where did the two "\\" come from?
 
-> Sometimes, R needs to distinguish between a character that is being used programmatically, versus one that should be a string. To distinquish between the two an escape character is used. That escape character is "". We need two in the paragraph above because the first is the escape character and the second is the character we want to print out in the final notebook.
+> First, the "\\" is called an escape character. You use it to differentiate between a character that should be used as a character as opposed to indicating the beginning or end of a string. You might also use it to indicate a non-printing character. An example would be "\\n" which is a line feed. In this case, we want to have a string that includes quoted text, but we use quotes to tell R something is a string. The example above shows that R uses double quotes to identify the beginning and end of a string and if we need to include quoted text, we should use single quotes.
 
 ## Dates & Times
 
 Dates are their own special kind of special. The Date/Time data type is useful for:
 
--   Outputting dates so they look pretty and confirm to the style you want them to (e.g., 8/26/2025, August 26, 2025; 25/08/2025).
+-   Outputting dates so they look pretty and conform to the style you want them to (e.g., 8/26/2025, August 26, 2025; 25/08/2025).
 -   Being able to do date math: how many weeks, days, months, years between two dates, etc.
 
 We can define a date as a string. The computer doesn't care:
 
-```{r}
+```{r Text-Dates}
 aDateButItsReallyAString <- "07/15/2025"
 print(aDateButItsReallyAString)
+
 ```
 
 Why would we want to use a date data type? See above or try the code below. Uncomment the line that states with `letsAdd4Days` and try to run it.
 
 ```{r Text-Dates-Are-Bad-At-Math}
-# To explore when data strings break, uncomment the next line and
-# try to run it. We are just trying to find out what the date is 4 days from
-# our date string:
+# To explore when data strings break, uncomment the next line and try to run it. We are just trying to find out what the date is 4 days from our date string:
 
 # letsAdd4Days <- aDateButItsReallyAString + 4
 
@@ -347,40 +370,51 @@ Why would we want to use a date data type? See above or try the code below. Unco
 
 Using text dates has it's limitations. What if you didn't want to print it out as "07/15/2025", but wanted to show "July 15, 2025"?
 
-That's where the date datatype comes in.
+That's where the date data type comes in.
 
-```{r}
+```{r Date-Dates}
 # Let's try some dates
 myTextDate = "7/15/25"
 print(myTextDate)
+
 myDateDate = as.Date(myTextDate, format = "%m/%d/%y")
 print(myDateDate)
+
 myDateDate2 = as.Date(myTextDate, format = "%m/%d/%Y")
 print(myDateDate2)
+
+
 ```
 
-What is with the output on the third line? Good question! Look at the format passed in the `as.Date()` function. Compare the formats used to define `myDateDate` and `myDateDate2`. What's different?
+What is with the output on the third line? Good question! Look at the format string passed in the `as.Date()` function. Compare the formats used to define `myDateDate` and `myDateDate2`. What's different?
 
-But the question is can we add 4 days to `myDateDate` now?
+The question is can we add 4 days to `myDateDate` now?
 
-```{r}
+```{r Date-Dates-Math}
+
 myNewDateDate <- myDateDate + 4
 myNewDateDate
+
 ```
 
-Yes! Any questions?
+Yes!
 
 ## Logical
 
-A boolean value is one that can take one of two values: 0 or 1. In R, these types of values are represented using the "logical" data type. The logical data type takes the value TRUE (1) or FALSE (0). It is good for setting flags and creating indices to subset data. ![Examples for logical values](imgs/logical_examples.jpg)
+A Boolean value is one that can take one of two values: 0 or 1. In R, these types of values are represented using the "logical" data type. The logical data type takes the value TRUE (1) or FALSE (0). It is good for setting flags and creating indices to subset data.
 
-```{r}
+![Examples for logical values](imgs/logical_examples.jpg)
+
+```{r Boolean-Examples}
 # Example of boolean
 dogIsCute <- TRUE
 glassIsFull <- TRUE
 todoIsDone <- FALSE
 doorIsClosed <- FALSE
+
 ```
+
+When we get to the section on operators, you will begin to see the extent to which we use logical values in programming. It make sense when you remember that computers only understand voltage off/voltage on which gets encoded as 0/1. So, of course we would use logical values a lot. It is the most basic thing computers can manipulate.
 
 ------------------------------------------------------------------------
 
@@ -389,16 +423,19 @@ doorIsClosed <- FALSE
 ```{r Quiz_3-Variables}
 
 # Create a variable and set it to some text.
-
+sailBoatType <- "Sonar"
 
 # Create a variable and set it to a numeric value
+boatLength <- 23 # Length in Feet
 
-
-# Create a variable and set to a date type
 # Create a text variable and set it to a text date.
+sailDateText <- "09-15-1997"
 
 # Create a date variable and convert the text date to a date using `as.Date()`
+sailDate <- as.Date(sailDateText, format="%m-%d-%Y")
+
 # Print your date variable to the screen
+print(sailDate)
 
 ```
 
@@ -412,9 +449,9 @@ We will explore three widely used data structures:
 
 -   arrays/vectors
 -   matrices
--   data frames
+-   dataframes
 
-Basic distinguishing factors between data types include:
+Basic distinguishing factors between data structions include:
 
 -   do they store only one data type or multiple data types?
 -   do they have one dimension, two dimensions or \> 2 dimensions?
@@ -424,11 +461,11 @@ There are two aspects of using data structures:
 -   how to create them; and,
 -   how to access the data in them.
 
-We'll cover both aspects.
+We'll cover both.
 
 ## Vectors (1-D Arrays)
 
-Vectors store data in one dimension and allow only one data type to be stored in one.
+Vectors store data in one dimension and allow only one data type to be stored.
 
 ## I Digress ...
 
@@ -436,9 +473,12 @@ In point of fact, R is a vectorized language. What does that mean? It means scal
 
 ### How to Create Vectors
 
-Creating vectors is shown in the code below. We'll make one for integers, floating point values, text and boolean. No dates.
+Creating vectors is shown in the code below. We'll make one for integers, floating point values, text and Boolean. No dates.
 
 ```{r Define-Vectors}
+# Let's clean up the variables to make it easier to see what's going on
+rm(list=ls())
+
 # EXAMPLES OF HOW TO CREATE VECTORS
 # (Single Data Type)
 
@@ -462,18 +502,17 @@ print(logiVector)
 # Also a vector:
 dohVector <- c(1, 2, 3.00, "four", "five") # Wait! What?!?!
 print(dohVector)
+
 ```
 
-I said arrays will only hold one data type and then I went and loaded one up with all sorts of data types. This was to prove a point. Just because you CAN do a thing doesn't mean you should. As you can see R helpfully converts every value to a string. This is great if this is what you wanted and expected to happen. However, if not, it could break your code.
+I said arrays will hold only one data type and then I went and loaded one up with all sorts of data types. This was to prove a point. Just because you CAN do a thing doesn't mean you should. As you can see R helpfully converts every value to a string. This is great if this is what you wanted and expected to happen. However, if not, it could break your code.
 
 ### Accessing Elements in a Vector
 
-Elements in a vector can be accessed by using an index, or range of indices, put and open and closed square bracket. Let's try it out
+Elements in a vector can be accessed by using an index, or range of indices between two square brackets. Let's try it out.
 
 ```{r Access-Elements-In-Vectors}
-# Make sure the vectors 
-# (e.g., click # on the green arrow in the code block, if you haven't
-# yet)
+# Make sure you ran the code above to define the vectors. Click on the green run button in the code chunk above. 
 # VECTORS
 print(intVector)
 intVector[1]
@@ -495,34 +534,50 @@ length(dohVector) # Oops
 newVector2Showoff <- c(7, 8, 9, 10, 11, 12)
 indices2grab <- c(2,4,6)
 newVector2Showoff[indices2grab] # We can use a vector to extract values from a vector
+
+
 ```
 
 ## Matrices (or n-D Arrays)
 
-Matrices: \* can have 2 or more dimensions \* hold only one data type
+Matrices:
+
+-   can have 2 or more dimensions
+
+-   hold only one data type
 
 They are useful in computational work. There are a couple of ways to declare a matrix in R.
 
-If you only need a 2-dimensional matrix (rows and columns only), you can use `matrix()`. Let's see an example below:
+If you only need a 2-dimensional matrix (rows and columns only), you can use `matrix()`. You define the number of rows and columns. Let's see an example below:
 
 ```{r Two-Dimension-Matrices}
-# Create a matrix
-myMatrix <-  matrix(c(1,2,3,4,5,6,7,8), nrow=4, ncol=2, byrow = FALSE)
+# Create a 2-D matrix
+myMatrix <-  matrix(c(1:8), nrow=4, ncol=2, byrow = FALSE)
 print(myMatrix)
 
-# Create a matrix filled with zeros
-# then you can fill it in later.
+# What happens if you create a matrix with more elements than your data?
+myBiggerMatrix <- matrix(c(1:8), nrow=5, ncol=2, byrow=FALSE)
+print(myBiggerMatrix)
+
+# What happens if you create a matrix with fewer elements than your data?
+mySmallerMatrix <- matrix(c(1:8), nrow=3, ncol=2, byrow=FALSE)
+print(mySmallerMatrix)
+
+# Create a 2-D matrix filled with zeros
+# that you can fill it in later.
 myZeroMatrix <-  matrix(0, nrow=5, ncol=6)
 print(myZeroMatrix)
 
 # Ooh let's set an element to some other value...
 myZeroMatrix[4,4] <- -16
 print(myZeroMatrix)
+
 ```
 
 To create a matrix that has more than 2 dimensions, you use the `array()` function. Let's give it a try.
 
 ```{r Multi-dim-matrices}
+# Create a 3-D matrix
 my_array <- array(0, dim = c(5,10,3))
 print(my_array)
 
@@ -531,8 +586,9 @@ my_array[1,2,3] <- 42 # [row, col, dim]
 print(my_array)
 print(my_array[1,2,3])
 
-# Set the value of the 5th column, 3rd row and 2nd dimension of myArray to your favorite number
-
+# Set the value of the 5th column, 3rd row and 2nd dimension of myArray to your favorite number. Print out "my_array" to see the change
+my_array[3,5,2] <- 7892
+print(my_array)
 
 ```
 
@@ -544,21 +600,24 @@ Dataframes:
 -   allow multiple datatypes, but each column must be the same datatype.
 -   are similar to excel tables.
 
-Dataframes can have row and column names.
+dataframes can have row and column names.
 
 ```{r Data-frames}
-
+# Create a dataframe
 myDataFrame <- data.frame(Name = c("Snoopy", "Scrat", "Ratbert", "Hobbs"),
                           Species = c("Dog", "Squirrel", "Rat", "Tiger"),
                           numFriends = c(8, 0, 1, 1))
 print(myDataFrame)
 
 # extract data from dataframe
-myDataFrame["Name"]
-myDataFrame[c("Name","numFriends")]
-myDataFrame[1:2]
-myDataFrame[,1:2]
-myDataFrame[1:2, ]
+myDataFrame["Name"] # extracts the values in the Name column
+myDataFrame[c("Name","numFriends")] # extract values for Name and numFriends columns
+myDataFrame[1:2] # extracts the first two columns
+myDataFrame[,1:2] # also extracts the first two columns
+myDataFrame[1:2, ] # extracts the first two rows
+myDataFrame[-1] # extracts all columns but the first column
+myDataFrame[-1,] # extracts every row but the first one
+
 ```
 
 ------------------------------------------------------------------------
@@ -566,20 +625,44 @@ myDataFrame[1:2, ]
 ## Quiz \# 4
 
 ```{r Quiz-4-Data-Structures}
-data <- c(1:24)
-
+# Create some data to use for the problems below. Make sure you run this line of code
+data <- c(1:24) 
 
 # Create an array/vector that holds 4 words
+myFavColors <- c("green", "purple", "black", "cyan")
 
 # Create a two-dimensional maxtrix and fill it with `data`
+# Try using dimensions that fit the data and dimensions that don't
+
+# Define matrix to be the same number of elements as data
+myMatrix1 <- matrix(data, nrow=6, ncol=4)
+print(myMatrix1)
+
+# Define matrix to be larger than data
+myMatrix2 <- matrix(data, nrow=6, ncol=5)
+print(myMatrix2)
+
+# Define matrix to be smaller than data
+myMatrix3 <- matrix(data, nrow=5, ncol=4)
+print(myMatrix3)
 
 # Create a 3-dimensional matrix and fill it with `data`
-# Use dimensions that fit the data
+# Try using dimensions that fit the data and dimensions that don't
+my3DMatrix <- array(data, dim = c(3,2,4))
+print(my3DMatrix)
 
 # Make a 3-dimensional matrix and fill it with zeros
 # pick whatever dimensions you want, but don't break your computer with huge values!
+# print out matrix
+myZeros <- array(0, dim = c(9,9,9))
+print(myZeros)
 
 # Make a dataframe with two rows and three columns of data
+# Print out the dataframe
+myDataframe <- data.frame(id = 1:2,
+                     color = c("green","blue"),
+                     size = c(36,92))
+print(myDataframe)
 
 ```
 
@@ -593,7 +676,7 @@ We'll cover the following kinds of operators:
 
 -   Arithmetic,
 
--   Relational,
+-   Relational, and
 
 -   Logical.
 
@@ -615,29 +698,32 @@ I'm sure you can already guess what these are:
 Operators can be referred to as **unary** or **binary**. From math class, you may recall that operators act upon **operands**. Unary means that an operator takes a single operand while binary indicates it takes two. The `-` operator is a great example. It is not essential you know this, but if you hear it in the future you'll know what it means.
 
 ```{r Unary-Binary-Operators}
+# Let's clear out our variables
+rm(list=ls())
 
 # Unary
-lessThanZero <- -5
-print(lessThanZero)
-
+aNumber = 5
+myNegativeNumber <- -aNumber
+print(myNegativeNumber)
+  
 # Binary
-x <- 11
-y <- 9
-aDifference <- x - y
-print(aDifference)
-
+x <- 5
+y <- 10
+myDifference <- x-y
+print(myDifference)
 
 ```
 
 Most of the arithmetic operators should be familiar. Examples are provided below:
 
 ```{r Arithmetic-Operators-1}
-# Use familiar operators with values
+# Use operators with values
 5 + 6
 5 - 6
 5 * 6
 5 / 6
 5 ^ 6
+5 ** 6
 
 # Separate Output
 print('* * * * * * * * * * *')
@@ -646,20 +732,22 @@ print('* * * * * * * * * * *')
 # We'll be creative and use new values
 
 # Declare some variables and set them to values
-variable.1 <- 8
-variable.2 <- 2
+x <- 7.985
+y <- 2.001
 
 # Apply operators
-variable.1 + variable.2
-variable.1 - variable.2
-variable.1 * variable.2
-variable.1 / variable.2
-variable.1 ^ variable.2
+
+x + y
+x - y
+x * y
+x / y
+x ^ y
+x ** y
 
 
 ```
 
-However, some operators may be new. These include the modulus operator, `%%`, and the special operator for integer division, `%/%`. These two operators provide special output. The modulus operator returns the remainder of integer division. The operator to perform integer division, returns the quotient of the division.
+However, some operators may be new. These include the modulus operator, `%%`, and the special operator for integer division, `%/%`. These two operators provide special functionality. The modulus operator returns the remainder of integer division. The operator to perform integer division, returns the quotient of the division.
 
 ```{r Arithmetic-Operators-2}
 myNumber <- 10
@@ -681,7 +769,7 @@ myNumber %% myOtherDivisor
 
 ## Relational
 
-Relational operators are all binary and are used to compare two values. The result of using relational operators is a logical value: TRUE or FALSE.
+Relational operators are all binary and are used to compare two values. The result of using relational operators is a logical (Boolean) value: `TRUE` or `FALSE`.
 
 | Operator |        Operation         |    Example    |
 |:--------:|:------------------------:|:-------------:|
@@ -693,12 +781,46 @@ Relational operators are all binary and are used to compare two values. The resu
 |    !=    |        inequality        |   "a"!="b"    |
 
 ```{r Relational-Operators}
+# Let's clear out our variables
+rm(list=ls())
 
+# Define some variables and set them to a value
+bigWolf <- 135 # this is the weight of a wolf in pounds
+medWolf1 <- 85 # this is an average sized wolf
+medWolf2 <- 85.000000000001 # this is another average sized wolf
+smallWolf <- 50 # small wolf
+
+myGermanShepard <- 85 # weight of my dog, if I had one
+
+# Let's compare my shepard to the different wolves
+
+myGermanShepard < bigWolf
+myGermanShepard >= medWolf1
+myGermanShepard < medWolf2
+myGermanShepard > smallWolf
+
+# Let's look at `==` more closely
+myGermanShepard == medWolf1 # perfectly fine, two integers
+myGermanShepard == medWolf2 # Seems good because 85.000000000001 is not equal to 85 BUT DON'T DO THIS
+
+# BUT what if that 85.000000000001 was the result of calculating an average weight. In this situation .000000000001 may not be a meaningful difference
+
+```
+
+It is a bad idea to compare equality of floating point numbers. This is particularly true when the variables you are comparing are the result of calculation. In the example above, if `85.000000000001` was the results of an averaging calculation, it is quite likely that the fractional part is not informative. In practice you would want to find that comparison equal but your computer would not find it so. It is standard practice to use a tolerance to check for equality. This allows you to control the precision with which you check equality. See the example below:
+
+```{r Tolerance-Example}
+a <-  0.4 + 0.5
+b <-  0.9
+epsilon <- 1e-9 # a very small number
+
+(a-b) < epsilon # if the difference is less, then you assume equality.
+print(a-b)
 ```
 
 ## Logical
 
-Logical operators are used to compare two logical values.
+Logical operators are used to compare two logical values or two relational expressions that evaluate to logical values.
 
 | Operator |    Operation     |                    Example                    |
 |:-----------------:|:-----------------:|:--------------------------------:|
@@ -707,6 +829,43 @@ Logical operators are used to compare two logical values.
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
 |   \|\|   |    Logical OR    |                    isCute                     |
 |    !     |   Logical NOT    |                    !isCute                    |
+
+```{r Logical-Operators}
+# Use variables from last section
+
+# Define some variables to compare
+numWolves <- 50
+numDogs <- 25
+numCats <- 100
+
+# Define some Boolean variables and set them
+isParty <- FALSE
+haveHotdogs <- TRUE
+haveCheetos <- TRUE
+
+# Check if numWolves is less than numDogs AND numCats is less than numDogs
+(numWolves < numDogs) && (numCats < numDogs)
+
+# Check if numDogs is less than or equal to 25 OR numCats is less than or equal to 25
+(numDogs <= 25) || (numCats <= 25)
+
+# Check if numDogs is less than 150 OR numCats is less than 150
+(numDogs < 150) || (numCats < 150)
+
+# See isParty is TRUE AND if numDogs is greater than 0 AND haveHotdogs is FALSE
+# This could be a problem
+isParty && (numDogs > 0) && !haveHotdogs
+
+# See if (numDogs is greater than zero AND haveHotdogs is TRUE) OR (numCats is greater than 0 AND haveCheetos is TRUE)
+
+(numDogs > 0 && haveHotdogs) || (numCats > 0 && haveCheetos)
+
+# How could you fix the expression above to make sure that you have food available for both cats and dogs who come to your party?
+
+(numDogs > 0 && haveHotdogs) && (numCats > 0 && haveCheetos)
+
+
+```
 
 ------------------------------------------------------------------------
 
@@ -718,59 +877,73 @@ Logical operators are used to compare two logical values.
 # You need to see if you have more buns than hotdogs. Create two variables, numBuns and numHotdogs and set them to any values you want. Create a variable "haveEnoughBuns" and write an expression that sets `haveEnoughBuns` to TRUE if you have enough. Try different values for `numBuns` and `numHotdogs`, if you want.
 
 # Declare `numBuns` and `numHotDogs`
-numBuns <- 6
-numHotdogs <- 8 # Why, why do they do this?!? (well, they used to)
+numBuns = 6 # Seriously? This used to be a thing. Why was it a thing?
+numHotdogs = 8 
 
 # Check if you have enough buns.
-haveEnoughBuns <- numBuns > numHotdogs
-print(haveEnoughBuns) # NOOOOOOO! 
+haveEnoughBuns <-  numHotdogs == numBuns
+# NOOOOOOOO!!!
 
 # PROBLEM 2
 
 # We need to make sure we have potato chips for our guests for our Friday night party
+
 # Declare the following variables:
 #
 # `perfectChipsPortion`: set it to the number of grams a perfect portion of potato chips would be
 # `numGuests`: set it to the number of guests you've invited
-# `chipsNeededInGrams`: calculate the number of chips you need in grams
-# `numBagOChips`: set to the number of bag of chips you picked up
-# `gramsPerBag`: set this to the number of grams of chips per bag
-# `totalChipsInGrams`: calculate the number of grams you bought
-# `haveEnoughChips`: compare the number of chips you need to the number you have (in grams)
+perfectChipsPortion <- 500
+numGuests <- 5
 
-# How many grams of chips do I need?
-perfectChipsPortion <- 500 # don't judge me. I love chips
-numGuests <- 4 # I'm an introvert.
+# Also declare
+#
+# `numBagsChips`: set to the number of bag of chips you picked up
+# `gramsPerBag`: set this to the number of grams of chips per bag
+numBagsChips <- 3
+gramsPerBag <- 250
+
+# Calculate the number of grams of chips you need for all your guests
+# name the variable `chipsNeededInGrams`
 chipsNeededInGrams <- perfectChipsPortion * numGuests
 
+# Calculate how many of grams of chips you have
+# name this variable `totalChipsInGrams`
+totalChipsInGrams <- numBagsChips * gramsPerBag
+
+# Create a Boolean variable and name it `haveEnoughChips`
+# compare the number of chips you need to the number you have (in grams)
+# You want `haveEnoughChips` to be TRUE if you have enough
+haveEnoughChips <- totalChipsInGrams >= chipsNeededInGrams
+
+# How many grams of chips do I need?
+chipsNeededInGrams
+
 # How many grams of chips do I have?
-numBagOChips <- 3
-gramsPerBag <- 200
-totalChipsInGrams <- numBagOChips * gramsPerBag
+totalChipsInGrams
 
 # Do I have enough chips? Drum roll please...
-haveEnoughChips <- totalChipsInGrams >= chipsNeededInGrams
-# NOOOOOOO!!!...Back to the store... I hope it went better for you
+haveEnoughChips
 
 # PROBLEM 3
 # Use a logical operator to check whether you have enough buns for your hotdogs and enough chips for your guests. Declare a variable to store the result.
-partyTime <- haveEnoughBuns && haveEnoughChips
+haveEnoughFood <- haveEnoughChips && (numHotdogs * numGuests == numBuns * numGuests)
 
 # PROBLEM 4
-# Use the modulus operator and a relational operator to test if the variable `isThisEven` is an even number. Then, write a statement that creates a logical variable to hold the result.
+# In this problem we are going to write code that let's use check whether a number is even.
 
-# This is the number to check
-isThisEven <- 7324
+# Declare a variable and set it to the number you want to check
+num2Check <- 12
 
-# First use modulus to divide the number by 2, then check if the remainder is zero. This can be done it two steps or one
+# Use modulus to find the remainder of dividing your number by 2. 
+# Then check if the remainder is zero. 
+# This can be done it two steps or one
 
 # Two Steps
-myRemainder <- isThisEven %% 2
-isEven <- myRemainder == 0
+divBy2 <- num2Check %% 2
+divBy2 == 0
 
 # One step
-isEven <- isThisEven %% 2 == 0
-print(isEven)
+(num2Check %% 2) == 0
 
 
 
@@ -802,41 +975,3 @@ We appreciate your input. Let us know how this Workshop went for you! We take yo
 We are available to help you with whatever question you have about this Workshop or programming in general. If you run into snags or questions (we all do), as you start to create programs for yourself, reach out to [us](https://go.ncsu.edu/getdatahelp). Send an email, make an appointment, or reserve a workstation! We are here to assist you to be successful in your data science journey.
 
 ------------------------------------------------------------------------
-
-# Answers to Quizzes MOVE TO ANSWERS DOCUMENT
-
-## Quiz \# 1 Answers
-
-1.  Environment tab in the Environment Pane 2. Plots tab of the Output pane AND/OR In a notebook, below the code block that generates the plot 3. Source Pane
-
-## Quiz \# 2 Answers
-
-The following passwords are acceptable passwords in R:
-
--   My_favoritePASSWORDofAlL.tymes
--   PW6
--   PW6_myfav
--   If
-
-## Quiz \# 3 Answers (Yours may look different)
-
-```{r Quiz_3_Answers}
-
-# Create a variable and set it to some text.
-firstName <- "Snavely"
-
-# Create a variable and set it to a numeric value
-numPenquins <- 253
-costSweater <- 64.99
-
-# Create a variable and set to a date type
-# Create a text variable and set it to a text date.
-txtDate = "08/28/2025"
-
-# Create a date variable and convert the text date to a date using `as.Date()`
-my.birthday <- as.Date(txtDate, format="%m/%d/%Y")
-
-# Print your date variable to the screen
-print(my.birthday)
-
-```
