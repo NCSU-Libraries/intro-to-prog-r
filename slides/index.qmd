@@ -37,8 +37,6 @@ To get a complete from this session:
   <li>Future coders</li>
 </ul>
 
----
-
 <ul>
   <li>If you are following the full series:
     <ul>

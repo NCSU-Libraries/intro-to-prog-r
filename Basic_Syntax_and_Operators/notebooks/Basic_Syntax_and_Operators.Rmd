@@ -37,6 +37,10 @@ By the end of this Session, you will understand:
 6.  Basic data structures and how to access the data in them
 7.  What an operator is and some available in R
 
+# Links to materials
+
+Slides: go.ncsu.edu/intro-prog-r-slides Code: go.ncsu.edu/intro-to-prog-r
+
 # R vs. RStudio: What's the Difference?
 
 -   R is an open-source programming language
@@ -153,11 +157,6 @@ barplot(data$a,
 -   Environment pane
 -   Output pane
 
-## Quiz \# 1 ANSWERS
-
-1.  Environment tab in the Environment Pane
-2.  Plots tab of the Output pane
-3.  Source Pane
 
 ------------------------------------------------------------------------
 
@@ -206,16 +205,11 @@ The code box below shows some example variables. Use CMD/CTRL + RETURN/ENTER to 
 
 ```{r Variables}
 
-bert  <-  5
-ernie <-  "Bert's Best Friend"
-mrs.wuff  <-  9.732
-TuFfY <-  "8/18/2025"
-tuffy_2 <-  as.POSIXct("8/18/2025", format="%m/%d/%Y")
-i.am.happy = TRUE # Wait, what?!?! what's with the "="?
+
 
 # See the variable value
-bert
-ernie
+
+
 ```
 
 ## I Digress ...
@@ -244,14 +238,7 @@ My_favoritePASSWORDofAlL.tymes <- 5
 
 ```
 
-## Quiz \# 2 Answers
 
-The acceptable passwords are:
-
--   My_favoritePASSWORDofAlL.tymes
--   PW6
--   PW6_myfav
--   If
 
 ------------------------------------------------------------------------
 
@@ -288,9 +275,6 @@ Let's look at some examples.
 
 ```{r Integers}
 # Let's set some variables to an integer.
-myBelovedInteger <- -53
-BigInteger <- 1500225
-typeof(BigInteger)
 
 # Uncomment the line below.
 # Look for a red x to the left of the line number
@@ -306,15 +290,9 @@ typeof(BigInteger)
 ```{r Doubles-no-not-tennis}
 
 # Now we'll define some floating point variables
-myPreciousFloat <- 42.5 # Even floating point numbers need love
-RandomFloatIdontKnow <- 1999999999.9999999999999
-swimFloaties <- -25.11235813
 
 # stillNoCommas <- 4,325.98
 
-trickyFloat <- 198.0 # is it an integer or is it a double?
-typeof(trickyFloat) # everything is a double to R
-typeof(myPreciousFloat) # yup, still a double
 
 ```
 
@@ -326,16 +304,9 @@ We've looked at the scary, scary numbers. Let's look at good old familiar text. 
 
 ```{r}
 # Some text examples
-myFirstString <- "String"
-mySecondString <- "My second string"
-anotherString <- "Is this a string or a sentence? I'm not sure..."
 
-ughWhatNow <- 'She asked, "What if I want to put something in quotes?"'
-print(ughWhatNow)
-typeof(ughWhatNow)
 
-ughWhatNowPart2 <- "She asked, 'What if I want to put something in single quotes?'"
-print(ughWhatNowPart2)
+
 
 ```
 
@@ -353,8 +324,8 @@ Dates are their own special kind of special. The Date/Time data type is useful f
 We can define a date as a string. The computer doesn't care:
 
 ```{r Text-Dates}
-aDateButItsReallyAString <- "07/15/2025"
-print(aDateButItsReallyAString)
+
+
 
 ```
 
@@ -374,14 +345,7 @@ That's where the date data type comes in.
 
 ```{r Date-Dates}
 # Let's try some dates
-myTextDate = "7/15/25"
-print(myTextDate)
 
-myDateDate = as.Date(myTextDate, format = "%m/%d/%y")
-print(myDateDate)
-
-myDateDate2 = as.Date(myTextDate, format = "%m/%d/%Y")
-print(myDateDate2)
 
 
 ```
@@ -392,8 +356,6 @@ The question is can we add 4 days to `myDateDate` now?
 
 ```{r Date-Dates-Math}
 
-myNewDateDate <- myDateDate + 4
-myNewDateDate
 
 ```
 
@@ -407,10 +369,8 @@ A Boolean value is one that can take one of two values: 0 or 1. In R, these type
 
 ```{r Boolean-Examples}
 # Example of boolean
-dogIsCute <- TRUE
-glassIsFull <- TRUE
-todoIsDone <- FALSE
-doorIsClosed <- FALSE
+
+
 
 ```
 
@@ -423,19 +383,14 @@ When we get to the section on operators, you will begin to see the extent to whi
 ```{r Quiz_3-Variables}
 
 # Create a variable and set it to some text.
-sailBoatType <- "Sonar"
 
 # Create a variable and set it to a numeric value
-boatLength <- 23 # Length in Feet
 
 # Create a text variable and set it to a text date.
-sailDateText <- "09-15-1997"
 
 # Create a date variable and convert the text date to a date using `as.Date()`
-sailDate <- as.Date(sailDateText, format="%m-%d-%Y")
 
 # Print your date variable to the screen
-print(sailDate)
 
 ```
 
@@ -483,25 +438,25 @@ rm(list=ls())
 # (Single Data Type)
 
 # Integer. Ok, fine, double.
-intVector = c(1, 2, 3, 4, 5) 
-print(intVector)
+
+
 
 # Decimal. Ok, fine, double.
-floatVector = c(1.00, 2.25, 3.50, 4.75, 5.00)
-print(floatVector)
+
+
 
 # Text
-txtVector = c("one", "two", "three", "four", "five")
-print(txtVector)
+
+
 
 # Boolean/Logical
-logiVector = c(TRUE, FALSE, FALSE, TRUE, TRUE)
-print(logiVector)
+
+
 
 # Into the weeds we go ....
 # Also a vector:
-dohVector <- c(1, 2, 3.00, "four", "five") # Wait! What?!?!
-print(dohVector)
+
+
 
 ```
 
@@ -514,26 +469,9 @@ Elements in a vector can be accessed by using an index, or range of indices betw
 ```{r Access-Elements-In-Vectors}
 # Make sure you ran the code above to define the vectors. Click on the green run button in the code chunk above. 
 # VECTORS
-print(intVector)
-intVector[1]
-
-print(floatVector)
-floatVector[2]
-
-print(txtVector)
-txtVector[3:4] # we can pull more than 1 element
-
-print(logiVector)
-logiVector[5]
-
-print(dohVector)
-dohVector[6] # Why did we get NA? Hmm...How long is the dohVector?
-length(dohVector) # Oops
 
 # Let's Get Fancy!
-newVector2Showoff <- c(7, 8, 9, 10, 11, 12)
-indices2grab <- c(2,4,6)
-newVector2Showoff[indices2grab] # We can use a vector to extract values from a vector
+
 
 
 ```
@@ -552,25 +490,15 @@ If you only need a 2-dimensional matrix (rows and columns only), you can use `ma
 
 ```{r Two-Dimension-Matrices}
 # Create a 2-D matrix
-myMatrix <-  matrix(c(1:8), nrow=4, ncol=2, byrow = FALSE)
-print(myMatrix)
 
 # What happens if you create a matrix with more elements than your data?
-myBiggerMatrix <- matrix(c(1:8), nrow=5, ncol=2, byrow=FALSE)
-print(myBiggerMatrix)
 
 # What happens if you create a matrix with fewer elements than your data?
-mySmallerMatrix <- matrix(c(1:8), nrow=3, ncol=2, byrow=FALSE)
-print(mySmallerMatrix)
 
 # Create a 2-D matrix filled with zeros
 # that you can fill it in later.
-myZeroMatrix <-  matrix(0, nrow=5, ncol=6)
-print(myZeroMatrix)
 
 # Ooh let's set an element to some other value...
-myZeroMatrix[4,4] <- -16
-print(myZeroMatrix)
 
 ```
 
@@ -578,17 +506,11 @@ To create a matrix that has more than 2 dimensions, you use the `array()` functi
 
 ```{r Multi-dim-matrices}
 # Create a 3-D matrix
-my_array <- array(0, dim = c(5,10,3))
-print(my_array)
 
 # Set a value
-my_array[1,2,3] <- 42 # [row, col, dim]
-print(my_array)
-print(my_array[1,2,3])
+# Access using [row, col, dim]
 
 # Set the value of the 5th column, 3rd row and 2nd dimension of myArray to your favorite number. Print out "my_array" to see the change
-my_array[3,5,2] <- 7892
-print(my_array)
 
 ```
 
@@ -604,19 +526,12 @@ dataframes can have row and column names.
 
 ```{r Data-frames}
 # Create a dataframe
-myDataFrame <- data.frame(Name = c("Snoopy", "Scrat", "Ratbert", "Hobbs"),
-                          Species = c("Dog", "Squirrel", "Rat", "Tiger"),
-                          numFriends = c(8, 0, 1, 1))
-print(myDataFrame)
+
+
 
 # extract data from dataframe
-myDataFrame["Name"] # extracts the values in the Name column
-myDataFrame[c("Name","numFriends")] # extract values for Name and numFriends columns
-myDataFrame[1:2] # extracts the first two columns
-myDataFrame[,1:2] # also extracts the first two columns
-myDataFrame[1:2, ] # extracts the first two rows
-myDataFrame[-1] # extracts all columns but the first column
-myDataFrame[-1,] # extracts every row but the first one
+
+
 
 ```
 
@@ -629,40 +544,25 @@ myDataFrame[-1,] # extracts every row but the first one
 data <- c(1:24) 
 
 # Create an array/vector that holds 4 words
-myFavColors <- c("green", "purple", "black", "cyan")
 
 # Create a two-dimensional maxtrix and fill it with `data`
 # Try using dimensions that fit the data and dimensions that don't
 
 # Define matrix to be the same number of elements as data
-myMatrix1 <- matrix(data, nrow=6, ncol=4)
-print(myMatrix1)
 
 # Define matrix to be larger than data
-myMatrix2 <- matrix(data, nrow=6, ncol=5)
-print(myMatrix2)
 
 # Define matrix to be smaller than data
-myMatrix3 <- matrix(data, nrow=5, ncol=4)
-print(myMatrix3)
 
 # Create a 3-dimensional matrix and fill it with `data`
 # Try using dimensions that fit the data and dimensions that don't
-my3DMatrix <- array(data, dim = c(3,2,4))
-print(my3DMatrix)
 
 # Make a 3-dimensional matrix and fill it with zeros
 # pick whatever dimensions you want, but don't break your computer with huge values!
 # print out matrix
-myZeros <- array(0, dim = c(9,9,9))
-print(myZeros)
 
 # Make a dataframe with two rows and three columns of data
 # Print out the dataframe
-myDataframe <- data.frame(id = 1:2,
-                     color = c("green","blue"),
-                     size = c(36,92))
-print(myDataframe)
 
 ```
 
@@ -702,15 +602,11 @@ Operators can be referred to as **unary** or **binary**. From math class, you ma
 rm(list=ls())
 
 # Unary
-aNumber = 5
-myNegativeNumber <- -aNumber
-print(myNegativeNumber)
+
   
 # Binary
-x <- 5
-y <- 10
-myDifference <- x-y
-print(myDifference)
+
+
 
 ```
 
@@ -718,12 +614,7 @@ Most of the arithmetic operators should be familiar. Examples are provided below
 
 ```{r Arithmetic-Operators-1}
 # Use operators with values
-5 + 6
-5 - 6
-5 * 6
-5 / 6
-5 ^ 6
-5 ** 6
+
 
 # Separate Output
 print('* * * * * * * * * * *')
@@ -732,17 +623,11 @@ print('* * * * * * * * * * *')
 # We'll be creative and use new values
 
 # Declare some variables and set them to values
-x <- 7.985
-y <- 2.001
+
+
 
 # Apply operators
 
-x + y
-x - y
-x * y
-x / y
-x ^ y
-x ** y
 
 
 ```
@@ -750,20 +635,14 @@ x ** y
 However, some operators may be new. These include the modulus operator, `%%`, and the special operator for integer division, `%/%`. These two operators provide special functionality. The modulus operator returns the remainder of integer division. The operator to perform integer division, returns the quotient of the division.
 
 ```{r Arithmetic-Operators-2}
-myNumber <- 10
-myFirstDivisor <- 2 # divides evenly
-myOtherDivisor <- 3 # doesn't divide evenly
+
 
 # Integer Division & Modulus using first divisor
-myNumber %/% myFirstDivisor
-myNumber %% myFirstDivisor
 
 # Separate Output
 print("* * * * * * * * * *")
 
 # Integer Division & Modulus using second divisor
-myNumber %/% myOtherDivisor
-myNumber %% myOtherDivisor
 
 ```
 
@@ -794,14 +673,8 @@ myGermanShepard <- 85 # weight of my dog, if I had one
 
 # Let's compare my shepard to the different wolves
 
-myGermanShepard < bigWolf
-myGermanShepard >= medWolf1
-myGermanShepard < medWolf2
-myGermanShepard > smallWolf
 
 # Let's look at `==` more closely
-myGermanShepard == medWolf1 # perfectly fine, two integers
-myGermanShepard == medWolf2 # Seems good because 85.000000000001 is not equal to 85 BUT DON'T DO THIS
 
 # BUT what if that 85.000000000001 was the result of calculating an average weight. In this situation .000000000001 may not be a meaningful difference
 
@@ -823,7 +696,7 @@ print(a-b)
 Logical operators are used to compare two logical values or two relational expressions that evaluate to logical values.
 
 | Operator |    Operation     |                    Example                    |
-|:--------------:|:--------------:|:---------------------------------------:|
+|:---------------:|:---------------:|:------------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    &&    |   Logical AND    |                isCute & isBig                 |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
@@ -844,25 +717,19 @@ haveHotdogs <- TRUE
 haveCheetos <- TRUE
 
 # Check if numWolves is less than numDogs AND numCats is less than numDogs
-(numWolves < numDogs) && (numCats < numDogs)
 
 # Check if numDogs is less than or equal to 25 OR numCats is less than or equal to 25
-(numDogs <= 25) || (numCats <= 25)
 
 # Check if numDogs is less than 150 OR numCats is less than 150
-(numDogs < 150) || (numCats < 150)
 
 # See isParty is TRUE AND if numDogs is greater than 0 AND haveHotdogs is FALSE
 # This could be a problem
-isParty && (numDogs > 0) && !haveHotdogs
 
 # See if (numDogs is greater than zero AND haveHotdogs is TRUE) OR (numCats is greater than 0 AND haveCheetos is TRUE)
 
-(numDogs > 0 && haveHotdogs) || (numCats > 0 && haveCheetos)
 
 # How could you fix the expression above to make sure that you have food available for both cats and dogs who come to your party?
 
-(numDogs > 0 && haveHotdogs) && (numCats > 0 && haveCheetos)
 
 
 ```
@@ -876,12 +743,11 @@ isParty && (numDogs > 0) && !haveHotdogs
 # PROBLEM 1
 # You need to see if you have more buns than hotdogs. Create two variables, numBuns and numHotdogs and set them to any values you want. Create a variable "haveEnoughBuns" and write an expression that sets `haveEnoughBuns` to TRUE if you have enough. Try different values for `numBuns` and `numHotdogs`, if you want.
 
-# Declare `numBuns` and `numHotDogs`
-numBuns = 6 # Seriously? This used to be a thing. Why was it a thing?
-numHotdogs = 8 
+# Declare `numBuns` and `numHotDogs` and set to some values
+
 
 # Check if you have enough buns.
-haveEnoughBuns <-  numHotdogs == numBuns
+
 # NOOOOOOOO!!!
 
 # PROBLEM 2
@@ -892,58 +758,47 @@ haveEnoughBuns <-  numHotdogs == numBuns
 #
 # `perfectChipsPortion`: set it to the number of grams a perfect portion of potato chips would be
 # `numGuests`: set it to the number of guests you've invited
-perfectChipsPortion <- 500
-numGuests <- 5
 
 # Also declare
-#
 # `numBagsChips`: set to the number of bag of chips you picked up
 # `gramsPerBag`: set this to the number of grams of chips per bag
-numBagsChips <- 3
-gramsPerBag <- 250
+
+
 
 # Calculate the number of grams of chips you need for all your guests
 # name the variable `chipsNeededInGrams`
-chipsNeededInGrams <- perfectChipsPortion * numGuests
+
 
 # Calculate how many of grams of chips you have
 # name this variable `totalChipsInGrams`
-totalChipsInGrams <- numBagsChips * gramsPerBag
+
 
 # Create a Boolean variable and name it `haveEnoughChips`
 # compare the number of chips you need to the number you have (in grams)
 # You want `haveEnoughChips` to be TRUE if you have enough
-haveEnoughChips <- totalChipsInGrams >= chipsNeededInGrams
+
 
 # How many grams of chips do I need?
-chipsNeededInGrams
 
 # How many grams of chips do I have?
-totalChipsInGrams
 
 # Do I have enough chips? Drum roll please...
-haveEnoughChips
 
 # PROBLEM 3
 # Use a logical operator to check whether you have enough buns for your hotdogs and enough chips for your guests. Declare a variable to store the result.
-haveEnoughFood <- haveEnoughChips && (numHotdogs * numGuests == numBuns * numGuests)
 
 # PROBLEM 4
 # In this problem we are going to write code that let's use check whether a number is even.
 
 # Declare a variable and set it to the number you want to check
-num2Check <- 12
 
 # Use modulus to find the remainder of dividing your number by 2. 
 # Then check if the remainder is zero. 
 # This can be done it two steps or one
 
 # Two Steps
-divBy2 <- num2Check %% 2
-divBy2 == 0
 
 # One step
-(num2Check %% 2) == 0
 
 
 
