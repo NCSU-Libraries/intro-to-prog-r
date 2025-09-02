@@ -823,7 +823,7 @@ print(a-b)
 Logical operators are used to compare two logical values or two relational expressions that evaluate to logical values.
 
 | Operator |    Operation     |                    Example                    |
-|:--------:|:----------------:|:---------------------------------------------:|
+|:-----------------:|:-----------------:|:--------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    &&    |   Logical AND    |                isCute & isBig                 |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |

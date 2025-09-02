@@ -1,0 +1,455 @@
+---
+title: "Introduction to Programming with R"
+subtitle: "Basic Syntax and Operators-Code Chunks"
+author: "Selene R. Schmittling"
+date: "2025-08-01" 
+output: 
+  html_document: 
+    number_sections: true
+  pdf_document:
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r Plot_tab_example}
+# Lets create a little plot
+# create some data
+data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
+
+# generate plot
+barplot(data$a, 
+        names.arg = data$b, 
+        col="blue", 
+        ylab="# of Regional Managers")
+
+```
+
+# Variables in R
+
+```{r Variables}
+
+bert  <-  5
+ernie <-  "Bert's Best Friend"
+mrs.wuff  <-  9.732
+TuFfY <-  "8/18/2025"
+tuffy_2 <-  as.POSIXct("8/18/2025", format="%m/%d/%Y")
+i.am.happy = TRUE # Wait, what?!?! what's with the "="?
+
+# What happens when we break the rules?
+
+# See the variable value
+bert
+ernie
+```
+
+
+
+```{r Quiz-2-Variables}
+# Not sure which will run? 
+# Use the assignment operator to assign the value 5 to a variable using the names above. Feel free to test some you define yourself!
+
+My_favoritePASSWORDofAlL.tymes <- 5
+
+```
+
+
+# Data Types
+
+
+```{r Integers}
+# Let's set some variables to an integer.
+myBelovedInteger <- -53
+BigInteger <- 1500225
+typeof(BigInteger)
+
+# Uncomment the line below.
+# Look for a red x to the left of the line number
+# Try to run the line of code.
+
+# NoCommasReally <- -22,550,675
+
+# Remember to re-comment the line because the error may keep the notebook from rendering.
+```
+
+
+```{r Doubles-no-not-tennis}
+
+# Now we'll define some floating point variables
+myPreciousFloat <- 42.5 # Even floating point numbers need love
+RandomFloatIdontKnow <- 1999999999.9999999999999
+swimFloaties <- -25.11235813
+
+# stillNoCommas <- 4,325.98
+
+trickyFloat <- 198.0 # is it an integer or is it a double?
+typeof(trickyFloat) # everything is a double to R
+typeof(myPreciousFloat) # yup, still a double
+
+```
+
+## Text
+
+
+```{r}
+# Some text examples
+myFirstString <- "String"
+mySecondString <- "My second string"
+anotherString <- "Is this a string or a sentence? I'm not sure..."
+
+ughWhatNow <- 'She asked, "What if I want to put something in quotes?"'
+print(ughWhatNow)
+typeof(ughWhatNow)
+
+ughWhatNowPart2 <- "She asked, 'What if I want to put something in single quotes?'"
+print(ughWhatNowPart2)
+
+```
+
+
+## Dates & Times
+
+
+```{r Text-Dates}
+aDateButItsReallyAString <- "07/15/2025"
+print(aDateButItsReallyAString)
+
+```
+
+
+```{r Text-Dates-Are-Bad-At-Math}
+# To explore when data strings break, uncomment the next line and try to run it. We are just trying to find out what the date is 4 days from our date string:
+
+# letsAdd4Days <- aDateButItsReallyAString + 4
+
+# !! Recomment it when you are done. Otherwise you notebook won't render.
+```
+
+
+
+```{r Date-Dates}
+# Let's try some dates
+myTextDate = "7/15/25"
+print(myTextDate)
+
+myDateDate = as.Date(myTextDate, format = "%m/%d/%y")
+print(myDateDate)
+
+myDateDate2 = as.Date(myTextDate, format = "%m/%d/%Y")
+print(myDateDate2)
+
+
+```
+
+
+```{r Date-Dates-Math}
+
+myNewDateDate <- myDateDate + 4
+myNewDateDate
+
+```
+
+
+
+## Logical
+
+```{r Boolean-Examples}
+# Example of boolean
+dogIsCute <- TRUE
+glassIsFull <- TRUE
+todoIsDone <- FALSE
+doorIsClosed <- FALSE
+
+```
+
+
+# Data Structures
+
+## Vectors (1-D Arrays)
+
+### How to Create Vectors
+
+```{r Define-Vectors}
+# Let's clean up the variables to make it easier to see what's going on
+rm(list=ls())
+
+# EXAMPLES OF HOW TO CREATE VECTORS
+# (Single Data Type)
+
+# Integer. Ok, fine, double.
+intVector = c(1, 2, 3, 4, 5) 
+print(intVector)
+
+# Decimal. Ok, fine, double.
+floatVector = c(1.00, 2.25, 3.50, 4.75, 5.00)
+print(floatVector)
+
+# Text
+txtVector = c("one", "two", "three", "four", "five")
+print(txtVector)
+
+# Boolean/Logical
+logiVector = c(TRUE, FALSE, FALSE, TRUE, TRUE)
+print(logiVector)
+
+# Into the weeds we go ....
+# Also a vector:
+dohVector <- c(1, 2, 3.00, "four", "five") # Wait! What?!?!
+print(dohVector)
+
+```
+
+### Accessing Elements in a Vector
+
+```{r Access-Elements-In-Vectors}
+# Make sure you ran the code above to define the vectors. Click on the green run button in the code chunk above. 
+# VECTORS
+print(intVector)
+intVector[1]
+
+print(floatVector)
+floatVector[2]
+
+print(txtVector)
+txtVector[3:4] # we can pull more than 1 element
+
+print(logiVector)
+logiVector[5]
+
+print(dohVector)
+dohVector[6] # Why did we get NA? Hmm...How long is the dohVector?
+length(dohVector) # Oops
+
+# Let's Get Fancy!
+newVector2Showoff <- c(7, 8, 9, 10, 11, 12)
+indices2grab <- c(2,4,6)
+newVector2Showoff[indices2grab] # We can use a vector to extract values from a vector
+
+
+```
+
+## Matrices (or n-D Arrays)
+
+### How to create Matrices
+
+```{r Two-Dimension-Matrices}
+# Create a 2-D matrix
+myMatrix <-  matrix(c(1:8), nrow=4, ncol=2, byrow = FALSE)
+print(myMatrix)
+
+# What happens if you create a matrix with more elements than your data?
+myBiggerMatrix <- matrix(c(1:8), nrow=5, ncol=2, byrow=FALSE)
+print(myBiggerMatrix)
+
+# What happens if you create a matrix with fewer elements than your data?
+mySmallerMatrix <- matrix(c(1:8), nrow=3, ncol=2, byrow=FALSE)
+print(mySmallerMatrix)
+
+# Create a 2-D matrix filled with zeros
+# that you can fill it in later.
+myZeroMatrix <-  matrix(0, nrow=5, ncol=6)
+print(myZeroMatrix)
+
+# Ooh let's set an element to some other value...
+myZeroMatrix[4,4] <- -16
+print(myZeroMatrix)
+
+```
+
+
+
+```{r Multi-dim-matrices}
+# Create a 3-D matrix
+my_array <- array(0, dim = c(5,10,3))
+print(my_array)
+
+# Set a value
+my_array[1,2,3] <- 42 # [row, col, dim]
+print(my_array)
+print(my_array[1,2,3])
+
+# Set the value of the 5th column, 3rd row and 2nd dimension of myArray to your favorite number. Print out "my_array" to see the change
+my_array[3,5,2] <- 7892
+print(my_array)
+
+```
+
+## Dataframes (Tabular Data)
+
+### How to Create and Access Dataframes
+
+```{r Data-frames}
+# Create a dataframe
+myDataFrame <- data.frame(Name = c("Snoopy", "Scrat", "Ratbert", "Hobbs"),
+                          Species = c("Dog", "Squirrel", "Rat", "Tiger"),
+                          numFriends = c(8, 0, 1, 1))
+print(myDataFrame)
+
+# extract data from dataframe
+myDataFrame["Name"] # extracts the values in the Name column
+myDataFrame[c("Name","numFriends")] # extract values for Name and numFriends columns
+myDataFrame[1:2] # extracts the first two columns
+myDataFrame[,1:2] # also extracts the first two columns
+myDataFrame[1:2, ] # extracts the first two rows
+myDataFrame[-1] # extracts all columns but the first column
+myDataFrame[-1,] # extracts every row but the first one
+
+```
+
+# Operators
+
+
+```{r Unary-Binary-Operators}
+# Let's clear out our variables
+rm(list=ls())
+
+# Unary
+aNumber = 5
+myNegativeNumber <- -aNumber
+print(myNegativeNumber)
+  
+# Binary
+x <- 5
+y <- 10
+myDifference <- x-y
+print(myDifference)
+
+```
+
+
+```{r Arithmetic-Operators-1}
+# Use operators with values
+5 + 6
+5 - 6
+5 * 6
+5 / 6
+5 ^ 6
+5 ** 6
+
+# Separate Output
+print('* * * * * * * * * * *')
+
+# Use familiar operators with variables
+# We'll be creative and use new values
+
+# Declare some variables and set them to values
+x <- 7.985
+y <- 2.001
+
+# Apply operators
+
+x + y
+x - y
+x * y
+x / y
+x ^ y
+x ** y
+
+
+```
+
+
+```{r Arithmetic-Operators-2}
+myNumber <- 10
+myFirstDivisor <- 2 # divides evenly
+myOtherDivisor <- 3 # doesn't divide evenly
+
+# Integer Division & Modulus using first divisor
+myNumber %/% myFirstDivisor
+myNumber %% myFirstDivisor
+
+# Separate Output
+print("* * * * * * * * * *")
+
+# Integer Division & Modulus using second divisor
+myNumber %/% myOtherDivisor
+myNumber %% myOtherDivisor
+
+```
+
+## Relational
+
+
+
+```{r Relational-Operators}
+# Let's clear out our variables
+rm(list=ls())
+
+# Define some variables and set them to a value
+bigWolf <- 135 # this is the weight of a wolf in pounds
+medWolf1 <- 85 # this is an average sized wolf
+medWolf2 <- 85.000000000001 # this is another average sized wolf
+smallWolf <- 50 # small wolf
+
+myGermanShepard <- 85 # weight of my dog, if I had one
+
+# Let's compare my shepard to the different wolves
+
+myGermanShepard < bigWolf
+myGermanShepard >= medWolf1
+myGermanShepard < medWolf2
+myGermanShepard > smallWolf
+
+# Let's look at `==` more closely
+myGermanShepard == medWolf1 # perfectly fine, two integers
+myGermanShepard == medWolf2 # Seems good because 85.000000000001 is not equal to 85 BUT DON'T DO THIS
+
+# BUT what if that 85.000000000001 was the result of calculating an average weight. In this situation .000000000001 may not be a meaningful difference
+
+```
+
+
+
+```{r Tolerance-Example}
+a <-  0.4 + 0.5
+b <-  0.9
+epsilon <- 1e-9 # a very small number
+
+(a-b) < epsilon # if the difference is less, then you assume equality.
+print(a-b)
+```
+
+## Logical
+
+
+```{r Logical-Operators}
+# Use variables from last section
+
+# Define some variables to compare
+numWolves <- 50
+numDogs <- 25
+numCats <- 100
+
+# Define some Boolean variables and set them
+isParty <- FALSE
+haveHotdogs <- TRUE
+haveCheetos <- TRUE
+
+# Check if numWolves is less than numDogs AND numCats is less than numDogs
+(numWolves < numDogs) && (numCats < numDogs)
+
+# Check if numDogs is less than or equal to 25 OR numCats is less than or equal to 25
+(numDogs <= 25) || (numCats <= 25)
+
+# Check if numDogs is less than 150 OR numCats is less than 150
+(numDogs < 150) || (numCats < 150)
+
+# See isParty is TRUE AND if numDogs is greater than 0 AND haveHotdogs is FALSE
+# This could be a problem
+isParty && (numDogs > 0) && !haveHotdogs
+
+# See if (numDogs is greater than zero AND haveHotdogs is TRUE) OR (numCats is greater than 0 AND haveCheetos is TRUE)
+
+(numDogs > 0 && haveHotdogs) || (numCats > 0 && haveCheetos)
+
+# How could you fix the expression above to make sure that you have food available for both cats and dogs who come to your party?
+
+(numDogs > 0 && haveHotdogs) && (numCats > 0 && haveCheetos)
+
+```
+
