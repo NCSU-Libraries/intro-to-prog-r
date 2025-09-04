@@ -60,7 +60,7 @@ We'll talk about scripts and Notebooks soon.
 
 ## Console Pane
 
--   Features 4 tabs:
+-   Features 3 tabs by default:
     -   Console Tab
         -   Enter commands that run immediately
         -   Good for testing
@@ -108,6 +108,10 @@ barplot(data$a,
         names.arg = data$b, 
         col="blue", 
         ylab="# of Regional Managers")
+
+# function name
+# function parameters
+# return values
 
 ```
 

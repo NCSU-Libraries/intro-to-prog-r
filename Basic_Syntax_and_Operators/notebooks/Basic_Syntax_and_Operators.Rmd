@@ -39,7 +39,8 @@ By the end of this Session, you will understand:
 
 # Links to materials
 
-Slides: go.ncsu.edu/intro-prog-r-slides Code: go.ncsu.edu/intro-to-prog-r
+-   Slides: go.ncsu.edu/intro-prog-r-slides
+-   Code: go.ncsu.edu/intro-to-prog-r
 
 # R vs. RStudio: What's the Difference?
 
@@ -64,7 +65,7 @@ We'll talk about scripts and Notebooks soon.
 
 ## Console Pane
 
--   Features 4 tabs:
+-   Features 3 tabs by default:
     -   Console Tab
         -   Enter commands that run immediately
         -   Good for testing
@@ -113,6 +114,10 @@ barplot(data$a,
         col="blue", 
         ylab="# of Regional Managers")
 
+# function name
+# function parameters
+# return values
+
 ```
 
 -   Packages
@@ -156,7 +161,6 @@ barplot(data$a,
 -   Console pane
 -   Environment pane
 -   Output pane
-
 
 ------------------------------------------------------------------------
 
@@ -237,8 +241,6 @@ Using the rules listed above which of the following passwords will work?
 My_favoritePASSWORDofAlL.tymes <- 5
 
 ```
-
-
 
 ------------------------------------------------------------------------
 
@@ -696,7 +698,7 @@ print(a-b)
 Logical operators are used to compare two logical values or two relational expressions that evaluate to logical values.
 
 | Operator |    Operation     |                    Example                    |
-|:---------------:|:---------------:|:------------------------------------:|
+|:--------:|:----------------:|:---------------------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    &&    |   Logical AND    |                isCute & isBig                 |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |

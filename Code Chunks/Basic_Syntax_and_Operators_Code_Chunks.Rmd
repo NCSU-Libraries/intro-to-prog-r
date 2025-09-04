@@ -15,8 +15,6 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-
 ```{r Plot_tab_example}
 # Lets create a little plot
 # create some data
@@ -48,8 +46,6 @@ bert
 ernie
 ```
 
-
-
 ```{r Quiz-2-Variables}
 # Not sure which will run? 
 # Use the assignment operator to assign the value 5 to a variable using the names above. Feel free to test some you define yourself!
@@ -58,9 +54,7 @@ My_favoritePASSWORDofAlL.tymes <- 5
 
 ```
 
-
 # Data Types
-
 
 ```{r Integers}
 # Let's set some variables to an integer.
@@ -76,7 +70,6 @@ typeof(BigInteger)
 
 # Remember to re-comment the line because the error may keep the notebook from rendering.
 ```
-
 
 ```{r Doubles-no-not-tennis}
 
@@ -95,7 +88,6 @@ typeof(myPreciousFloat) # yup, still a double
 
 ## Text
 
-
 ```{r}
 # Some text examples
 myFirstString <- "String"
@@ -111,16 +103,13 @@ print(ughWhatNowPart2)
 
 ```
 
-
 ## Dates & Times
-
 
 ```{r Text-Dates}
 aDateButItsReallyAString <- "07/15/2025"
 print(aDateButItsReallyAString)
 
 ```
-
 
 ```{r Text-Dates-Are-Bad-At-Math}
 # To explore when data strings break, uncomment the next line and try to run it. We are just trying to find out what the date is 4 days from our date string:
@@ -129,8 +118,6 @@ print(aDateButItsReallyAString)
 
 # !! Recomment it when you are done. Otherwise you notebook won't render.
 ```
-
-
 
 ```{r Date-Dates}
 # Let's try some dates
@@ -146,15 +133,12 @@ print(myDateDate2)
 
 ```
 
-
 ```{r Date-Dates-Math}
 
 myNewDateDate <- myDateDate + 4
 myNewDateDate
 
 ```
-
-
 
 ## Logical
 
@@ -166,7 +150,6 @@ todoIsDone <- FALSE
 doorIsClosed <- FALSE
 
 ```
-
 
 # Data Structures
 
@@ -261,8 +244,6 @@ print(myZeroMatrix)
 
 ```
 
-
-
 ```{r Multi-dim-matrices}
 # Create a 3-D matrix
 my_array <- array(0, dim = c(5,10,3))
@@ -303,7 +284,6 @@ myDataFrame[-1,] # extracts every row but the first one
 
 # Operators
 
-
 ```{r Unary-Binary-Operators}
 # Let's clear out our variables
 rm(list=ls())
@@ -320,7 +300,6 @@ myDifference <- x-y
 print(myDifference)
 
 ```
-
 
 ```{r Arithmetic-Operators-1}
 # Use operators with values
@@ -353,7 +332,6 @@ x ** y
 
 ```
 
-
 ```{r Arithmetic-Operators-2}
 myNumber <- 10
 myFirstDivisor <- 2 # divides evenly
@@ -373,8 +351,6 @@ myNumber %% myOtherDivisor
 ```
 
 ## Relational
-
-
 
 ```{r Relational-Operators}
 # Let's clear out our variables
@@ -403,8 +379,6 @@ myGermanShepard == medWolf2 # Seems good because 85.000000000001 is not equal to
 
 ```
 
-
-
 ```{r Tolerance-Example}
 a <-  0.4 + 0.5
 b <-  0.9
@@ -415,7 +389,6 @@ print(a-b)
 ```
 
 ## Logical
-
 
 ```{r Logical-Operators}
 # Use variables from last section
@@ -452,4 +425,3 @@ isParty && (numDogs > 0) && !haveHotdogs
 (numDogs > 0 && haveHotdogs) && (numCats > 0 && haveCheetos)
 
 ```
-
