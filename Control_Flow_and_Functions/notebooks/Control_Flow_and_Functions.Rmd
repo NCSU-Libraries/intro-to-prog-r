@@ -168,6 +168,18 @@ while (eatsHamburger == TRUE) {
 
 ```
 
+You may be looking at the last `while` loop and thinking "this could be more efficient". If so, you are right! However, if you didn't see this, it's ok. An important point to keep in mind as you begin to code is that everyone codes differently. Algorithms are imprecise structures. We all start our days similarly, but the details are different for everyone. There's many ways to start your day and there is not right way.
+
+There will be many ways to write code. Good code is
+
+-   code that works and
+
+-   that can be understood by others.
+
+Once you are good at that, and as your experience grows, you will work on efficient. Don't attempt to be efficient out of the gate. If you have problems running your code, e.g. processing seems very slow, don't hesitate to get input from more experienced coders. This is a skill you gain from experience and seeing it done.\
+\
+Let's look at how we might make the code above more efficient.
+
 Some important considerations with `while` loops is that you need to ensure:
 
 -   you initialize any values used inside the loop to change the condition BEFORE the while loop starts
