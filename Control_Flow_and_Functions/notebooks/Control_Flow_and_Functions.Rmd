@@ -4,9 +4,9 @@ subtitle: "Control Flow and Functions"
 author: "Selene R. Schmittling"
 date: "2025-08-01" 
 output: 
+  pdf_document:
   html_document: 
     number_sections: true
-  pdf_document:
 editor_options: 
   chunk_output_type: inline
 ---
@@ -151,24 +151,33 @@ While loops execute code by testing a condition. This means that the code may ex
 
 While `for` loops execute over a range of values, `while` loops need a condition to test. This means you use a logical variable, relational expression or logical expression to determine if the code should run. Here are some examples:
 
-```{r while-loop}
+```{r while-loop-DONT-RUN-TIL-YOU-FIX}
+# monitor our loop using this logical variable
+eatsHamburger = TRUE
 
-# While loop
-numBurgersEaten <- 0
-while (eatsHamburger == TRUE) {
-  my.calorie.count <- my.calorie.count + 650
-  numBurgersEaten <- numBurgersEaten + 1
-}
+# Broken While loop
+# Uncomment and run, but comment it back before rendering notebook!
+# numBurgersEaten <- 0
+# my.calorie.count <- 0
+# while (eatsHamburger == TRUE) {
+#   my.calorie.count <- my.calorie.count + 650
+#   numBurgersEaten <- numBurgersEaten + 1
+# }
+
 
 # Ok, let's try this again
-numBurgersEaten <- 0
-while (eatsHamburger == TRUE) {
-  my.calorie.count <- my.calorie.count + 650
-  numBurgersEaten <- numBurgersEaten + 1
-  if (numBurgersEaten > 5) {
-    eatsHamburger == FALSE # OK we've added code to change value of condition
-  }
-}
+# numBurgersEaten <- 0
+# my.calorie.count <- 0
+# while (eatsHamburger == TRUE) {
+#   my.calorie.count <- my.calorie.count + 650
+#   numBurgersEaten <- numBurgersEaten + 1
+#   if (numBurgersEaten > 5) {
+#     eatsHamburger == FALSE # OK we've added code to change value of condition
+#   }
+#   print(numBurgersEaten)
+#   print(my.calorie.count)
+#   print(Ω)
+# }
 
 ```
 
