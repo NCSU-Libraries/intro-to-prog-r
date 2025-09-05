@@ -284,11 +284,154 @@ A function has three main components:
 
 Built-in functions are functions that are loaded when R is loaded. You don't have to do anything to use them.
 
-You can see what packages R loads by opening the Packages tab in the Output pane. If you haven't loaded any packages, then the packages with check-marks are the built-in packages that get loaded.
+You can see what packages R loads by opening the Packages tab in the Output pane. If you haven't loaded any other packages, then the packages with check-marks are the built-in packages that get loaded.
 
 We saw an example of using built-in package in the Basic Syntax and Operators Workshop.
 
 ```{r built-in-function-call}
+# define some data
+data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
+
+# generate plot
+barplot(data$a, 
+        names.arg = data$b, 
+        col="blue", 
+        ylab="# of Regional Managers")
+
+```
+
+The `barplot()` function is part of Base R and is loaded by default. In the console window, type "?barplot" and hit enter. Let's use the vocabulary we covered earlier and read some documentation!
+
+Here is what we see in the Help pane:
+
+-   name of the function and the package it is in: barplot {package}
+
+-   title of the help page: Bar Plots
+
+-   Description: gives a high-level description of what the function does
+
+-   Usage:
+
+    -   provides the function interface
+
+        -   all parameters, required and optional
+
+            -   optional parameters will be followed by an "=" sign
+
+        -   different "flavors" of the function
+
+-   Arguments
+
+    -   lists all parameters
+
+    -   sometimes indicates "optional", but not always
+
+    -   includes acceptable values, data types and data structures
+
+-   Value
+
+    -   provides information about the return value
+
+-   Authors, References, See Also and Examples
+
+    -   self-explanatory
+
+    -   click on "Run examples"
+
+```{r function-flavors-and-return-values}
+# using barplot() S3 Method for class `formula`
+# define some data
+data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
+
+# generate plot
+barplot(a ~ b, 
+        data = data, 
+        col="blue", 
+        ylab="# of Regional Managers")
+
+bp <- barplot(a ~ b, 
+        data = data, 
+        col="blue", 
+        ylab="# of Regional Managers")
+
+```
+
+### Practice Using Built-In Functions
+
+```{r built-in-practice}
+# Make some data to plot. Uses rnorm() to generate 50 values drawn from a normal distribution with a mean of 0 and standard deviation of 4.25
+data <- rnorm(50, mean=0, sd=4.25)
+
+# You can use the function built in function hist() to create a histogram of data
+# Use ?hist() in the Console to learn how to call the function
+
+# What are the required parameters? Call the function using only the required parameter
+hist(data)
+
+# add a breaks statement to increase the number of bars (bins)
+# hint: count the bars in the last plot and increase it
+hist(data, breaks=15)
+
+# set the freq argument to TRUE and then FALSE and look at the difference
+hist(data, breaks=15, freq=TRUE)
+hist(data, breaks=15, freq=FALSE)
+```
+
+### Packages
+
+The Base R packages provide a lot of functionality and they will take you far. However, the beauty of open source languages is that creative, capable people like you can create packages and provide them to you. The ability to expand R's functionality is limitless and free.
+
+Packages:
+
+-   must be installed initially
+
+-   once installed, they must be loaded using the `library()` function
+
+    -   the function will stay loaded as long as the R-session is active and not closed.
+
+    -   if the R session is closed (you exit out of R), you will need to run the `library()` command again
+
+Let's explore a package that will be useful for importing data: `openxlsx2`.
+
+For this we will work in the Package's tab of the Output pane. Do the following:
+
+1.  In the output pane, click on the Packages tab.
+2.  Click on Install
+3.  Type the name of the package: "openxlxs2" and hit enter
+
+This will installs the package in your environment.
+
+Next:
+
+1.  Scroll through the list of packages in the Packages pane and look for "openxlsx2".
+2.  Start typing "openxlsx2" in the search bar to find it quicker.
+3.  Is there a check in the box to the left of the name?
+    -   Yes: the library is already loaded.
+        -   Uncheck it, so we can load it
+    -   No: then we need to load it before we use it.
+
+```{r load-a-package}
+library(openxlsx2)
+
+# load NCSU Mascot data using openxlsx2
+# Because we are in a notebook it sees the current working directory as "notebooks"
+# To use a relative file name, we use "../" to "go" up a level and then "/data/" 
+# points to documents in the data directory. Once that is entered if we hit Tab we will get a list of files to choose from.
+
+# Load data using read_xlsx() function
+mascot.data <- read_xlsx("../data/NCSU_Mascots_v1.xlsx")
+# print the first 6 rows of the data using the head() function
+print(head(mascot.data))
+```
+
+While we are using this package, let's practice writing data to an excel file.
+
+```{r write-to-excel}
+
 
 
 ```
+
+### User-defined Functions
+
+Functions, whether built-in, from packages or those you write yourself (user-defined) should perform a discrete task or set of tasks. These task should be well-defined
