@@ -32,5 +32,175 @@ In this Session of our R Workshop, we will cover the following introductory aspe
 
 By the end of this Session, you will understand:
 
-8.  How to install and use R Libraries
-9.  How to use documentation, get help in RStudio
+1.  How to write an if statement and what to use it for
+2.  How to write a for loop, how it works and what to use if for
+3.  How to write a while loop, how it works and what to use it for
+4.  The three types of functions
+5.  The anatomy of a function
+6.  How to install and use R Libraries
+7.  How to use documentation, get help in RStudio
+8.  How to import and save data
+
+## Conditional Statements and Flow Control
+
+### If Statement (Conditional)
+
+The `if` statement allows us to run code based on some condition (**if** the condition is true, the code is run). The `if` statement can use a logical variable or an expression that evaluates to a logical value as its "test". Here is what it looks like:
+
+```{r if-statement}
+eatsHamburger = TRUE
+eatsVegees = TRUE
+eatsMeat = TRUE
+numHamburgersEaten = 1 # number per week
+my.calorie.count <- 0
+
+
+# Use relational operator
+if (numHamburgersEaten <= 1) {
+  eatsHamburger = TRUE
+}
+
+# Use a logical operator
+if (eatsVegees==TRUE && eatsMeat==FALSE) {
+  # I'm a vegetarian
+  eatsHamburger = FALSE
+}
+
+# Use logical variable
+if (eatsHamburger) {
+  my.calorie.count <- my.calorie.count + 650
+}
+```
+
+You use if statements when you want to execute code **conditionally**, e.g. only if certain conditions are met.
+
+We can expand the `if` statement with `else`. The `else` clause is used to run code if the condition **isn't** met. Let's look at some examples:
+
+```{r if-else-statement}
+eatsHamburger = TRUE
+eatsVegees = TRUE
+eatsMeat = TRUE
+numHamburgersEaten = 1 # number per week
+my.calorie.count <- 0
+
+# increase calorie count
+if (eatsHamburger) {
+  my.calorie.count <- my.calorie.count + 650
+} else {
+  my.calorie.count <- my.calorie.count + 60 # I should choose this more often
+}
+```
+
+While we have provided examples with one line of code, you can put as much code between the two braces as you need.
+
+### For Loop
+
+A `for` loop is used to perform code multiple times. The code in a `for` loop will, by definition, run a specified number of times. This is because you provide a range, in some form, over which the loop executes. This makes `for` loops very useful for traversing data structures like vectors, matrices, and dataframes. Let's look at some examples:
+
+```{r for-loops}
+# Simplest example
+for (i in 1:5) {
+  print(i) # spice it up and divide i by 2
+}
+
+vector1 = c("one", "two", "three", "four", "five")
+for (x in vector1) {
+  print(x)
+}
+
+vector2 = c(2, 4, 6, 8, 10)
+for (y in vector2) {
+  print(y)
+}
+```
+
+In the last couple of examples, we looped over a vector. What about a matrix? In this case we would do nested `for` loops.
+
+```{r nested-for}
+# Make a matrix
+data = (1:60)
+my.matrix = matrix(data, nrow=10, ncol=6, byrow = TRUE)
+print(my.matrix)
+
+# Lets print every value in the matrix out one at a time
+for (row in 1:10) {
+  for (col in 1:6) {
+    print(my.matrix[row,col])
+  }
+}
+
+# We can use functions to extract number of rows and cols
+for (row in 1:nrow(my.matrix)) {
+  for (col in 1:ncol(my.matrix)) {
+    print(my.matrix[row,col])
+  }
+}
+
+# How would you use this same kind of structure to access data in a 3-D array?
+
+
+```
+
+### While Loops
+
+While loops execute code by testing a condition. This means that the code may execute once, several times or not at all! While loops are great when you need to perform some tasks, but you don't know how many times. Humans do this all the time, "I want to pet my dog until the dog hair on my pants makes them look like fur leggings." You don't know when that condition will happen, but when it does you want to stop petting your dog.
+
+While `for` loops execute over a range of values, `while` loops need a condition to test. This means you use a logical variable, relational expression or logical expression to determine if the code should run. Here are some examples:
+
+```{r while-loop}
+
+# While loop
+numBurgersEaten <- 0
+while (eatsHamburger == TRUE) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+}
+
+# Ok, let's try this again
+numBurgersEaten <- 0
+while (eatsHamburger == TRUE) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+  if (numBurgersEaten > 5) {
+    eatsHamburger == FALSE # OK we've added code to change value of condition
+  }
+}
+
+```
+
+Some important considerations with `while` loops is that you need to ensure:
+
+-   you initialize any values used inside the loop to change the condition BEFORE the while loop starts
+
+-   that the condition used to determine whether the while loop is run again is updated within the while loop
+
+### I digress ...
+
+Sometimes you need to exit an `if`, `for`, or `while` loop before all the code is executed. Most languages, including R, have a reserved word you can use to exit a loop, if needed. This word is `break`. While we won't cover it today, it is an important enough concept that I want to provide an example.
+
+```{r breaking-out}
+# Use a for loop as an example, but this will work with if and while statements too
+
+for (i in 1:10) {
+  print(paste("Current value:", i))
+  
+  # if value = 7 print a different message and exit loop
+  if (i == 7) {
+    print("Elvis has left the building. Bye!")
+    break # this statement will end the loop change 7 to another number
+  }
+}
+
+```
+
+## Functions
+
+We will look at three types of functions:
+
+-   Built-in
+
+-   Library functions
+
+-   User-defined functions
+
+We'll talk about each of these and explore some examples. But first we'll talk about the anatomy of a function.
