@@ -427,11 +427,150 @@ print(head(mascot.data))
 While we are using this package, let's practice writing data to an excel file.
 
 ```{r write-to-excel}
+# Let's write out the first 20 rows of the mascot data to an .xlsx file. Save the file in the output folder
+write_xlsx(mascot.data[1:20, ], "../output/mascot_20.xlsx")
 
-
+# Open the data and compare it to "../data/NCSU_Mascots_v1.xlsx"
 
 ```
 
 ### User-defined Functions
 
-Functions, whether built-in, from packages or those you write yourself (user-defined) should perform a discrete task or set of tasks. These task should be well-defined
+Functions should:
+
+-   perform a discrete task or set of tasks
+
+-   be written to be reusable
+
+Whether you are just starting our or whether you are a seasoned programming, spending time with paper and pencil before programming is a good idea. At a minimum, consider:
+
+-   what will the function do?
+
+-   what information (parameters) does it need to do it
+
+-   what parameters will be required vs. optional
+
+    -   a lot of new programmers make everything required and that's ok
+
+-   what will the function return?
+
+Let's work through a couple of simple examples:
+
+The mean of a set of numbers is $(x_1 + x_2 + ... + x_n)/N$, where $x_1, x_2, ..., x_n$ are a vector of numbers and $N$ is the number of elements in the vector. Base R has a function to calculate the mean. We are going to make our own and use the Base R `mean()` function to check our work.
+
+Let's consider the following before we start writing code:
+
+1.  What are the steps we need to take to calculate a mean? Think in terms of using a calculator or pen and paper.
+2.  What information do we need to pass to the function to calculate a mean?
+3.  What information do we expect to return once we've calculated the mean?
+4.  What data types or structures would be appropriate?
+    -   for parameters
+    -   for return values
+5.  Looking at our steps would we need one of our flow control statements:
+    -   In the steps we articulated above, do we need to run code conditionally?
+    -   Are there any steps that require us to do anything a preset \# of times?
+    -   Do we have steps that need to be repeated but we aren't sure how many?
+
+Now, we probably have enough information to start writing our function. For readability, let's use comments to document some information about our function. Also, let's call our function `avg` since the mean function already exists.
+
+```{r write-a-mean-function}
+# Function: avg(x, N)
+# Required parameters:
+#   * x: a vector of numbers
+#   * N: the number of elements in the vector
+# Return value: avg returns the mean of the numbers in the vector.
+
+avg <- function(x, N){
+  sumX <-  0
+  for (i in 1:N) {
+    sumX <- sumX + x[i]
+  }
+  avgX <- sumX/N
+  return(avgX)
+}
+# Once we run this code we should see `avg` listed under "Functions" in the Environment tab of the Environment pane.
+
+# Let's Test our Function
+# Define some vectors
+vector.1 <- runif(50, min=0, max=100) # pulls 50 values from a uniform distribution
+vector.2 <- rnorm(50, 0, 1) # pulls 50 numbers from a normal distributions
+
+print(avg(vector.1, 50))
+print(mean(vector.1))
+print(avg(vector.2, 50))
+print(mean(vector.2))
+
+```
+
+### Practice Writing Your Own Function
+
+Your turn!! Try writing a function to calculate standard deviation. The formula for **s**tandard **d**eviation is:
+
+$sd = \sqrt{\frac{(x_1 - \mu )^2 + (x_2 - \mu) ^2 + ... + (x_n - \mu)^2}{N-1}}$ where $x_1, x_2,...x_n$ are our values, $\mu$ is the avg of our numbers, and $N$ is the number of values we want to find the standard deviation for. Name your function "stndev" and test it using the R `sd()` function. Before writing code, walk through the steps listed above. You can use the `sqrt()` function to calculate the square root.
+
+#### Example Solution:
+
+1.  What are the steps we need to take to calculate a standard deviation?
+
+    -   We need to:
+        -   Calculate the mean of the numbers.
+        -   For each number, we need to subtract the mean from it and then square the result
+        -   We need to add this value to a running sum
+        -   Once we have calculated the sum, we need to divide the sum be the number of values - 1
+        -   Finally, we need to take the square root of the value calculated in the previous step
+
+2.  What information do we need to pass to the function to calculate a standard deviation?
+
+    -   a vector of numerical values
+    -   the number of values passed
+
+3.  What information do we expect to return once we've calculated the mean?
+
+    -   the standard deviation
+
+4.  What data types or structures would be appropriate?
+
+    -   for parameters: a vector of numerical values
+    -   for return values: a number representing the standard deviation
+
+5.  Looking at our steps would we need one of our flow control statements:
+
+    -   In the steps we articulated above, do we need to run code conditionally? No.
+    -   Are there any steps that require us to do anything a preset \# of times?
+        -   we can use our avg() function to calculate the mean
+        -   we need to subtract the mean from each of our numbers, square the result and add the result to a variable. This sounds like a `for` loop (but a `while` loop could work too)
+        -   we can divide the result by N-1 with a single line of code
+        -   we can take the square root of that value with a single line of code
+    -   Do we have steps that need to be repeated but we aren't sure how many? No.
+
+```{r write-sd-function}
+# Make sure we've run the code defining our "avg" function
+# Hint: look in the Environment Tab of the Environment Pane!
+standev <- function(x, N){
+  # calculate mean
+  my.avg <- avg(x, N)
+  # initialize our running sum
+  my.sum <- 0
+  for (num in x) {
+    # subtract mean from our number and square it
+    my.value <- (num-my.avg)**2
+    # add this value to our running sum
+    my.sum <- my.sum + my.value
+  }
+  my.variance <- my.sum / (N-1)
+  my.standev <- sqrt(my.variance)
+  return(my.standev)
+}
+
+# test your function
+# Define some vectors
+vector.1 <- runif(50, min=0, max=100) # pulls 50 values from a uniform distribution
+vector.2 <- rnorm(50, 0, 1) # pulls 50 numbers from a normal distributions
+
+# compare output from your function to the R function `sd()`
+print(standev(vector.1, 50))
+print(sd(vector.1))
+print(standev(vector.2, 50))
+print(sd(vector.2))
+
+```
