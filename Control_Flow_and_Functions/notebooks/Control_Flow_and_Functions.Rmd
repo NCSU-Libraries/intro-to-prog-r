@@ -151,7 +151,7 @@ While loops execute code by testing a condition. This means that the code may ex
 
 While `for` loops execute over a range of values, `while` loops need a condition to test. This means you use a logical variable, relational expression or logical expression to determine if the code should run. Here are some examples:
 
-```{r while-loop-DONT-RUN-TIL-YOU-FIX}
+```{r while-loop}
 # monitor our loop using this logical variable
 eatsHamburger = TRUE
 
@@ -159,25 +159,28 @@ eatsHamburger = TRUE
 # Uncomment and run, but comment it back before rendering notebook!
 # numBurgersEaten <- 0
 # my.calorie.count <- 0
+# eatsHamburger <- TRUE
 # while (eatsHamburger == TRUE) {
 #   my.calorie.count <- my.calorie.count + 650
 #   numBurgersEaten <- numBurgersEaten + 1
-# }
-
-
-# Ok, let's try this again
-# numBurgersEaten <- 0
-# my.calorie.count <- 0
-# while (eatsHamburger == TRUE) {
-#   my.calorie.count <- my.calorie.count + 650
-#   numBurgersEaten <- numBurgersEaten + 1
-#   if (numBurgersEaten > 5) {
-#     eatsHamburger == FALSE # OK we've added code to change value of condition
-#   }
 #   print(numBurgersEaten)
-#   print(my.calorie.count)
-#   print(Ω)
 # }
+
+
+#Ok, let's try this again
+numBurgersEaten <- 0
+my.calorie.count <- 0
+eatsHamburger <- TRUE
+while (eatsHamburger == TRUE) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+  if (numBurgersEaten > 5) {
+    eatsHamburger <-  FALSE # OK we've added code to change value of condition
+  }
+  print(numBurgersEaten)
+  print(my.calorie.count)
+  print(eatsHamburger)
+}
 
 ```
 
@@ -459,7 +462,7 @@ Whether you are just starting our or whether you are a seasoned programming, spe
 
 -   what parameters will be required vs. optional
 
-    -   a lot of new programmers make everything required and that's ok
+    -   it's ok to make everything required
 
 -   what will the function return?
 
