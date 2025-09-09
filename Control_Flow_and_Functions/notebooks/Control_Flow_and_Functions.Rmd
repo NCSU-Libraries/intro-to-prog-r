@@ -45,68 +45,105 @@ By the end of this Session, you will understand:
 
 ### If Statement (Conditional)
 
-The `if` statement allows us to run code based on some condition (**if** the condition is true, the code is run). The `if` statement can use a logical variable or an expression that evaluates to a logical value as its "test". Here is what it looks like:
+The `if` statement:
+
+-   runs code based on whether a condition is met
+
+-   if condition is met, code will be run once
+
+<!-- -->
+
+-   condition is only evaluated once (**if** the condition is true, the code is run).
+
+-   can use a logical variable or an expression that evaluates to a logical value as the test condition
 
 ```{r if-statement}
-eatsHamburger = TRUE
-eatsVegees = TRUE
-eatsMeat = TRUE
-numHamburgersEaten = 1 # number per week
-my.calorie.count <- 0
-
 
 # Use relational operator
-if (numHamburgersEaten <= 1) {
-  eatsHamburger = TRUE
+numBurgersEaten = 1 # number per week
+if (numBurgersEaten <= 1) {
+  eatsBurger = TRUE
 }
+eatsBurger
 
 # Use a logical operator
-if (eatsVegees==TRUE && eatsMeat==FALSE) {
-  # I'm a vegetarian
-  eatsHamburger = FALSE
-}
-
-# Use logical variable
-if (eatsHamburger) {
-  my.calorie.count <- my.calorie.count + 650
-}
-```
-
-You use if statements when you want to execute code **conditionally**, e.g. only if certain conditions are met.
-
-We can expand the `if` statement with `else`. The `else` clause is used to run code if the condition **isn't** met. Let's look at some examples:
-
-```{r if-else-statement}
-eatsHamburger = TRUE
 eatsVegees = TRUE
 eatsMeat = TRUE
-numHamburgersEaten = 1 # number per week
+if (eatsVegees==TRUE && eatsMeat==FALSE) {
+  # I'm a vegetarian
+  eatsBurger = FALSE
+}
+eatsBurger # This may fail if eatsBurger wasn't defined above!
+
+# Use logical variable
+eatsBurger = TRUE
 my.calorie.count <- 0
 
-# increase calorie count
-if (eatsHamburger) {
+my.calorie.count <- 0
+if (eatsBurger) {
   my.calorie.count <- my.calorie.count + 650
+}
+my.calorie.count
+```
+
+You can add an `else` statement to execute different code if condition is **not** met:
+
+```{r if-else-statement}
+
+# increase calorie count
+eatsBurger <- TRUE
+my.calorie.count <- 0
+numBurgersEaten  <-  0 # number per week
+
+if (eatsBurger) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
 } else {
   my.calorie.count <- my.calorie.count + 60 # I should choose this more often
 }
+numBurgersEaten
+my.calorie.count
 
-# make sure you have open ({) and closed (}) braces! Let's remove one and see what R does. Also note, if you put your cursor after a brace (or a bracket for that matter) it will highlight it's match.
+# make sure you have open ({) and closed (}) braces! 
+# Let's remove one and see what R does. 
+# Also note, if you put your cursor after a brace (or a bracket for that matter) it will # highlight the matching brace or bracket
 
 ```
 
-While we have provided examples with one line of code, you can put as much code between the two braces as you need.
+You can use `else if` to run code under more than two conditions:
+
+```{r else-if-statements}
+numBurgersEaten  <-  2 # number per week
+
+if (numBurgersEaten <= 1) {
+  print("Not bad.")
+} else if ((numBurgersEaten > 1) && (numBurgersEaten <= 3)) {
+  print("Dont eat any burgers for a few weeks")
+  # Can put many more lines of code.
+} else {
+  print("Warning, warning!! Too many burgers!")
+}
+```
 
 ### For Loop
 
-A `for` loop is used to perform code multiple times. The code in a `for` loop will, by definition, run a specified number of times. This is because you provide a range, in some form, over which the loop executes. This makes `for` loops very useful for traversing data structures like vectors, matrices, and dataframes. Let's look at some examples:
+A `for` loop:
+
+-   runs a specific number of times
+
+-   will run at least once
+
+-   is useful for traversing data structures like vectors, matrices, and dataframes.
 
 ```{r for-loops}
+
 # Simplest example
 for (i in 1:5) {
   print(i) # spice it up and divide i by 2
 }
 
 vector1 = c("one", "two", "three", "four", "five")
+# Can iterate over items in a vector
 for (x in vector1) {
   print(x)
 }
@@ -117,7 +154,7 @@ for (y in vector2) {
 }
 ```
 
-In the last couple of examples, we looped over a vector. What about a matrix? In this case we would do nested `for` loops.
+We can loop over a two-dimensional matrix or data frame using nested loops.
 
 ```{r nested-for}
 # Make a matrix
@@ -133,7 +170,7 @@ for (row in 1:10) {
   }
 }
 
-# We can use functions to extract number of rows and cols
+# We can use functions to extract number of rows and cols from the data structure
 for (row in 1:nrow(my.matrix)) {
   for (col in 1:ncol(my.matrix)) {
     print(my.matrix[row,col])
@@ -147,13 +184,32 @@ for (row in 1:nrow(my.matrix)) {
 
 ### While Loops
 
-While loops execute code by testing a condition. This means that the code may execute once, several times or not at all! While loops are great when you need to perform some tasks, but you don't know how many times. Humans do this all the time, "I want to pet my dog until the dog hair on my pants makes them look like fur leggings." You don't know when that condition will happen, but when it does you want to stop petting your dog.
+A while loop:
 
-While `for` loops execute over a range of values, `while` loops need a condition to test. This means you use a logical variable, relational expression or logical expression to determine if the code should run. Here are some examples:
+-   execute code by testing a condition
+
+-   code may execute once, several times or not at all
+
+-   can be used to run code in response to a changing condition
+
+-   the condition can be a logical variable, relational expression or logical expression
 
 ```{r while-loop}
 # monitor our loop using this logical variable
-eatsHamburger = TRUE
+eatsBurger = TRUE
+numBurgersEaten <- 0
+my.calorie.count <- 0
+
+while (eatsBurger == TRUE) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+  if (numBurgersEaten > 5) {
+    eatsBurger <-  FALSE # We are full no more burgers
+  }
+  print(numBurgersEaten)
+  print(my.calorie.count)
+  print(eatsBurger)
+}
 
 # Broken While loop
 # Uncomment and run, but comment it back before rendering notebook!
@@ -166,43 +222,27 @@ eatsHamburger = TRUE
 #   print(numBurgersEaten)
 # }
 
-
-#Ok, let's try this again
-numBurgersEaten <- 0
-my.calorie.count <- 0
-eatsHamburger <- TRUE
-while (eatsHamburger == TRUE) {
-  my.calorie.count <- my.calorie.count + 650
-  numBurgersEaten <- numBurgersEaten + 1
-  if (numBurgersEaten > 5) {
-    eatsHamburger <-  FALSE # OK we've added code to change value of condition
-  }
-  print(numBurgersEaten)
-  print(my.calorie.count)
-  print(eatsHamburger)
-}
-
 ```
 
-You are just starting out, but let's talk about efficiency when you are writing code. There will be many ways to write code. Good code is
+Good code is
 
 -   code that works and
 
 -   that can be understood by others.
 
-Once you are good at that, and as your experience grows, you will work on efficient. Efficiency comes with practice and in exploring different ways to write the same code.\
+Efficiency comes with practice and in exploring different ways to write the same code.\
 \
 Let's look at how we might make the code above more efficient.
 
 ```{r more-efficient-while}
 
-# Ok, let's look at the previous code
 numBurgersEaten <- 0
-while (eatsHamburger == TRUE) {
+eatsBurger <-  TRUE
+while (eatsBurger == TRUE) {
   my.calorie.count <- my.calorie.count + 650
   numBurgersEaten <- numBurgersEaten + 1
   if (numBurgersEaten > 5) { 
-    eatsHamburger == FALSE # OK we've added code to change value of condition
+    eatsBurger == FALSE # OK we've added code to change value of condition
   }
 }
 
@@ -218,9 +258,9 @@ while (numBurgersEaten <= 5) {
 }
 ```
 
-Some important considerations with `while` loops is that you need to ensure:
+Some important considerations with `while` loops:
 
--   you initialize any values used inside the loop to change the condition BEFORE the while loop starts
+-   make sure you initialize any values used inside the loop to change the condition BEFORE the while loop starts
 
 -   that the condition used to determine whether the while loop is run again is updated within the while loop
 
