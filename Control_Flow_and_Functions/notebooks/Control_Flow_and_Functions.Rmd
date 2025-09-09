@@ -186,7 +186,7 @@ for (row in 1:nrow(my.matrix)) {
 
 A while loop:
 
--   execute code by testing a condition
+-   executes code by testing a condition
 
 -   code may execute once, several times or not at all
 
@@ -224,7 +224,7 @@ while (eatsBurger == TRUE) {
 
 ```
 
-Good code is
+Good code is:
 
 -   code that works and
 
@@ -260,9 +260,9 @@ while (numBurgersEaten <= 5) {
 
 Some important considerations with `while` loops:
 
--   make sure you initialize any values used inside the loop to change the condition BEFORE the while loop starts
+-   make sure you initialize condition values BEFORE the while loop starts
 
--   that the condition used to determine whether the while loop is run again is updated within the while loop
+-   make sure values in the test condition are getting updated appropriately within the loop
 
 ### I digress ...
 
@@ -301,9 +301,9 @@ We will look at three types of functions:
 
 We'll talk about each of these and explore some examples. The following vocabulary will be helpful:
 
-> **define**: before they can be used, functions need to be defined. For built-in and external package functions this will already be done for you (sweet!!). However, as the name suggests when you create your own functions (user-defined) you will "define" the function
+> **define**: before a function can be used it must be defined. Built-in and external package functions are defined. When you create your own functions (user-defined) you will create a definition.
 >
-> **call**: when you use a function in your program you "call" it.
+> **call**: when you use a function in your program you "call" it. You can't call a function before it is defined.
 
 A function has three main components:
 
@@ -401,11 +401,12 @@ barplot(a ~ b,
         col="blue", 
         ylab="# of Regional Managers")
 
+# does a plot have a return value? Yes!
 bp <- barplot(a ~ b, 
         data = data, 
         col="blue", 
         ylab="# of Regional Managers")
-
+bp
 ```
 
 ### Practice Using Built-In Functions
@@ -494,7 +495,7 @@ Functions should:
 
 -   be written to be reusable
 
-Whether you are just starting our or whether you are a seasoned programming, spending time with paper and pencil before programming is a good idea. At a minimum, consider:
+Whether you are just starting out or a seasoned programming, spending time with paper and pencil before programming is a good idea. Consider:
 
 -   what will the function do?
 
