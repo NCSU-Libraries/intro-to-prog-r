@@ -4,9 +4,9 @@ subtitle: "Control Flow and Functions"
 author: "Selene R. Schmittling"
 date: "2025-08-01" 
 output: 
+  pdf_document:
   html_document: 
     number_sections: true
-  pdf_document:
 editor_options: 
   chunk_output_type: inline
 ---
@@ -15,22 +15,295 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Learning Outcomes
+## Conditional Statements and Flow Control
 
-In this Session of our R Workshop, we will cover the following introductory aspects of R Studio & Programming:
+```{r if-statement}
 
--   Conditional and Flow Control Statements
-    -   if
-    -   for
-    -   while
--   Functions, including
-    -   built-in
-    -   library
-    -   user-defined
--   Getting help
--   File Input and Output
+# Use relational operator
+numBurgersEaten = 1 # number per week
+if (numBurgersEaten <= 1) {
+  eatsBurger = TRUE
+}
+eatsBurger
 
-By the end of this Session, you will understand:
+# Use a logical operator
+eatsVegees = TRUE
+eatsMeat = TRUE
+if (eatsVegees==TRUE && eatsMeat==FALSE) {
+  # I'm a vegetarian
+  eatsBurger = FALSE
+}
+eatsBurger # This may fail if eatsBurger wasn't defined above!
 
-8.  How to install and use R Libraries
-9.  How to use documentation, get help in RStudio
+# Use logical variable
+eatsBurger = TRUE
+my.calorie.count <- 0
+
+my.calorie.count <- 0
+if (eatsBurger) {
+  my.calorie.count <- my.calorie.count + 650
+}
+my.calorie.count
+```
+
+You can add an `else` statement to execute different code if condition is **not** met:
+
+```{r if-else-statement}
+
+# increase calorie count
+eatsBurger <- TRUE
+my.calorie.count <- 0
+numBurgersEaten  <-  0 # number per week
+
+if (eatsBurger) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+} else {
+  my.calorie.count <- my.calorie.count + 60 # I should choose this more often
+}
+numBurgersEaten
+my.calorie.count
+
+# make sure you have open ({) and closed (}) braces! 
+# Let's remove one and see what R does. 
+# Also note, if you put your cursor after a brace (or a bracket for that matter) it will # highlight the matching brace or bracket
+
+```
+
+You can use `else if` to run code under more than two conditions:
+
+```{r else-if-statements}
+numBurgersEaten  <-  2 # number per week
+
+if (numBurgersEaten <= 1) {
+  print("Not bad.")
+} else if ((numBurgersEaten > 1) && (numBurgersEaten <= 3)) {
+  print("Dont eat any burgers for a few weeks")
+  # Can put many more lines of code.
+} else {
+  print("Warning, warning!! Too many burgers!")
+}
+```
+
+### For Loop
+
+```{r for-loops}
+
+# Simplest example
+for (i in 1:5) {
+  print(i) # spice it up and divide i by 2
+}
+
+vector1 = c("one", "two", "three", "four", "five")
+# Can iterate over items in a vector
+for (x in vector1) {
+  print(x)
+}
+
+vector2 = c(2, 4, 6, 8, 10)
+for (y in vector2) {
+  print(y)
+}
+```
+
+We can loop over a two-dimensional matrix or data frame using nested loops.
+
+```{r nested-for}
+# Make a matrix
+data = (1:60)
+my.matrix = matrix(data, nrow=10, ncol=6, byrow = TRUE)
+print(my.matrix)
+
+# Lets print every value in the matrix out one at a time
+# REMEMBER TO MAKE SURE YOU HAVE OPEN & CLOSED BRACES!
+for (row in 1:10) {
+  for (col in 1:6) {
+    print(my.matrix[row,col])
+  }
+}
+
+# We can use functions to extract number of rows and cols from the data structure
+for (row in 1:nrow(my.matrix)) {
+  for (col in 1:ncol(my.matrix)) {
+    print(my.matrix[row,col])
+  }
+}
+
+# How would you use this same kind of structure to access data in a 3-D array?
+
+
+```
+
+### While Loops
+
+```{r while-loop}
+# monitor our loop using this logical variable
+eatsBurger = TRUE
+numBurgersEaten <- 0
+my.calorie.count <- 0
+
+while (eatsBurger == TRUE) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+  if (numBurgersEaten > 5) {
+    eatsBurger <-  FALSE # We are full no more burgers
+  }
+  print(numBurgersEaten)
+  print(my.calorie.count)
+  print(eatsBurger)
+}
+
+# Broken While loop
+# Uncomment and run, but comment it back before rendering notebook!
+# numBurgersEaten <- 0
+# my.calorie.count <- 0
+# eatsHamburger <- TRUE
+# while (eatsHamburger == TRUE) {
+#   my.calorie.count <- my.calorie.count + 650
+#   numBurgersEaten <- numBurgersEaten + 1
+#   print(numBurgersEaten)
+# }
+
+```
+
+\
+Let's look at how we might make the code above more efficient.
+
+```{r more-efficient-while}
+
+numBurgersEaten <- 0
+eatsBurger <-  TRUE
+while (eatsBurger == TRUE) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+  if (numBurgersEaten > 5) { 
+    eatsBurger == FALSE # OK we've added code to change value of condition
+  }
+}
+
+# Walk through the steps in your head. Is there anything that seems duplicative? Focus on the "if" statement used above to change the value of "eatsHamburger".
+
+# What if we just use numBurgersEaten as our "while" test?
+# How you you rewrite it to use that instead?
+
+numBurgersEaten <- 0
+while (numBurgersEaten <= 5) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+}
+```
+
+## Functions
+
+### Built-In
+
+```{r built-in-function-call}
+# define some data
+data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
+
+# generate plot
+barplot(data$a, 
+        names.arg = data$b, 
+        col="blue", 
+        ylab="# of Regional Managers")
+
+```
+
+```{r function-flavors-and-return-values}
+# using barplot() S3 Method for class `formula`
+# define some data
+data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
+
+# generate plot
+barplot(a ~ b, 
+        data = data, 
+        col="blue", 
+        ylab="# of Regional Managers")
+
+# does a plot have a return value? Yes!
+bp <- barplot(a ~ b, 
+        data = data, 
+        col="blue", 
+        ylab="# of Regional Managers")
+bp
+```
+
+### Practice Using Built-In Functions
+
+```{r built-in-practice}
+# Make some data to plot. Uses rnorm() to generate 50 values drawn from a normal distribution with a mean of 0 and standard deviation of 4.25
+data <- rnorm(50, mean=0, sd=4.25)
+
+# You can use the function built in function hist() to create a histogram of data
+# Use ?hist() in the Console to learn how to call the function
+
+# What are the required parameters? Call the function using only the required parameter
+hist(data)
+
+# add a breaks statement to increase the number of bars (bins)
+# hint: count the bars in the last plot and increase it
+hist(data, breaks=15)
+
+# set the freq argument to TRUE and then FALSE and look at the difference
+hist(data, breaks=15, freq=TRUE)
+hist(data, breaks=15, freq=FALSE)
+```
+
+### Packages
+
+```{r load-a-package}
+library(openxlsx2)
+
+# load NCSU Mascot data using openxlsx2
+# Because we are in a notebook it sees the current working directory as "notebooks"
+# To use a relative file name, we use "../" to "go" up a level and then "/data/" 
+# points to documents in the data directory. Once that is entered if we hit Tab we will get a list of files to choose from.
+
+# Load data using read_xlsx() function
+mascot.data <- read_xlsx("../data/NCSU_Mascots_v1.xlsx")
+# print the first 6 rows of the data using the head() function
+print(head(mascot.data))
+```
+
+While we are using this package, let's practice writing data to an excel file.
+
+```{r write-to-excel}
+# Let's write out the first 20 rows of the mascot data to an .xlsx file. Save the file in the output folder
+write_xlsx(mascot.data[1:20, ], "../output/mascot_20.xlsx")
+
+# Open the data and compare it to "../data/NCSU_Mascots_v1.xlsx"
+
+```
+
+### User-defined Functions
+
+```{r write-a-mean-function}
+# Function: avg(x, N)
+# Required parameters:
+#   * x: a vector of numbers
+#   * N: the number of elements in the vector
+# Return value: avg returns the mean of the numbers in the vector.
+
+avg <- function(x, N){
+  sumX <-  0
+  for (i in 1:N) {
+    sumX <- sumX + x[i]
+  }
+  avgX <- sumX/N
+  return(avgX)
+}
+# Once we run this code we should see `avg` listed under "Functions" in the Environment tab of the Environment pane.
+
+# Let's Test our Function
+# Define some vectors
+vector.1 <- runif(50, min=0, max=100) # pulls 50 values from a uniform distribution
+vector.2 <- rnorm(50, 0, 1) # pulls 50 numbers from a normal distributions
+
+print(avg(vector.1, 50))
+print(mean(vector.1))
+print(avg(vector.2, 50))
+print(mean(vector.2))
+
+```
+
+

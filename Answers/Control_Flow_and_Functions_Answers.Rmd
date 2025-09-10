@@ -60,21 +60,49 @@ The `if` statement:
 ```{r if-statement}
 
 # Use relational operator
+numBurgersEaten = 1 # number per week
+if (numBurgersEaten <= 1) {
+  eatsBurger = TRUE
+}
+eatsBurger
 
 # Use a logical operator
+eatsVegees = TRUE
+eatsMeat = TRUE
+if (eatsVegees==TRUE && eatsMeat==FALSE) {
+  # I'm a vegetarian
+  eatsBurger = FALSE
+}
+eatsBurger # This may fail if eatsBurger wasn't defined above!
 
 # Use logical variable
+eatsBurger = TRUE
+my.calorie.count <- 0
 
+my.calorie.count <- 0
+if (eatsBurger) {
+  my.calorie.count <- my.calorie.count + 650
+}
+my.calorie.count
 ```
 
 You can add an `else` statement to execute different code if condition is **not** met:
 
 ```{r if-else-statement}
 
-# Define variables
+# increase calorie count
+eatsBurger <- TRUE
+my.calorie.count <- 0
+numBurgersEaten  <-  0 # number per week
 
-# if-else statement
-
+if (eatsBurger) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+} else {
+  my.calorie.count <- my.calorie.count + 60 # I should choose this more often
+}
+numBurgersEaten
+my.calorie.count
 
 # make sure you have open ({) and closed (}) braces! 
 # Let's remove one and see what R does. 
@@ -85,12 +113,16 @@ You can add an `else` statement to execute different code if condition is **not*
 You can use `else if` to run code under more than two conditions:
 
 ```{r else-if-statements}
-# Define variable(s)
+numBurgersEaten  <-  2 # number per week
 
-# if else-if else statement
-
-
-
+if (numBurgersEaten <= 1) {
+  print("Not bad.")
+} else if ((numBurgersEaten > 1) && (numBurgersEaten <= 3)) {
+  print("Dont eat any burgers for a few weeks")
+  # Can put many more lines of code.
+} else {
+  print("Warning, warning!! Too many burgers!")
+}
 ```
 
 ### For Loop
@@ -105,38 +137,47 @@ A `for` loop:
 
 ```{r for-loops}
 
-# Simple for loop using range
+# Simplest example
+for (i in 1:5) {
+  print(i) # spice it up and divide i by 2
+}
 
+vector1 = c("one", "two", "three", "four", "five")
+# Can iterate over items in a vector
+for (x in vector1) {
+  print(x)
+}
 
-# Define string vector1
-
-
-# Iterate over vector1
-
-# Define numeric vector2
-
-# Iterate over vector2
-
-
+vector2 = c(2, 4, 6, 8, 10)
+for (y in vector2) {
+  print(y)
+}
 ```
 
 We can loop over a two-dimensional matrix or data frame using nested loops.
 
 ```{r nested-for}
 # Make a matrix
+data = (1:60)
+my.matrix = matrix(data, nrow=10, ncol=6, byrow = TRUE)
+print(my.matrix)
 
+# Lets print every value in the matrix out one at a time
+# REMEMBER TO MAKE SURE YOU HAVE OPEN & CLOSED BRACES!
+for (row in 1:10) {
+  for (col in 1:6) {
+    print(my.matrix[row,col])
+  }
+}
 
-# Print out elements in matrix one at a time
-
-
-
-# Use nrow and ncol to find end of range
-
-
+# We can use functions to extract number of rows and cols from the data structure
+for (row in 1:nrow(my.matrix)) {
+  for (col in 1:ncol(my.matrix)) {
+    print(my.matrix[row,col])
+  }
+}
 
 # How would you use this same kind of structure to access data in a 3-D array?
-# Hint: you need indices for row, column and dimension
-
 
 
 ```
@@ -154,12 +195,11 @@ A while loop:
 -   the condition can be a logical variable, relational expression or logical expression
 
 ```{r while-loop}
-# Define variables
+# monitor our loop using this logical variable
 eatsBurger = TRUE
 numBurgersEaten <- 0
 my.calorie.count <- 0
 
-# Create while loop using a logical variable
 while (eatsBurger == TRUE) {
   my.calorie.count <- my.calorie.count + 650
   numBurgersEaten <- numBurgersEaten + 1
@@ -196,7 +236,6 @@ Let's look at how we might make the code above more efficient.
 
 ```{r more-efficient-while}
 
-# First Attempt at while loop
 numBurgersEaten <- 0
 eatsBurger <-  TRUE
 while (eatsBurger == TRUE) {
@@ -212,7 +251,11 @@ while (eatsBurger == TRUE) {
 # What if we just use numBurgersEaten as our "while" test?
 # How you you rewrite it to use that instead?
 
-
+numBurgersEaten <- 0
+while (numBurgersEaten <= 5) {
+  my.calorie.count <- my.calorie.count + 650
+  numBurgersEaten <- numBurgersEaten + 1
+}
 ```
 
 Some important considerations with `while` loops:
@@ -369,21 +412,22 @@ bp
 ### Practice Using Built-In Functions
 
 ```{r built-in-practice}
-# Make some data to plot. Uses rnorm() to generate 50 values drawn from a normal distribution with a mean of 0 and standard deviation of 4.25 
-# Save these values in the variable "data"
+# Make some data to plot. Uses rnorm() to generate 50 values drawn from a normal distribution with a mean of 0 and standard deviation of 4.25
 data <- rnorm(50, mean=0, sd=4.25)
 
 # You can use the function built in function hist() to create a histogram of data
 # Use ?hist() in the Console to learn how to call the function
 
 # What are the required parameters? Call the function using only the required parameter
+hist(data)
 
 # add a breaks statement to increase the number of bars (bins)
 # hint: count the bars in the last plot and increase it
+hist(data, breaks=15)
 
 # set the freq argument to TRUE and then FALSE and look at the difference
-
-
+hist(data, breaks=15, freq=TRUE)
+hist(data, breaks=15, freq=FALSE)
 ```
 
 ### Packages
@@ -420,29 +464,26 @@ Next:
     -   No: then we need to load it before we use it.
 
 ```{r load-a-package}
+library(openxlsx2)
 
 # load NCSU Mascot data using openxlsx2
 # Because we are in a notebook it sees the current working directory as "notebooks"
 # To use a relative file name, we use "../" to "go" up a level and then "/data/" 
 # points to documents in the data directory. Once that is entered if we hit Tab we will get a list of files to choose from.
 
-# Load excel spreadsheet, "../data/NCSU_Mascots_v1.xlsx" into a variable named "mascot.data" using read_xlsx() function
-
-
-
-# print the first 6 rows of the data using the head() function inside print()
-# Hint use ?head to determine how to get the first 6 rows
-
-
+# Load data using read_xlsx() function
+mascot.data <- read_xlsx("../data/NCSU_Mascots_v1.xlsx")
+# print the first 6 rows of the data using the head() function
+print(head(mascot.data))
 ```
 
 While we are using this package, let's practice writing data to an excel file.
 
 ```{r write-to-excel}
-# Let's write out the first 20 rows of the mascot data to an .xlsx file. 
-# Save the file in "../output/mascot_20.xlsx"
+# Let's write out the first 20 rows of the mascot data to an .xlsx file. Save the file in the output folder
+write_xlsx(mascot.data[1:20, ], "../output/mascot_20.xlsx")
 
-
+# Open the data and compare it to "../data/NCSU_Mascots_v1.xlsx"
 
 ```
 
@@ -486,9 +527,20 @@ Let's consider the following before we start writing code:
 Now, we probably have enough information to start writing our function. For readability, let's use comments to document some information about our function. Also, let's call our function `avg` since the mean function already exists.
 
 ```{r write-a-mean-function}
-# Write out Function name "avg", a description of required and optional parameters and return value
+# Function: avg(x, N)
+# Required parameters:
+#   * x: a vector of numbers
+#   * N: the number of elements in the vector
+# Return value: avg returns the mean of the numbers in the vector.
 
-
+avg <- function(x, N){
+  sumX <-  0
+  for (i in 1:N) {
+    sumX <- sumX + x[i]
+  }
+  avgX <- sumX/N
+  return(avgX)
+}
 # Once we run this code we should see `avg` listed under "Functions" in the Environment tab of the Environment pane.
 
 # Let's Test our Function
@@ -496,10 +548,8 @@ Now, we probably have enough information to start writing our function. For read
 vector.1 <- runif(50, min=0, max=100) # pulls 50 values from a uniform distribution
 vector.2 <- rnorm(50, 0, 1) # pulls 50 numbers from a normal distributions
 
-# Test Average
 print(avg(vector.1, 50))
 print(mean(vector.1))
-
 print(avg(vector.2, 50))
 print(mean(vector.2))
 
@@ -549,7 +599,31 @@ $sd = \sqrt{\frac{(x_1 - \mu )^2 + (x_2 - \mu) ^2 + ... + (x_n - \mu)^2}{N-1}}$ 
 ```{r write-sd-function}
 # Make sure we've run the code defining our "avg" function
 # Hint: look in the Environment Tab of the Environment Pane!
+standev <- function(x, N){
+  # calculate mean
+  my.avg <- avg(x, N)
+  # initialize our running sum
+  my.sum <- 0
+  for (num in x) {
+    # subtract mean from our number and square it
+    my.value <- (num-my.avg)**2
+    # add this value to our running sum
+    my.sum <- my.sum + my.value
+  }
+  my.variance <- my.sum / (N-1)
+  my.standev <- sqrt(my.variance)
+  return(my.standev)
+}
 
+# test your function
+# Define some vectors
+vector.1 <- runif(50, min=0, max=100) # pulls 50 values from a uniform distribution
+vector.2 <- rnorm(50, 0, 1) # pulls 50 numbers from a normal distributions
 
+# compare output from your function to the R function `sd()`
+print(standev(vector.1, 50))
+print(sd(vector.1))
+print(standev(vector.2, 50))
+print(sd(vector.2))
 
 ```
