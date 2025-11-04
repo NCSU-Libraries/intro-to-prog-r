@@ -13,6 +13,7 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 # Learning Outcomes
@@ -51,39 +52,31 @@ The `if` statement:
 
 -   if condition is met, code will be run once
 
-<!-- -->
-
--   condition is only evaluated once (**if** the condition is true, the code is run).
-
--   can use a logical variable or an expression that evaluates to a logical value as the test condition
-
 ```{r if-statement}
 
 # Use relational operator
-numBurgersEaten = 1 # number per week
-if (numBurgersEaten <= 1) {
-  eatsBurger = TRUE
+numWolves = 12 # number per week
+if (numWolves <= 5) {
+  isWolfPack = FALSE
 }
-eatsBurger
+isWolfPack
 
 # Use a logical operator
-eatsVegees = TRUE
+talleyWolf = TRUE
 eatsMeat = TRUE
-if (eatsVegees==TRUE && eatsMeat==FALSE) {
+if (talleyWolf==TRUE && eatsMeat==FALSE) {
   # I'm a vegetarian
-  eatsBurger = FALSE
+  goTuffys = TRUE
 }
-eatsBurger # This may fail if eatsBurger wasn't defined above!
+goTuffys # This may fail if eatsBurger wasn't defined above!
 
 # Use logical variable
-eatsBurger = TRUE
-my.calorie.count <- 0
+wolf.calorie.count <- 0
 
-my.calorie.count <- 0
-if (eatsBurger) {
-  my.calorie.count <- my.calorie.count + 650
+if (eatsMeat) {
+  wolf.calorie.count <- wolf.calorie.count + 650
 }
-my.calorie.count
+wolf.calorie.count
 ```
 
 You can add an `else` statement to execute different code if condition is **not** met:
@@ -91,18 +84,18 @@ You can add an `else` statement to execute different code if condition is **not*
 ```{r if-else-statement}
 
 # increase calorie count
-eatsBurger <- TRUE
-my.calorie.count <- 0
+eatsMeat <- TRUE
+wolf.calorie.count <- 0
 numBurgersEaten  <-  0 # number per week
 
-if (eatsBurger) {
-  my.calorie.count <- my.calorie.count + 650
+if (eatsMeat) {
+  my.calorie.count <- wolf.calorie.count + 650
   numBurgersEaten <- numBurgersEaten + 1
 } else {
-  my.calorie.count <- my.calorie.count + 60 # I should choose this more often
+  wolf.calorie.count <- wolf.calorie.count + 60 # I should choose this more often
 }
 numBurgersEaten
-my.calorie.count
+wolf.calorie.count
 
 # make sure you have open ({) and closed (}) braces! 
 # Let's remove one and see what R does. 
@@ -150,7 +143,7 @@ for (x in vector1) {
 
 vector2 = c(2, 4, 6, 8, 10)
 for (y in vector2) {
-  print(y)
+  print(y**y)
 }
 ```
 
@@ -158,27 +151,35 @@ We can loop over a two-dimensional matrix or data frame using nested loops.
 
 ```{r nested-for}
 # Make a matrix
-data = (1:60)
-my.matrix = matrix(data, nrow=10, ncol=6, byrow = TRUE)
-print(my.matrix)
+data = rnorm(60, 64, 6)
+wtWolves = matrix(data, nrow=10, ncol=6, byrow = TRUE)
+print(wtWolves)
 
 # Lets print every value in the matrix out one at a time
 # REMEMBER TO MAKE SURE YOU HAVE OPEN & CLOSED BRACES!
 for (row in 1:10) {
   for (col in 1:6) {
-    print(my.matrix[row,col])
+    print(wtWolves[row,col])
   }
 }
 
 # We can use functions to extract number of rows and cols from the data structure
-for (row in 1:nrow(my.matrix)) {
-  for (col in 1:ncol(my.matrix)) {
-    print(my.matrix[row,col])
+for (row in 1:nrow(wtWolves)) {
+  for (col in 1:ncol(wtWolves)) {
+    print(wtWolves[row,col])
   }
 }
 
 # How would you use this same kind of structure to access data in a 3-D array?
-
+wtWolves3D = array(wtWolves, dim=c(10,3,2))
+wtWolves3D
+for (row in 1:10) {
+  for (col in 1:3) {
+    for (dim in 1:2) {
+      print(wtWolves3D[row, col, dim])
+    }
+  }
+}
 
 ```
 
@@ -196,31 +197,33 @@ A while loop:
 
 ```{r while-loop}
 # monitor our loop using this logical variable
-eatsBurger = TRUE
-numBurgersEaten <- 0
-my.calorie.count <- 0
+moreWolves = TRUE
+numWolves <- 10
 
-while (eatsBurger == TRUE) {
-  my.calorie.count <- my.calorie.count + 650
-  numBurgersEaten <- numBurgersEaten + 1
-  if (numBurgersEaten > 5) {
-    eatsBurger <-  FALSE # We are full no more burgers
+while (moreWolves == TRUE) {
+  # a wolf leaves
+  numWolves = numWolves - 1
+  if (numWolves == 0) {
+    moreWolves = FALSE
   }
-  print(numBurgersEaten)
-  print(my.calorie.count)
-  print(eatsBurger)
+  print(paste('Number of wolves: ', numWolves))
 }
+
+
 
 # Broken While loop
 # Uncomment and run, but comment it back before rendering notebook!
-# numBurgersEaten <- 0
-# my.calorie.count <- 0
-# eatsHamburger <- TRUE
-# while (eatsHamburger == TRUE) {
-#   my.calorie.count <- my.calorie.count + 650
-#   numBurgersEaten <- numBurgersEaten + 1
-#   print(numBurgersEaten)
+# monitor our loop using this logical variable
+# moreWolves = TRUE
+# numWolves <- 10
+# 
+# while (moreWolves == TRUE) {
+#   # a wolf leaves
+#   numWolves = numWolves - 1
+#   Sys.sleep(.25) # Slows code down enough to keep it from crashing
+#   print(paste('Number of wolves: ', numWolves))
 # }
+
 
 ```
 
@@ -236,26 +239,36 @@ Let's look at how we might make the code above more efficient.
 
 ```{r more-efficient-while}
 
-numBurgersEaten <- 0
-eatsBurger <-  TRUE
-while (eatsBurger == TRUE) {
-  my.calorie.count <- my.calorie.count + 650
-  numBurgersEaten <- numBurgersEaten + 1
-  if (numBurgersEaten > 5) { 
-    eatsBurger == FALSE # OK we've added code to change value of condition
+# Initial version of while loop with print statements
+# removed
+
+moreWolves = TRUE
+numWolves <- 10
+
+while (moreWolves == TRUE) {
+  # a wolf leaves
+  numWolves = numWolves - 1
+  if (numWolves == 0) {
+    moreWolves = FALSE
   }
+  print(paste('Number of wolves: ', numWolves))
 }
+
 
 # Walk through the steps in your head. Is there anything that seems duplicative? Focus on the "if" statement used above to change the value of "eatsHamburger".
 
 # What if we just use numBurgersEaten as our "while" test?
 # How you you rewrite it to use that instead?
 
-numBurgersEaten <- 0
-while (numBurgersEaten <= 5) {
-  my.calorie.count <- my.calorie.count + 650
-  numBurgersEaten <- numBurgersEaten + 1
+moreWolves = TRUE
+numWolves <- 10
+
+while (numWolves > 0) {
+  # a wolf leaves
+  numWolves = numWolves - 1
+  print(paste('Number of wolves: ', numWolves))
 }
+
 ```
 
 Some important considerations with `while` loops:
@@ -332,6 +345,8 @@ A function has three main components:
         -   data that has been manipulated in some way, or
         -   a status that indicates whether the function encountered any errors
 
+START HERE!!
+
 ### Built-In
 
 Built-in functions are functions that are loaded when R is loaded. You don't have to do anything to use them.
@@ -342,13 +357,14 @@ We saw an example of using built-in package in the Basic Syntax and Operators Wo
 
 ```{r built-in-function-call}
 # define some data
-data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
+data <- data.frame(weight = c(50,50.000001,45,135,85), 
+                   name = c("Artemis", "Aurora", "Fang", "Fen", "Snoopy"))
 
 # generate plot
-barplot(data$a, 
-        names.arg = data$b, 
-        col="blue", 
-        ylab="# of Regional Managers")
+barplot(data$weight, 
+        names.arg = data$name, 
+        col="red", 
+        ylab="Weight of Wolf (lbs)")
 
 ```
 
@@ -393,18 +409,19 @@ Here is what we see in the Help pane:
 ```{r function-flavors-and-return-values}
 # using barplot() S3 Method for class `formula`
 # define some data
-data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
+data <- data.frame(weight = c(50,50.000001,45,135,85), 
+                   name = c("Artemis", "Aurora", "Fang", "Fen", "Snoopy"))
 
 # generate plot
-barplot(a ~ b, 
+barplot(weight ~ name, 
         data = data, 
-        col="blue", 
-        ylab="# of Regional Managers")
+        col="red", 
+        ylab="Weight of Wolf (lbs)")
 
 # does a plot have a return value? Yes!
-bp <- barplot(a ~ b, 
+bp <- barplot(weight ~ name, 
         data = data, 
-        col="blue", 
+        col="red", 
         ylab="# of Regional Managers")
 bp
 ```
@@ -472,7 +489,8 @@ library(openxlsx2)
 # points to documents in the data directory. Once that is entered if we hit Tab we will get a list of files to choose from.
 
 # Load data using read_xlsx() function
-mascot.data <- read_xlsx("../data/NCSU_Mascots_v1.xlsx")
+# Note: 
+mascot.data <- read_xlsx("../Control_Flow_and_Functions/data/NCSU_Mascots_v1.xlsx")
 # print the first 6 rows of the data using the head() function
 print(head(mascot.data))
 ```
@@ -481,7 +499,7 @@ While we are using this package, let's practice writing data to an excel file.
 
 ```{r write-to-excel}
 # Let's write out the first 20 rows of the mascot data to an .xlsx file. Save the file in the output folder
-write_xlsx(mascot.data[1:20, ], "../output/mascot_20.xlsx")
+write_xlsx(mascot.data[1:20, ], "../Control_Flow_and_Functions/output/mascot_20.xlsx")
 
 # Open the data and compare it to "../data/NCSU_Mascots_v1.xlsx"
 

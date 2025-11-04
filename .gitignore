@@ -49,3 +49,5 @@ slides/*_files/
 .Rhistory
 .RData
 .Ruserdata
+
+**/*.quarto_ipynb

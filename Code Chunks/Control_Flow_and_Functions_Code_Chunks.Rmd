@@ -305,5 +305,3 @@ print(avg(vector.2, 50))
 print(mean(vector.2))
 
 ```
-
-
