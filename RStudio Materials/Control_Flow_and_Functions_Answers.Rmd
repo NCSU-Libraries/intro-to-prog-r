@@ -490,7 +490,7 @@ library(openxlsx2)
 
 # Load data using read_xlsx() function
 # Note: 
-mascot.data <- read_xlsx("../Control_Flow_and_Functions/data/NCSU_Mascots_v1.xlsx")
+mascot.data <- read_xlsx("data/NCSU_Mascots_v1.xlsx")
 # print the first 6 rows of the data using the head() function
 print(head(mascot.data))
 ```
@@ -499,7 +499,7 @@ While we are using this package, let's practice writing data to an excel file.
 
 ```{r write-to-excel}
 # Let's write out the first 20 rows of the mascot data to an .xlsx file. Save the file in the output folder
-write_xlsx(mascot.data[1:20, ], "../Control_Flow_and_Functions/output/mascot_20.xlsx")
+write_xlsx(mascot.data[1:20, ], "output/mascot_20.xlsx")
 
 # Open the data and compare it to "../data/NCSU_Mascots_v1.xlsx"
 

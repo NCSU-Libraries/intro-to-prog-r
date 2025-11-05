@@ -49,7 +49,7 @@ By the end of this Session, you will understand:
 
 # RStudio Environment
 
-There are four main window panes in RStudio: the Source, the Console, the Environments and the Output Window. [![Image from https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html](imgs/Rstudio_panes.jpg)](https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html)
+There are four main window panes in RStudio: the Source, the Console, the Environments and the Output Window. [![Image from https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html](../assets/notebooks/Rstudio_panes.jpg)](https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html)
 
 ## Source Pane
 
@@ -101,13 +101,9 @@ The output pane has a variety of tabs that provide access to different types of 
 ```{r Plot_tab_example}
 # Lets create a little plot
 # create some data
-data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
 
 # generate plot
-barplot(data$a, 
-        names.arg = data$b, 
-        col="blue", 
-        ylab="# of Regional Managers")
+
 
 # function name
 # function parameters
@@ -210,26 +206,7 @@ The code box below shows some example variables. Use CMD/CTRL + RETURN/ENTER to 
 
 ```{r Variables}
 
-wolves  <-  5
-rabbits <-  20
 
-pctWolfStudents <- .30
-pctRabbitStudents <- .05
-
-wolf1.name <- "Scruffy"
-wolf2.name <- "Belinda"
-
-wolf1.bday <- "8/18/2025"
-wolf2.bday <- as.POSIXct("8/18/2025", format="%m/%d/%Y")
-
-wolf1.isSmiley <- TRUE
-wolf2.isSmiley <- FALSE
-
-# See the variable value
-wolves
-wolf1.name
-wolf2.bday
-wolf1.isSmiley
 ```
 
 ## I Digress ...
@@ -254,7 +231,7 @@ Using the rules listed above which of the following passwords will work?
 # Not sure which will run? 
 # Use the assignment operator to assign the value 5 to a variable using the names above. Feel free to test some you define yourself!
 
-My_favoritePASSWORDofAlL.tymes <- 5
+
 
 ```
 
@@ -302,10 +279,6 @@ Let's look at some examples.
 
 ```{r Integers}
 
-wolves  <-  5
-rabbits <-  20
-wolves
-rabbits
 
 # Uncomment the line below.
 # Look for a red x to the left of the line number
@@ -322,19 +295,10 @@ rabbits
 
 # Now we'll define some floating point variables
 
-pctWolfStudents <- .30
-pctRabbitStudents <- .05
-
-typeof(wolves)
-typeof(pctWolfStudents)
 # stillNoCommas <- 4,325.98
 
-NCwolves <- 1098.0
 # will print as an integer if the value to the right of the decimal = 0
-NCwolves
 
-SCwolves <- 1329.9
-SCwolves
 ```
 
 > Use the `typeof()` function to check what data type R thinks a variable is.
@@ -346,22 +310,10 @@ We've looked at the scary, scary numbers. Let's look at good old familiar text. 
 ```{r}
 # Some text examples
 
-wolf1.name <- "Scruffy"
-wolf2.name <- "Belinda"
-
-wolf1.slogan <- "Howl like its 1999!!"
-wolf1.FavoriteArtist <- "Prince"
-
-wolfQuote1 <- 'He had learned well the law of club and fang.'
 
 # What if you have quoted text in your string?
-wolfQuote2 <- "'You poor devil,' said John Thornton, and Buck licked his hand."
-print(wolfQuote1)
-print(wolfQuote2)
 
 # Is this ok?
-wolfQuote3 <- '"You poor devil," said John Thornton, and Buck licked his hand.'
-print(wolfQuote3)
 
 ```
 
@@ -379,8 +331,6 @@ Dates are their own special kind of special. The Date/Time data type is useful f
 We can define a date as a string. The computer doesn't care:
 
 ```{r Text-Dates}
-aDateButItsReallyAString <- "07/15/2025"
-print(aDateButItsReallyAString)
 
 ```
 
@@ -401,21 +351,14 @@ That's where the date data type comes in.
 ```{r Date-Dates}
 # Let's try some dates
 
-wolf1.bday.text <- "8/18/2019"
-print(wolf1.bday.text)
 
-wolf1.bday <- as.Date(wolf1.bday.text, format = "%m/%d/%Y")
-print(wolf1.bday)
 
-wolf2.bday <- as.POSIXct("11-01-2015", format="%m-%d-%Y")
-print(wolf2.bday)
 ```
 
 Why does the output of `wolf2.bday` and `wolf3.bday` look different from the text we provide the function? This is because both the `as.Date()` and `as.POSIXct()` functions store the date in a base formate ("YYYY-MM-DD"). You can display the date in many different formats.
 
 ```{r date-format}
 
-print(format(wolf2.bday, "%A, %B %d, %Y"))
 
 ```
 
@@ -425,8 +368,6 @@ What if we want to find the date 20 days after a wolf's birthday?
 
 # wolf1.bday.plus20 <- wolf1.bday.text + 20
 
-wolf1.bday.plus20 <- wolf1.bday + 20
-print(wolf1.bday.plus20)
 
 
 
@@ -438,14 +379,10 @@ Yes!
 
 A Boolean value is one that can take one of two values: 0 or 1. In R, these types of values are represented using the "logical" data type. The logical data type takes the value TRUE (1) or FALSE (0). It is good for setting flags and creating indices to subset data.
 
-![Examples for logical values](imgs/logical_examples_w.jpg)
+![Examples for logical values](../assets/notebooks/logical_examples_w.jpg)
 
 ```{r Boolean-Examples}
 # Example of boolean variables
-isWolf1 = TRUE
-isWolf2 = FALSE # coyote!!! oops!
-isMajestic = TRUE
-isAlive = FALSE
 
 
 ```
@@ -460,22 +397,20 @@ Pick a personal or research interest and generate variables using appropriate da
 
 ```{r Quiz_3-Variables}
 
-# EXAMPLE INTEREST: Sailing
 
 # Create a variable and set it to some text.
-sailBoatType <- "Sonar"
 
 # Create a variable and set it to a numeric value
-boatLength <- 23 # Length in Feet
+
 
 # Create a text variable and set it to a text date.
-sailDateText <- "09-15-1997"
+
 
 # Create a date variable and convert the text date to a date using `as.Date()`
-sailDate <- as.Date(sailDateText, format="%m-%d-%Y")
+
 
 # Print your date variable to the screen
-print(sailDate)
+
 
 ```
 
@@ -525,30 +460,25 @@ rm(list=ls())
 # Integer. Ok, fine, double.
 # What if we want to store the number of NCSU wolves prowling
 # around 5 different locations on campus?
-numWolves = c(10, 4, 7, 12, 3) 
-print(numWolves)
+
 
 # Float. Ok, fine, double
 # We want to store the weights of 6 wolves prowling around campus
-wtWolves = c(46.8, 75.1, 62.9, 51.7, 49.0, 70.8)
-print(wtWolves)
+
 
 # Text.
 # We want to reference the five locations at which we counted wolves
-locWolves = c("Talley", "SAS Hall", "Hunt Library", "Hill Library", "Burlington Lab")
-print(locWolves)
+
 
 # Boolean/Logical
 # We want to know if the wolves we weighed are female
-isFemaleWolf = c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)
-print(isFemaleWolf)
+
 
 # Vectors only store one data type...really!
 # We decide inappropriately to store a bunch a information about
 # our favorite Wolf in a vector
 # We store: name, weight, isFemale, location and age
-badWolfVector <- c("Basil", 60.1, TRUE, "SAS Hall", 3) # so far so good
-print(badWolfVector) # oops...
+
 
 ```
 
@@ -566,21 +496,17 @@ Elements in a vector are accessed using an index, or range of indices between tw
 
 # Single index
 # grab the 3rd count from numWolves (# of wolves at Hunt Library)
-numHuntWolves <- numWolves[3]
-print(numHuntWolves)
+
 
 # Range of values
 # Let's grab the 2-4 wts of our wolves
-subsetWts <- wtWolves[2:4]
 
 # list of indices
-idxOI <- c(1, 3, 5)
-print(locWolves[idxOI])
 
 # Out of range
 # What happens if we do the following?
-print(isFemaleWolf[7]) # can't access what you haven't defined
 
+# can't access what you haven't defined
 
 ```
 
@@ -601,17 +527,11 @@ If you only need a 2-dimensional matrix (rows and columns only), you can use `ma
 # We need to store counts of Wolves in 5 locations over the course of 7 days
 # a 2-D matrix would work well: one data type and we can have the rows represent
 # locations and the columns = days
-data <- floor(runif(35, min=0, max=50)) # generates some random data
- 
-wolfCounts <-  matrix(data, nrow=5, ncol=7, byrow = FALSE)
 
 # Define Days of Week so we can use them again
-daysOfWeek <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-                         "Saturday", "Sunday")
+
 # for ease of use, we can set rownames and colnames to be descriptive
-rownames(wolfCounts) = locWolves
-colnames(wolfCounts) = daysOfWeek
-print(wolfCounts)
+
 
 
 ```
@@ -622,12 +542,7 @@ To create a matrix that has more than 2 dimensions, you use the `array()` functi
 # Create a 3-D matrix
 # We now want to store counts of wolves at 5 locations, 7 days a week, for 4
 # weeks. 
-data <- floor(runif(140, min=0, max=50)) # generates more uniform data
 
-locWolfCounts <- array(data, dim = c(5, 7, 4),
-                       dimnames = list(locWolves, daysOfWeek, 
-                                       c("Week1", "Week2", "Week3", "Week4")))
-print(locWolfCounts)
 
 ```
 
@@ -643,31 +558,31 @@ Data in a matrix is accessed using indices just like arrays. An index is provide
 # one for column
 
 # Extract the number of wolves in Talley on Wednesday
-wolfCounts[1,3]
+
+
 # If you provided row and column names, you can use those
-wolfCounts["Talley", "Wednesday"]
+
 
 # What if we want to see the counts for Talley on all days?
-wolfCounts[1,]
+
+
 # using row name
-wolfCounts["Talley", ]
+
 
 # How about if we want to see the counts for all locations on Wednesday?
-wolfCounts[,3]
-wolfCounts[,"Wednesday"]
+
 
 # To access data in a multi-dimensional array you just need more indices
 # We can access the wolfCounts at Burlington Lab on Tuesday of the 3rd week
-locWolfCounts
-locWolfCounts[5, 2, 3] # row, column, dimension
+
+
+# row, column, dimension
 
 # We can also use row, column and dimension names
-print(locWolfCounts["Burlington Lab", "Tuesday", "Week3"])
+
 
 # We can set the value of data using indices too
-wolfCounts
-wolfCounts["Hill Library", "Friday"] <- 33
-wolfCounts
+
 
 ```
 
@@ -685,41 +600,33 @@ Dataframes:
 # We want to store data about some of our favorite Wolves who hang out at
 # NC State.
 
-wolfData <- data.frame(Name = c("Snoopy", "Fang", "Wolfie", "Artemis", 
-                                "Fen", "Aurora"),
-                       isFemale = c(FALSE, TRUE, FALSE, TRUE, FALSE, TRUE),
-                       weight = c(62.9, 70.1, 79.2, 50.5, 68.3, 49.7),
-                       favHangout = c("Talley", "Burlington Lab", 
-                                      "Hunt Library", "SAS Hall", "Talley",
-                                      "Hill Library"))
-print(wolfData)
 
 # Extract data from data frames
 # We use indices like we do with vectors and matrices to extract or set data
 
 # Extract Column data
 # Extract the names of all the wolves
-wolfData["Name"] 
+
+
 # Extract data in first two columns
-wolfData[c("Name","isFemale")] 
-wolfData[1:2]
+
 
 # Extract Data from non-contiguous columns
-wolfData[c("Name", "favHangout")]
-wolfData[c(1,4)]
+
 
 # Extract row data
 # Extract data for wolf in row 1
-wolfData[1, ]
+
 
 # Extract data for wolves in rows 1-3
-wolfData[1:3, ]
+
 
 # Extract data for wolves in rows 2 and 5
-wolfData[c(2,5), ]
+
 
 # Extract data for female wolves only
-wolfData[wolfData$isFemale, ]
+
+
 ```
 
 ------------------------------------------------------------------------
@@ -739,13 +646,10 @@ wolfData[wolfData$isFemale, ]
 #     Data frame because you want to store different data types
 
 # Define the dataframe below and provide some data for it
-testDrive <- data.frame(Make = c("Toyota", "Ford", "Maserati"),
-                        Model = c("Camry Hybrid", "Fiesta", "GranCabrio"),
-                        Year = c(2025, 2019, 2026),
-                        Price = c(31000, 11000, 165900),
-                        mpg.city = c(53,27,17),
-                        mpg.highway = c(50,37,26))
-print(testDrive)
+
+
+
+
 
 # 2.  You want to store 
 #     The number of Fiction and Nonfiction Books on 4 shelves of your bookcase
@@ -753,29 +657,22 @@ print(testDrive)
 #     What type of data structure should you use and why?
 #     2-D matrix: Single data type, 2 dimensions (use matrix() function)
 #     Rows could be Fiction/Nonfiction, columns Shelf # or vice versa
-bookCounts <- matrix(c(1,2,3,4,5,6,7,8), nrow=5, ncol=7, byrow = FALSE)
-print(bookCounts)
+
 
 # 3.  You want to store
 #     The weight in grams of 6 beetles
 
 #     What type of data structure should you use and why?
 #     Array/vector: one dimension, one data type
-wtsBeetles <- c(14.1, 35.2, 20.9, 25.6, 13.5, 19.3)
-print(wtsBeetles)
+
 
 # 4.  You want to store
 #     Temperature for 2 days, in 3 towns, at 2 locations/town
 
 #     What type of data structure should you use and why?
 #     matrix: one datatype, > 2 Dimensions (use array())
-data = runif(2*3*2, min=30, max=75) # you can also define 12 values
 
-temps <- array(data, dim = c(2,3,2),
-               dimnames = list(c("Day 1", "Day 2"),
-                               c("Town 1", "Town 2", "Town 3"),
-                               c("Loc 1", "Loc 2")))
-print(temps)
+
 
 ```
 
@@ -815,15 +712,10 @@ Operators can be referred to as **unary** or **binary**. From math class, you ma
 rm(list=ls())
 
 # Example of unary -
-numWolves = 5
-reduceWolves <- -numWolves
-print(reduceWolves)
-  
+
+
 # Example of binary -
-babyWolves <- 5
-totalWolves <- 10
-adultWolves <- totalWolves - babyWolves
-print(adultWolves)
+
 
 ```
 
@@ -831,12 +723,8 @@ Most of the arithmetic operators should be familiar. Examples are provided below
 
 ```{r Arithmetic-Operators-1}
 # Use operators with values
-5 + 6
-5 - 6
-5 * 6
-5 / 6
-5 ^ 6
-5 ** 6
+
+
 
 # Separate Output
 print('* * * * * * * * * * *')
@@ -846,13 +734,8 @@ print('* * * * * * * * * * *')
 
 
 # Apply operators to variables
+# Make sure adultWolves and babyWolves is defined in your workspace!
 
-adultWolves + babyWolves
-adultWolves - babyWolves
-adultWolves * babyWolves
-adultWolves / babyWolves
-adultWolves ^ babyWolves
-adultWolves ** babyWolves
 
 
 ```
@@ -861,13 +744,14 @@ However, some operators may be new. These include the modulus operator, `%%`, an
 
 ```{r Arithmetic-Operators-2}
 # We want to know how many treats we have for each wolf
-numWolfTreats <- 10
-numWolvesTalley <- 2 # divides evenly
-numWolvesHunt <- 3 # doesn't divide evenly
+
+# divides evenly
+
+# doesn't divide evenly
+
 
 # Integer Division & Modulus numWolvesTalley
-numWolfTreats %/% numWolvesTalley
-numWolfTreats %% numWolvesTalley
+
 
 # So, wolves at valley get 5 treats and there are no leftovers
 
@@ -875,8 +759,8 @@ numWolfTreats %% numWolvesTalley
 print("* * * * * * * * * *")
 
 # Integer Division & Modulus using numWolvesHunt
-numWolfTreats %/% numWolvesHunt
-numWolfTreats %% numWolvesHunt
+
+
 
 # Wolves at Hunt, on the other hand get three treats and there is 1 left over.
 # Good luck with that.
@@ -901,24 +785,19 @@ Relational operators are all binary and are used to compare two values. The resu
 rm(list=ls())
 
 # Define the weights of some wolves (in pounds) around campus
-wtFen <- 135 
-wtArtemis <- 70 
-wtAurora <- 70.000000001 
-wtFang <- 45 
 
-wtSnoopy <- 70 
 
 # Let's compare Snoopy's weight to the other wolves
 
-wtSnoopy < wtFen
-wtSnoopy >= wtArtemis
-wtSnoopy < wtAurora
-wtSnoopy > wtFang
+
 
 # Let's look at `==` more closely
-wtSnoopy == wtArtemis # perfectly fine, two integers
-wtSnoopy == wtAurora # Seems good because technically the weights are not equal
-# BUT DON'T DO THIS
+# comparing integers: good!
+
+# comparing floating point: less good!
+
+
+# DON'T DO THIS
 
 ```
 
@@ -938,7 +817,7 @@ print(a-b)
 Logical operators are used to compare logical values and variables or relational expressions that evaluate to logical values. There are two main types of logical operators: the AND operator and the OR operator.
 
 | Operator |    Operation     |                    Example                    |
-|:----------------:|:----------------:|:----------------------------------:|
+|:--------------:|:--------------:|:---------------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    &&    |   Logical AND    |                isCute & isBig                 |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
@@ -949,35 +828,30 @@ Logical operators are used to compare logical values and variables or relational
 # Use variables from last section
 
 # Define some variables to compare
-numWolves <- 50
-numDogs <- 25
-numCats <- 100
+
 
 # Define some Boolean variables and set them
-isParty <- FALSE
-haveHotdogs <- TRUE
-haveCheetos <- TRUE
+
 
 # Check if numWolves is less than numDogs AND numCats is less than numDogs
-(numWolves < numDogs) && (numCats < numDogs)
+
 
 # Check if numDogs is less than or equal to 25 OR numCats is less than or equal to 25
-(numDogs <= 25) || (numCats <= 25)
+
 
 # Check if numDogs is less than 150 OR numCats is less than 150
-(numDogs < 150) || (numCats < 150)
+
 
 # See isParty is TRUE AND if numDogs is greater than 0 AND haveHotdogs is FALSE
 # This could be a problem
-isParty && (numDogs > 0) && !haveHotdogs
+
 
 # See if (numDogs is greater than zero AND haveHotdogs is TRUE) OR (numCats is greater than 0 AND haveCheetos is TRUE)
 
-(numDogs > 0 && haveHotdogs) || (numCats > 0 && haveCheetos)
+
 
 # How could you fix the expression above to make sure that you have food available for both cats and dogs who come to your party?
 
-(numDogs > 0 && haveHotdogs) && (numCats > 0 && haveCheetos)
 
 
 ```
@@ -995,12 +869,10 @@ isParty && (numDogs > 0) && !haveHotdogs
 # You need to see if you have more buns than hotdogs. Create two variables, numBuns and numHotdogs and set them to any values you want. Create a variable "haveEnoughBuns" and write an expression that sets `haveEnoughBuns` to TRUE if you have enough. Try different values for `numBuns` and `numHotdogs`, if you want.
 
 # Declare `numBuns` and `numHotDogs`
-numBuns = 6 # Seriously? This used to be a thing. Why was it a thing?
-numHotdogs = 8 
+
 
 # Check if you have enough buns.
-haveEnoughBuns <-  numHotdogs == numBuns
-# NOOOOOOOO!!!
+
 
 # PROBLEM 2
 # Next, we need to make sure we have potato chips for our guests 
@@ -1010,62 +882,59 @@ haveEnoughBuns <-  numHotdogs == numBuns
 # `perfectChipsPortion`: set it to the number of grams a perfect portion of potato
 # chips would be
 # `numGuests`: set it to the number of guests you've invited
-perfectChipsPortion <- 500
-numGuests <- 5
+
 
 # Also declare
 #
 # `numBagsChips`: set to the number of bag of chips you picked up
 # `gramsPerBag`: set this to the number of grams of chips per bag
-numBagsChips <- 3
-gramsPerBag <- 250
+
 
 # Calculate the number of grams of chips you need for all your guests
 # name the variable `chipsNeededInGrams`
-chipsNeededInGrams <- perfectChipsPortion * numGuests
+
 
 # Calculate how many of grams of chips you have
 # name this variable `totalChipsInGrams`
-totalChipsInGrams <- numBagsChips * gramsPerBag
+
 
 # Create a Boolean variable and name it `haveEnoughChips`
 # compare the number of chips you need to the number you have (in grams)
 # You want `haveEnoughChips` to be TRUE if you have enough
-haveEnoughChips <- totalChipsInGrams >= chipsNeededInGrams
+
 
 # How many grams of chips do I need?
-chipsNeededInGrams
+
 
 # How many grams of chips do I have?
-totalChipsInGrams
+
 
 # Do I have enough chips? Drum roll please...
-haveEnoughChips
+
 
 # PROBLEM 3
 # We now need to make sure that we have enough food.
 
 # Use a logical operator to check whether you have enough buns for your hotdogs and
 # enough chips for your guests. Declare a variable to store the result.
-haveEnoughFood <- haveEnoughChips && (numHotdogs * numGuests == numBuns * numGuests)
+
 
 # PROBLEM 4
 # In this problem we are going to write code that let's use check whether a number is
 # even.
 
 # Declare a variable and set it to the number you want to check
-num2Check <- 12
+
 
 # Use modulus to find the remainder of dividing your number by 2. 
 # Then check if this remainder is zero. 
 # This can be done it two steps or one
 
 # Two Steps
-divBy2 <- num2Check %% 2
-divBy2 == 0
+
 
 # One step
-(num2Check %% 2) == 0
+
 
 
 
