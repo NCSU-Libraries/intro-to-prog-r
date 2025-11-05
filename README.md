@@ -39,10 +39,10 @@ These materials are used in NC State University Libraries' Data Science Services
 ## 🧩 Solutions
 
 - Basic Syntax and Operators — Solutions
-  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-py/blob/main/Colab Materials/Basic_Syntax_and_Operators_Answers.ipynb"><img alt="Open in Colab — Solutions: Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Basic_Syntax_and_Operators_Answers.ipynb"><img alt="Open in Colab — Solutions: Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 - Control Flow and Functions — Solutions
-  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-py/blob/main/Colab Materials/Control_Flow_and_Functions_Answers.ipynb"><img alt="Open in Colab — Solutions: Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Control_Flow_and_Functions_Answers.ipynb"><img alt="Open in Colab — Solutions: Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 ## 💻 Use on Google Colab
 
