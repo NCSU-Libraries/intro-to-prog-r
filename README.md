@@ -14,11 +14,12 @@
 </div>
 
 ## Introduction to Programming with R
-https://colab.research.google.com/github/USERNAME/REPOSITORY_NAME/blob/BRANCH_NAME/PATH/TO/YOUR/NOTEBOOK.ipynb
 
-### Basic Syntax and Operators  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Basic_Syntax_and_Operators.ipynb"><img alt="Open in Colab — Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+### Running in Google Colab
 
-### Control Flow and Functions <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Control_Flow_and_Functions.ipynb"><img alt="Open in Colab — Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+#### Basic Syntax and Operators  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Basic_Syntax_and_Operators.ipynb"><img alt="Open in Colab — Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+
+#### Control Flow and Functions <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Control_Flow_and_Functions.ipynb"><img alt="Open in Colab — Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
 These materials are used in NC State University Libraries' Data Science Services workshops covering practical data skills (Python, R, visualization, and analysis).
 
@@ -51,9 +52,8 @@ This folder contains Python/Jupyter equivalents of the R workshop notebooks. You
 ### 🔗 Open in Colab
 
 1. Click a badge above to open directly in Colab.
-2. Prefer to run locally? See the [LOCAL.md](LOCAL.md) guide.
 
-Alternatively, in Colab: File → Open Notebook → GitHub tab → paste the repo URL `https://github.com/NCSU-Libraries/intro-to-prog-py` and select the notebooks in the repository root.
+Alternatively, in Colab: File → Open Notebook → GitHub tab → paste the repo URL `https://github.com/NCSU-Libraries/intro-to-prog-r` and select the notebooks in the repository root.
 
 
 ### 💾 Save outputs to Google Drive (optional)
