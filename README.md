@@ -18,7 +18,7 @@ https://colab.research.google.com/github/USERNAME/REPOSITORY_NAME/blob/BRANCH_NA
 
 ### Basic Syntax and Operators  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Basic_Syntax_and_Operators.ipynb"><img alt="Open in Colab — Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
-### Control Flow and Functions <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials//Control_Flow_and_Functions.ipynb"><img alt="Open in Colab — Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+### Control Flow and Functions <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Control_Flow_and_Functions.ipynb"><img alt="Open in Colab — Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
 These materials are used in NC State University Libraries' Data Science Services workshops covering practical data skills (Python, R, visualization, and analysis).
 
