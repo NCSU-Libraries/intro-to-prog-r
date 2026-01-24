@@ -57,15 +57,7 @@ Alternatively, in Colab: File → Open Notebook → GitHub tab → paste the rep
 
 
 ### 💾 Save outputs to Google Drive (optional)
-GET INSTRUCTIONS FOR ADDING GOOGLE DRIVE WHEN USING R INTERPRETER
-If you want to persist outputs or datasets:
-
-```python
-from google.colab import drive
-drive.mount('/content/drive')
-# e.g., save under /content/drive/MyDrive/intro-to-prog-r/
-# e.g., save under /content/drive/MyDrive/intro-to-prog-py/
-```
+COMING SOON!
 
 ### ▶️ Run the notebooks
 
