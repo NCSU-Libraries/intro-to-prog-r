@@ -17,9 +17,9 @@
 
 ### Running in Google Colab
 
-#### Basic Syntax and Operators  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Basic_Syntax_and_Operators.ipynb"><img alt="Open in Colab — Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+#### Fundamentals  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Fundamentals.ipynb"><img alt="Open in Colab — Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
-#### Control Flow and Functions <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Control_Flow_and_Functions.ipynb"><img alt="Open in Colab — Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+#### Loops and Functions <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Loops_and_Functions.ipynb"><img alt="Open in Colab — Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
 These materials are used in NC State University Libraries' Data Science Services workshops covering practical data skills (Python, R, visualization, and analysis).
 
@@ -34,20 +34,20 @@ These materials are used in NC State University Libraries' Data Science Services
 
 ## 📘 Included notebooks
 
-- 🧱 Basic Syntax and Operators — variables, types, lists, dicts, and more.
-- 🔁 Control Flow and Functions — conditionals, loops, functions, and scope.
+- 🧱 Fundamentals — variables, types, lists, dicts, and more.
+- 🔁 Loops and Functions — conditionals, loops, functions, and scope.
 
 ## 🧩 Solutions
 
-- Basic Syntax and Operators — Solutions
-  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Basic_Syntax_and_Operators_Answers.ipynb"><img alt="Open in Colab — Solutions: Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+- Fundamentals — Solutions
+  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Fundamentals_Answers.ipynb"><img alt="Open in Colab — Solutions: Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
-- Control Flow and Functions — Solutions
-  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Control_Flow_and_Functions_Answers.ipynb"><img alt="Open in Colab — Solutions: Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+- Loops and Functions — Solutions
+  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Loops_and_Functions_Answers.ipynb"><img alt="Open in Colab — Solutions: Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 ## 💻 Use on Google Colab
 
-This folder contains Python/Jupyter equivalents of the R workshop notebooks. You can run them directly in Google Colab without installing anything locally.
+This folder contains Python/Jupyter equivalents of the R workshop notebooks found in the "RStudio Materials" directory. You can run them directly in Google Colab without installing anything locally (e.g. R, RStudio).
 
 ### 🔗 Open in Colab
 
