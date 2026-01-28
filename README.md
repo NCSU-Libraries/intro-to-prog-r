@@ -13,7 +13,7 @@
 
 </div>
 
-## Introduction to Programming with R
+## Getting Started with R
 
 ### Running in Google Colab
 
