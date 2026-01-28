@@ -2,7 +2,7 @@
 
 <a href="https://www.lib.ncsu.edu/" aria-label="nc state university libraries logo"><img src="assets/slides/lib_logo_whiteBG.svg" width="400" alt="NC State University Libraries Logo" /></a>
 
-<h2>NC State University Libraries Python Workshops</h2>
+<h2>NC State University Libraries R Workshops</h2>
 
 <a href="https://www.lib.ncsu.edu/workshops"><img alt="NC State Libraries Workshops" src="https://img.shields.io/badge/NC%20State%20Libraries-Workshops-red"></a>
 <a href="https://www.lib.ncsu.edu/staff/department/data-science-services"><img alt="Data Science Services" src="https://img.shields.io/badge/Data%20Science%20Services-Libraries-red"></a>
