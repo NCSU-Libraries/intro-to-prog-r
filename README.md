@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://www.lib.ncsu.edu/" aria-label="nc state university libraries logo"><img src="assets/slides/lib_logo_whiteBG.svg" width="400" alt="NC State University Libraries Logo" /></a>
+<a href="https://www.lib.ncsu.edu/" aria-label="nc state university libraries logo"><img src="assets/notebooks/lib_logo_whiteBG.svg" width="400" alt="NC State University Libraries Logo" /></a>
 
 <h2>NC State University Libraries R Workshops</h2>
 
@@ -20,6 +20,8 @@
 #### Fundamentals  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Fundamentals.ipynb"><img alt="Open in Colab — Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
 #### Loops and Functions <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Loops_and_Functions.ipynb"><img alt="Open in Colab — Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+
+#### EDA <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/EDA.ipynb"><img alt="Open in Colab — Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
 These materials are used in NC State University Libraries' Data Science Services workshops covering practical data skills (Python, R, visualization, and analysis).
 
@@ -44,6 +46,9 @@ These materials are used in NC State University Libraries' Data Science Services
 
 - Loops and Functions — Solutions
   <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Loops_and_Functions_Answers.ipynb"><img alt="Open in Colab — Solutions: Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+- EDA — Solutions
+  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/EDA_Answers.ipynb"><img alt="Open in Colab — Solutions: Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a>  
 
 ## 💻 Use on Google Colab
 
