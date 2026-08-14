@@ -68,7 +68,7 @@ if (talleyWolf==TRUE && eatsMeat==FALSE) {
   # I'm a vegetarian
   goTuffys = TRUE
 }
-goTuffys # This may fail if eatsBurger wasn't defined above!
+goTuffys # This may fail if eatsMeat wasn't defined above!
 
 # Use logical variable
 wolf.calorie.count <- 0
