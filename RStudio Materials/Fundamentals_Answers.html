@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Selene R. Schmittling">
+
+<title>Intro to Programming in R: Fundamentals</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Fundamentals_Answers_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Fundamentals_Answers_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Fundamentals_Answers_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Fundamentals_Answers_files/libs/quarto-html/popper.min.js"></script>
+<script src="Fundamentals_Answers_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Fundamentals_Answers_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Fundamentals_Answers_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Fundamentals_Answers_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Fundamentals_Answers_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Fundamentals_Answers_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Fundamentals_Answers_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
+  <li><a href="#r-vs.-rstudio-whats-the-difference" id="toc-r-vs.-rstudio-whats-the-difference" class="nav-link" data-scroll-target="#r-vs.-rstudio-whats-the-difference">R vs.&nbsp;RStudio: What’s the Difference?</a></li>
+  <li><a href="#rstudio-environment" id="toc-rstudio-environment" class="nav-link" data-scroll-target="#rstudio-environment">RStudio Environment</a>
+  <ul class="collapse">
+  <li><a href="#source-pane" id="toc-source-pane" class="nav-link" data-scroll-target="#source-pane">Source Pane</a></li>
+  <li><a href="#console-pane" id="toc-console-pane" class="nav-link" data-scroll-target="#console-pane">Console Pane</a></li>
+  <li><a href="#environments-pane" id="toc-environments-pane" class="nav-link" data-scroll-target="#environments-pane">Environments Pane</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a>
+  <ul class="collapse">
+  <li><a href="#mac-version" id="toc-mac-version" class="nav-link" data-scroll-target="#mac-version">Mac Version</a></li>
+  <li><a href="#windows-version" id="toc-windows-version" class="nav-link" data-scroll-target="#windows-version">Windows Version</a></li>
+  </ul></li>
+  <li><a href="#quiz-1" id="toc-quiz-1" class="nav-link" data-scroll-target="#quiz-1">Quiz # 1</a>
+  <ul class="collapse">
+  <li><a href="#where-do-you-look-for" id="toc-where-do-you-look-for" class="nav-link" data-scroll-target="#where-do-you-look-for">Where do you look for…?</a></li>
+  </ul></li>
+  <li><a href="#quiz-1-answers" id="toc-quiz-1-answers" class="nav-link" data-scroll-target="#quiz-1-answers">Quiz # 1 ANSWERS</a></li>
+  </ul></li>
+  <li><a href="#notebooks-scripts" id="toc-notebooks-scripts" class="nav-link" data-scroll-target="#notebooks-scripts">Notebooks &amp; Scripts</a></li>
+  <li><a href="#variables-in-r" id="toc-variables-in-r" class="nav-link" data-scroll-target="#variables-in-r">Variables in R</a>
+  <ul class="collapse">
+  <li><a href="#what-r-reserved-words" id="toc-what-r-reserved-words" class="nav-link" data-scroll-target="#what-r-reserved-words">What R reserved words?</a></li>
+  <li><a href="#will-it-variable" id="toc-will-it-variable" class="nav-link" data-scroll-target="#will-it-variable">Will it Variable?</a></li>
+  <li><a href="#i-digress" id="toc-i-digress" class="nav-link" data-scroll-target="#i-digress">I Digress …</a></li>
+  <li><a href="#quiz-2" id="toc-quiz-2" class="nav-link" data-scroll-target="#quiz-2">QUIZ # 2</a></li>
+  <li><a href="#quiz-2-answers" id="toc-quiz-2-answers" class="nav-link" data-scroll-target="#quiz-2-answers">Quiz # 2 Answers</a></li>
+  </ul></li>
+  <li><a href="#helpful-keyboard-shortcuts" id="toc-helpful-keyboard-shortcuts" class="nav-link" data-scroll-target="#helpful-keyboard-shortcuts">Helpful Keyboard Shortcuts</a></li>
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">Data Types</a>
+  <ul class="collapse">
+  <li><a href="#numeric" id="toc-numeric" class="nav-link" data-scroll-target="#numeric">Numeric</a></li>
+  <li><a href="#text" id="toc-text" class="nav-link" data-scroll-target="#text">Text</a>
+  <ul class="collapse">
+  <li><a href="#storing-sentences" id="toc-storing-sentences" class="nav-link" data-scroll-target="#storing-sentences">Storing Sentences</a></li>
+  </ul></li>
+  <li><a href="#dates-times" id="toc-dates-times" class="nav-link" data-scroll-target="#dates-times">Dates &amp; Times</a></li>
+  <li><a href="#quiz-3" id="toc-quiz-3" class="nav-link" data-scroll-target="#quiz-3">QUIZ # 3</a></li>
+  <li><a href="#quiz-3-answers" id="toc-quiz-3-answers" class="nav-link" data-scroll-target="#quiz-3-answers">Quiz # 3 Answers</a></li>
+  <li><a href="#logical" id="toc-logical" class="nav-link" data-scroll-target="#logical">Logical</a></li>
+  </ul></li>
+  <li><a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures">Data Structures</a>
+  <ul class="collapse">
+  <li><a href="#vectors-1-d-arrays" id="toc-vectors-1-d-arrays" class="nav-link" data-scroll-target="#vectors-1-d-arrays">Vectors (1-D Arrays)</a></li>
+  <li><a href="#i-digress-1" id="toc-i-digress-1" class="nav-link" data-scroll-target="#i-digress-1">I Digress …</a>
+  <ul class="collapse">
+  <li><a href="#how-to-create-vectors" id="toc-how-to-create-vectors" class="nav-link" data-scroll-target="#how-to-create-vectors">How to Create Vectors</a></li>
+  </ul></li>
+  <li><a href="#matrices-or-n-d-arrays" id="toc-matrices-or-n-d-arrays" class="nav-link" data-scroll-target="#matrices-or-n-d-arrays">Matrices (or n-D Arrays)</a></li>
+  <li><a href="#dataframes-tabular-data" id="toc-dataframes-tabular-data" class="nav-link" data-scroll-target="#dataframes-tabular-data">Dataframes (Tabular Data)</a>
+  <ul class="collapse">
+  <li><a href="#accessing-data-in-vectors-matrices-and-data-frames" id="toc-accessing-data-in-vectors-matrices-and-data-frames" class="nav-link" data-scroll-target="#accessing-data-in-vectors-matrices-and-data-frames">Accessing Data In Vectors, Matrices and Data Frames</a></li>
+  </ul></li>
+  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself">Try It Yourself!</a></li>
+  <li><a href="#quiz-4" id="toc-quiz-4" class="nav-link" data-scroll-target="#quiz-4">QUIZ # 4</a></li>
+  <li><a href="#quiz-4-answers" id="toc-quiz-4-answers" class="nav-link" data-scroll-target="#quiz-4-answers">Quiz # 4 Answers</a></li>
+  </ul></li>
+  <li><a href="#operators" id="toc-operators" class="nav-link" data-scroll-target="#operators">Operators</a>
+  <ul class="collapse">
+  <li><a href="#arithmetic" id="toc-arithmetic" class="nav-link" data-scroll-target="#arithmetic">Arithmetic</a></li>
+  <li><a href="#i-digress-2" id="toc-i-digress-2" class="nav-link" data-scroll-target="#i-digress-2">I Digress …</a></li>
+  <li><a href="#relational" id="toc-relational" class="nav-link" data-scroll-target="#relational">Relational</a></li>
+  <li><a href="#logical-1" id="toc-logical-1" class="nav-link" data-scroll-target="#logical-1">Logical</a>
+  <ul class="collapse">
+  <li><a href="#and" id="toc-and" class="nav-link" data-scroll-target="#and">AND</a></li>
+  <li><a href="#or" id="toc-or" class="nav-link" data-scroll-target="#or">OR</a></li>
+  <li><a href="#not" id="toc-not" class="nav-link" data-scroll-target="#not">NOT</a></li>
+  </ul></li>
+  <li><a href="#i-digress-3" id="toc-i-digress-3" class="nav-link" data-scroll-target="#i-digress-3">I Digress…</a></li>
+  <li><a href="#quiz-5" id="toc-quiz-5" class="nav-link" data-scroll-target="#quiz-5">Quiz # 5</a></li>
+  <li><a href="#quiz-5-answers" id="toc-quiz-5-answers" class="nav-link" data-scroll-target="#quiz-5-answers">Quiz # 5 Answers</a></li>
+  </ul></li>
+  <li><a href="#before-you-go" id="toc-before-you-go" class="nav-link" data-scroll-target="#before-you-go">Before You Go</a>
+  <ul class="collapse">
+  <li><a href="#take-our-survey" id="toc-take-our-survey" class="nav-link" data-scroll-target="#take-our-survey">Take our Survey</a></li>
+  <li><a href="#need-additional-help" id="toc-need-additional-help" class="nav-link" data-scroll-target="#need-additional-help">Need Additional Help?</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Fundamentals_Answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Intro to Programming in R: Fundamentals</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Selene R. Schmittling </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-outcomes" class="level1">
+<h1>Learning Outcomes</h1>
+<p>In this Session of our R Workshop, we will cover the following introductory aspects of R Studio &amp; Programming:</p>
+<ul>
+<li>R vs.&nbsp;RStudio</li>
+<li>RStudio Environment</li>
+<li>Notebooks &amp; Scripts</li>
+<li>Variables &amp; Data Types</li>
+<li>Anatomy of Base R Functions</li>
+<li>Data Structures</li>
+<li>Operators</li>
+</ul>
+<p>By the end of this Session, you will understand:</p>
+<ol type="1">
+<li>The difference between R and RStudio</li>
+<li>The default layout of the RStudio Environment</li>
+<li>Basic anatomy of a function in R</li>
+<li>What a variable is and how to declare one</li>
+<li>Basic data types available in R</li>
+<li>Basic data structures and how to access the data in them</li>
+<li>What an operator is and some available in R</li>
+</ol>
+</section>
+<section id="r-vs.-rstudio-whats-the-difference" class="level1">
+<h1>R vs.&nbsp;RStudio: What’s the Difference?</h1>
+<ul>
+<li>R is an open-source programming language
+<ul>
+<li>used widely for data science and statistical analysis.</li>
+</ul></li>
+<li>Open-source means free to use
+<ul>
+<li>With access to many libraries and packages</li>
+<li>Some tested more diligently than others</li>
+</ul></li>
+<li>RStudio is a programming environment
+<ul>
+<li>makes it easier to write and test scripts developed in R.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="rstudio-environment" class="level1">
+<h1>RStudio Environment</h1>
+<p>There are four main window panes in RStudio: the Source, the Console, the Environments and the Output Window.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html"><img src="images/Rstudio_panes.png" class="img-fluid figure-img" style="width:6in"></a></p>
+<figcaption>RStudio Panes from Posit website</figcaption>
+</figure>
+</div>
+<section id="source-pane" class="level2">
+<h2 class="anchored" data-anchor-id="source-pane">Source Pane</h2>
+<ul>
+<li>Shows open scripts, Notebooks and other files you are editing.</li>
+<li>The area where you can view data</li>
+</ul>
+<p>We’ll talk about scripts and Notebooks soon.</p>
+</section>
+<section id="console-pane" class="level2">
+<h2 class="anchored" data-anchor-id="console-pane">Console Pane</h2>
+<ul>
+<li>Features 3 tabs by default:
+<ul>
+<li>Console Tab
+<ul>
+<li>Enter commands that run immediately</li>
+<li>Good for testing</li>
+</ul></li>
+<li>Terminal
+<ul>
+<li>let’s you interact with your computer terminal</li>
+</ul></li>
+<li>Background Jobs
+<ul>
+<li>provides information on “background” scripts which run in a separate dedicated R session.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="environments-pane" class="level2">
+<h2 class="anchored" data-anchor-id="environments-pane">Environments Pane</h2>
+<p>The Environments pane has four tabs available by default:</p>
+<ul>
+<li>Environment
+<ul>
+<li>Provides info about variables defined in during your session</li>
+</ul></li>
+<li>History
+<ul>
+<li>Shows all the commands you have run during your session</li>
+<li>Can be saved across sessions</li>
+<li>Can be copied to console or a script</li>
+</ul></li>
+<li>Connections
+<ul>
+<li>beyond the scope of this workshop</li>
+<li>check out <a href="https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html#connections" target="_blank">this info</a> for more information</li>
+</ul></li>
+<li>Tutorial
+<ul>
+<li>provides access to interactive tutorials.</li>
+<li>Check them out!</li>
+</ul></li>
+</ul>
+</section>
+<section id="output" class="level2">
+<h2 class="anchored" data-anchor-id="output">Output</h2>
+<p>The output pane has a variety of tabs that provide access to different types of output. This includes files, plots, packages, help and a couple of other specialized output types. Tabs in this pane include:</p>
+<ul>
+<li>Files
+<ul>
+<li>shows your file directory</li>
+<li>projects created in a directory will set the “working directory” to the directory the project file is stored in
+<ul>
+<li>without a project, you may need to set a “working directory”</li>
+<li>setting a “working directory” lets you use relative path names</li>
+</ul></li>
+</ul></li>
+<li>Plots
+<ul>
+<li>this is where plots will show up when you generate them</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets create a little plot</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create some data</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">a =</span> <span class="fu">c</span>(<span class="dv">72</span>,<span class="dv">41</span>,<span class="dv">54</span>,<span class="dv">36</span>), <span class="at">b=</span><span class="fu">c</span>(<span class="st">'East'</span>,<span class="st">'West'</span>,<span class="st">'North'</span>,<span class="st">'South'</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generate plot</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(data<span class="sc">$</span>a, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg =</span> data<span class="sc">$</span>b, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">"blue"</span>, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"# of Regional Managers"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Fundamentals_Answers_files/figure-html/Plot_tab_example-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function name</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># function parameters</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># return values</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>Packages
+<ul>
+<li>Interface to install packages</li>
+<li>Installed packages
+<ul>
+<li>Any package listed</li>
+</ul></li>
+<li>Loaded packages
+<ul>
+<li>Any package with a check mark to the left of its name</li>
+</ul></li>
+</ul></li>
+<li>Help
+<ul>
+<li>Your best friend!!</li>
+<li>You can see the details about functions you want to use</li>
+<li>use search bar in pane or type “?barplot” in console</li>
+</ul></li>
+<li>Viewer
+<ul>
+<li>Shows output for rendered notebooks</li>
+</ul></li>
+<li>Presentation
+<ul>
+<li>Shows output when you generate slides using Quarto</li>
+</ul></li>
+</ul>
+<p>The Pane layout is very customizable. You can access it as follows:</p>
+<section id="mac-version" class="level3">
+<h3 class="anchored" data-anchor-id="mac-version">Mac Version</h3>
+<p>From the menu bar, select <strong>Edit</strong>-&gt;<strong>Preferences</strong></p>
+<p>From the sidebar in the Options window, choose <strong>Pane Layout</strong></p>
+</section>
+<section id="windows-version" class="level3">
+<h3 class="anchored" data-anchor-id="windows-version">Windows Version</h3>
+<p>From the menu choose <strong>Tools</strong>-&gt;<strong>Global</strong> Options</p>
+<p>From the sidebar in the Options window, choose <strong>Pane Layout</strong></p>
+<hr>
+</section>
+</section>
+<section id="quiz-1" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-1">Quiz # 1</h2>
+<section id="where-do-you-look-for" class="level3">
+<h3 class="anchored" data-anchor-id="where-do-you-look-for">Where do you look for…?</h3>
+<ol type="1">
+<li>Where would you look for the value of a variable you set?</li>
+</ol>
+<ul>
+<li>Source Pane</li>
+<li>Terminal Tab in the Console Pane</li>
+<li>Environment tab in the Environment Pane</li>
+<li>Viewer tab in the Output Pane</li>
+</ul>
+<ol start="2" type="1">
+<li>Where would you find the output of a plot command?</li>
+</ol>
+<ul>
+<li>Plots tab of the Output pane</li>
+<li>Source pane</li>
+<li>History tab of the Environment pane</li>
+<li>In a notebook, below the code block that generates the plot</li>
+</ul>
+<ol start="3" type="1">
+<li>What pane is your script or notebook file open in?</li>
+</ol>
+<ul>
+<li>Source pane</li>
+<li>Console pane</li>
+<li>Environment pane</li>
+<li>Output pane</li>
+</ul>
+</section>
+</section>
+<section id="quiz-1-answers" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-1-answers">Quiz # 1 ANSWERS</h2>
+<ol type="1">
+<li>Environment tab in the Environment Pane</li>
+<li>Plots tab of the Output pane</li>
+<li>Source Pane</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="notebooks-scripts" class="level1">
+<h1>Notebooks &amp; Scripts</h1>
+<p>Through RStudio, you can use and render R code in a variety of ways including:</p>
+<ul>
+<li><a href="Example_script.R" target="_blank">Scripts</a>
+<ul>
+<li>These are the way most people start out.</li>
+<li>A script has a file type of .R</li>
+<li>You can easily run the entire script using the Run command</li>
+<li>Only comments and code.</li>
+</ul></li>
+<li>Notebooks
+<ul>
+<li>Great way to have text and code together</li>
+<li>Can contain text, code chunks, equations, tables</li>
+<li>Good when small bits of code are being run for a discrete task.</li>
+<li>Two options: R Notebooks (.Rmd) and Quarto (.qmd)
+<ul>
+<li>Quarto is language-agnostic where as R Notebooks are tied to RStudio</li>
+<li>I choose Quarto for the flexibility</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>For this workshop, we will work in a Quarto notebook to take advantage of the ability to have readable text along side runnable code.</p>
+<hr>
+</section>
+<section id="variables-in-r" class="level1">
+<h1>Variables in R</h1>
+<p>Variables are named containers used to store information. What can we name them? Almost anything we want, according to the following rules:</p>
+<ul>
+<li>name has to start with a letter</li>
+<li>can contain any combination of letters, numbers and can include periods “.”</li>
+<li>can’t start with an underscore, “_”</li>
+<li>are case sensitive</li>
+<li>can’t be any of the reserved words in R</li>
+</ul>
+<section id="what-r-reserved-words" class="level2">
+<h2 class="anchored" data-anchor-id="what-r-reserved-words">What R reserved words?</h2>
+<p>All programming languages have reserved words. These are words that have a specific meaning to the language itself. Some examples in R include:</p>
+<ul>
+<li>TRUE</li>
+<li>FALSE</li>
+<li>NULL</li>
+<li>if</li>
+</ul>
+<p>You can see the reserved words in R by typing <code>?reserved</code> at the console prompt. You can also find a list of reserved words <a href="https://rdrr.io/r/base/Reserved.html" target="_blank">here</a>.</p>
+</section>
+<section id="will-it-variable" class="level2">
+<h2 class="anchored" data-anchor-id="will-it-variable">Will it Variable?</h2>
+<p>For a variable to be useful, you must give it a value. To set a variable to a value, you use the assignment operator. In R, to assign a value to a variable we use “&lt;-”. We’ll talk more about operators later, but now you know the assignment operator!</p>
+<p>The code box below shows some example variables. Use the arrow to the left of the code box to run the code.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set some variables:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>wolf.name <span class="ot">&lt;-</span> <span class="st">"Smiley"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>wolf.age <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># See the variable value</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf.name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Smiley"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf.age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+</section>
+<section id="i-digress" class="level2">
+<h2 class="anchored" data-anchor-id="i-digress">I Digress …</h2>
+<p>In most programming languages, you use “=” as the assignment operator, like you’ve seen above the R convention is to use <code>&lt;-</code>. While R lets you use “=”, the convention is to use “&lt;-”. This is a holdover from the language from which R is derived, S. R programmers have feelings about this. Programmers are funny, funny people. Welcome to the club!</p>
+<hr>
+</section>
+<section id="quiz-2" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-2">QUIZ # 2</h2>
+<p>Using the rules listed above which of the following passwords will work?</p>
+<ul>
+<li>My_favoritePASSWORDofAlL.tymes</li>
+<li>_favoritePW</li>
+<li>PW6</li>
+<li>PW6_myfav</li>
+<li>6PW</li>
+<li>If</li>
+<li>if</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Not sure which will run?</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the assignment operator to assign the value 5 to a variable using the</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># names above. Feel free to test some you define yourself!</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>My_favoritePASSWORDofAlL.tymes <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="quiz-2-answers" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-2-answers">Quiz # 2 Answers</h2>
+<p>The acceptable passwords are:</p>
+<ul>
+<li>My_favoritePASSWORDofAlL.tymes</li>
+<li>PW6</li>
+<li>PW6_myfav</li>
+<li>If</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="helpful-keyboard-shortcuts" class="level1">
+<h1>Helpful Keyboard Shortcuts</h1>
+<table class="caption-top table">
+<caption>See <a href="https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE">Posit’s list of keybinds</a>.</caption>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Windows &amp; Linux</th>
+<th>Mac</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>insert assignment operator</td>
+<td>Alt+-</td>
+<td>Option+-</td>
+</tr>
+<tr class="even">
+<td>insert code chunk</td>
+<td>Ctrl+Alt+I</td>
+<td>Cmd+Option+I</td>
+</tr>
+<tr class="odd">
+<td>Run current line &amp; advance</td>
+<td>Ctrl+Enter</td>
+<td>Cmd+Return</td>
+</tr>
+<tr class="even">
+<td>Run current line</td>
+<td>Alt+Enter</td>
+<td>Option+Return</td>
+</tr>
+<tr class="odd">
+<td>Comment/uncomment</td>
+<td>Ctrl+Shift+C</td>
+<td>Cmd+Shift+C</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="data-types" class="level1">
+<h1>Data Types</h1>
+<p>Data Types</p>
+<ul>
+<li>are categories of data</li>
+<li>dictate
+<ul>
+<li>how much space a variable of that type will take</li>
+<li>determine how they are handled as input and output</li>
+<li>how you can use the variable</li>
+</ul></li>
+<li>sometimes R cares about what data type you use</li>
+<li>sometimes R doesn’t care (e.g., it is really flexible)</li>
+</ul>
+<p>We’ll talk about 4 main data types today:</p>
+<ul>
+<li>Numeric</li>
+<li>Text</li>
+<li>Date/Time</li>
+<li>Logical or Boolean</li>
+</ul>
+<section id="numeric" class="level2">
+<h2 class="anchored" data-anchor-id="numeric">Numeric</h2>
+<p>Numeric values are exactly what they sound like: numbers. R can work with integer, double (floating point or decimal) and complex numbers. We’ll focus on integer and double since they are the most common.</p>
+<p>Some languages aggressively distinguish between integers (whole numbers) and double (numbers with a decimal point) values. R does not. In R, when you store a number it is loaded as a <code>double</code> regardless of whether it has a decimal point or not.</p>
+<p>Most of the time you don’t have to worry about whether a number is an integer or a double value. However, R has functions that check or convert a number to integers and floats. Read more about numbers in R <a href="https://www.burns-stat.com/documents/tutorials/impatient-r/more-r-key-objects/more-r-numbers/">here</a>.</p>
+<p>Let’s look at some examples.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create some variables and set them to numeric values</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>numWolves  <span class="ot">&lt;-</span>  <span class="dv">5</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pctWolves <span class="ot">&lt;-</span>  .<span class="dv">20</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numWolves)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pctWolves)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">typeof</span>(numWolves))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">typeof</span>(pctWolves))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>numWolves <span class="ot">&lt;-</span> <span class="fl">5.0</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numWolves)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">typeof</span>(numWolves))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">as.double</span>(numWolves))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+</section>
+<section id="text" class="level2">
+<h2 class="anchored" data-anchor-id="text">Text</h2>
+<p>We’ve looked at the scary, scary numbers. Let’s look at good old familiar text. Run the code in the block below. What data type does R see string data as? Hint: run the last line!!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some text examples</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>wolf.name <span class="ot">&lt;-</span> <span class="st">"Scruffy"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>wolf.initial <span class="ot">&lt;-</span> <span class="st">"D"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>wolf.FavoriteArtist <span class="ot">&lt;-</span> <span class="st">"Prince"</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf.name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Scruffy"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf.initial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "D"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf.FavoriteArtist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Prince"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">typeof</span>(wolf.name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<section id="storing-sentences" class="level3">
+<h3 class="anchored" data-anchor-id="storing-sentences">Storing Sentences</h3>
+<p>When dealing with longer sentences, it is important to keep track of double- and single-quotes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use single quotes to surround a string</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>wolfQuote1 <span class="ot">&lt;-</span> <span class="st">'He had learned well the law of club and fang.'</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolfQuote1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "He had learned well the law of club and fang."</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can nest double and single quotes.</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>wolfQuote2 <span class="ot">&lt;-</span> <span class="st">"'You poor devil,' said John Thornton, and Buck licked his hand."</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolfQuote2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "'You poor devil,' said John Thornton, and Buck licked his hand."</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Notice what happens when you switch the single and double quotes</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>wolfQuote3 <span class="ot">&lt;-</span> <span class="st">'"You poor devil," said John Thornton, and Buck licked his hand.'</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolfQuote3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "\"You poor devil,\" said John Thornton, and Buck licked his hand."</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="dates-times" class="level2">
+<h2 class="anchored" data-anchor-id="dates-times">Dates &amp; Times</h2>
+<p>Dates are their own special kind of special. The Date/Time data type is useful for:</p>
+<ul>
+<li>Outputting dates so they look pretty and conform to the style you want them to (e.g., 8/26/2025, August 26, 2025; 25/08/2025).</li>
+<li>Doing date math: how many weeks, days, months, years between two dates, etc.</li>
+</ul>
+<p>We can define a date as a string. The computer doesn’t care. While we can print the data, we can perform any date math on it. Uncomment the last line in</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>dateStr <span class="ot">&lt;-</span> <span class="st">"07/15/2025"</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dateStr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "07/15/2025"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># addDays &lt;- dateStr + 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To be able to manipulate dates you need to store or convert them to a date. In Base R, i.e., without loading a library, there are 3 main functions that convert a string to a date: <code>as.Date()</code>, <code>as.POSIXct()</code>, and <code>as.POSIXlt()</code>. <code>as.Date()</code> stores only date info, while the two <code>as.POSIX</code> functions store time info, including timezone. The difference between the two <code>as.POSIX</code> functions lies in how the data is stored.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's try some dates</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create text date</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>wolf1.bday.str <span class="ot">&lt;-</span> <span class="st">"8/18/2019"</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># convert using as.Date()</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>wolf1.bday <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(wolf1.bday.str, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf1.bday)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2019-08-18"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert using as.POSIXct()</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>wolf2.bday <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="st">"11-01-2015"</span>, <span class="at">format=</span><span class="st">"%m-%d-%Y"</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf2.bday)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2015-11-01 EDT"</code></pre>
+</div>
+</div>
+<p>For a list of format codes like <code>%m</code> and what they represent, type <code>?strptime()</code> in the console and look in the <strong>Details</strong> section.</p>
+<p>You may have noticed that when we print out the date, even though we provided the format of the date, it printed out in a YYYY-MM-DD format. This reflects how the date is stored. However we can use the <code>format()</code> command with the date codes found in the <code>strptime()</code> help to print the date out in many different formats.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>wolf2.bday.long <span class="ot">&lt;-</span> <span class="fu">format</span>(wolf2.bday, <span class="st">"%A, %B %d, %Y"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf2.bday.long)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Sunday, November 01, 2015"</code></pre>
+</div>
+</div>
+<p>We can also now perform math on our dates:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>wolf1.anniversary <span class="ot">&lt;-</span> wolf1.bday <span class="sc">+</span> <span class="dv">63</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf1.anniversary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2019-10-20"</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="quiz-3" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-3">QUIZ # 3</h2>
+<p>How can we print <code>wolf1.anniversary</code> in the same format as <code>wolf1.bday.long</code>?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the lines below to use as a template</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># wolf1.anniversay.long &lt;- </span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="quiz-3-answers" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-3-answers">Quiz # 3 Answers</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>wolf1.anniversay.long <span class="ot">&lt;-</span> <span class="fu">format</span>(wolf1.anniversary, <span class="st">"%A, %B %d, %Y"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wolf1.anniversay.long)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Sunday, October 20, 2019"</code></pre>
+</div>
+</div>
+</section>
+<section id="logical" class="level2">
+<h2 class="anchored" data-anchor-id="logical">Logical</h2>
+<p>A Boolean value is one that can take one of two values: 0 or 1. In R, these types of values are represented using the “logical” data type. The logical data type takes the value TRUE (1) or FALSE (0). It is good for setting flags and creating indices to subset data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/logical_examples_w.png" class="img-fluid figure-img" style="width:6in"></p>
+<figcaption>Examples for logical values</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of boolean variables based on picture</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>isAlive <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>isWolf<span class="fl">.1</span> <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(isWolf<span class="fl">.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(isAlive)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What do you think? Uncomment the two lines below and set them to the value you think they should be and print them to screen.</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co">#isMajestic = </span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co">#isWolf.2 = </span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print(isWolf.2)</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print(isMajestic)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Logical values are used ubiquitously in programming, particularly for program control. When we get to the material on operators, you will begin to see how they are used.</p>
+<hr>
+</section>
+</section>
+<section id="data-structures" class="level1">
+<h1>Data Structures</h1>
+<p>We’ve looked at the basic data types in R and how to store values in variables. In this section, we’ll explore 3 widely-used data structures. Data structures are programming structures that allow storage of multiple values.</p>
+<p>The structures we will explore are:</p>
+<ul>
+<li>arrays/vectors</li>
+<li>matrices</li>
+<li>data frames</li>
+</ul>
+<p>Basic distinguishing factors between data structions include:</p>
+<ul>
+<li>how many data types to they allow? one? more?</li>
+<li>how many dimensions do they allow? 1? 2? more?</li>
+</ul>
+<p>There are two aspects of using data structures:</p>
+<ul>
+<li>how to create them; and,</li>
+<li>how to access the data in them.</li>
+</ul>
+<p>We’ll cover both.</p>
+<section id="vectors-1-d-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="vectors-1-d-arrays">Vectors (1-D Arrays)</h2>
+<p>Vectors store data in one dimension. The allow only one data type.</p>
+</section>
+<section id="i-digress-1" class="level2">
+<h2 class="anchored" data-anchor-id="i-digress-1">I Digress …</h2>
+<p>In point of fact, R is a vectorized language. What does that mean? It means scalars (single values) in R are really 1-element vectors. Will this have a big impact on learning R? No, probably not. But you can whip this fact out at parties and amaze your friends.</p>
+<section id="how-to-create-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-create-vectors">How to Create Vectors</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EXAMPLES OF HOW TO CREATE VECTORS</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (Single Data Type)</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Numeric</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Since R sees integers and decimal data as double, vectors can contain both</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>num.vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="fl">4.5</span>, <span class="dv">7</span>, <span class="fl">12.2</span>, <span class="fl">3.0</span>)</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(num.vec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.0  4.5  7.0 12.2  3.0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">typeof</span>(num.vec))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Examples using other data types</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>txt.vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Talley"</span>, <span class="st">"SAS Hall"</span>, <span class="st">"Hunt Library"</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>log.vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vectors only store one data type…really, really! But, what happens if you mix data types?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's store some info about a pet cat named Fluffy: name, weight, isFemale, birthdate and age</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>mixed.vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Fluffy"</span>, <span class="fl">12.0</span>, <span class="cn">TRUE</span>, <span class="fu">as.Date</span>(<span class="st">"9/1/2024"</span>,<span class="at">format=</span><span class="st">"%m/%d/%Y"</span>), <span class="dv">2</span>) <span class="co"># so far so good</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mixed.vec) <span class="co"># oops...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Fluffy" "12"     "TRUE"   "19967"  "2"     </code></pre>
+</div>
+</div>
+<p>While R will let you pass different types of data to an array, it will convert all values to a single type. How it converts these values depends on what types of values you put in it. To see that this may not always be text, remove “Fluffy” from the vector and print it out again.</p>
+</section>
+</section>
+<section id="matrices-or-n-d-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="matrices-or-n-d-arrays">Matrices (or n-D Arrays)</h2>
+<p>Matrices:</p>
+<ul>
+<li>can have 2 or more dimensions</li>
+<li>hold only one data type</li>
+</ul>
+<p>They are useful in computational work. There are a couple of ways to declare a matrix in R.</p>
+<p>If you only need a 2-dimensional matrix (rows and columns only), you can use <code>matrix()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate 35 random values between 0 and 50</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">50</span>, <span class="at">size =</span> <span class="dv">35</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="co"># generates a vector</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 25 16  0  5 47 14  4  1 48  1 16  1 32 35 41 21  6  0 27 26 29 18 49 48  5
+[26] 10 29 32 44 24 39  8 42 48 40</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a 2-D matrix out of data</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>matrix<span class="fl">.2</span>D <span class="ot">&lt;-</span>  <span class="fu">matrix</span>(data, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">7</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix<span class="fl">.2</span>D)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+[1,]   25   14   16   21   29   10   39
+[2,]   16    4    1    6   18   29    8
+[3,]    0    1   32    0   49   32   42
+[4,]    5   48   35   27   48   44   48
+[5,]   47    1   41   26    5   24   40</code></pre>
+</div>
+</div>
+<p>To create a matrix that has more than 2 dimensions, you must use the <code>array()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate 75 random values between 0 and 50</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">50</span>, <span class="at">size =</span> <span class="dv">75</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make a 3-D matrix from data</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>matrix<span class="fl">.3</span>D <span class="ot">&lt;-</span> <span class="fu">array</span>(data, </span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix<span class="fl">.3</span>D)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , 1
+
+     [,1] [,2] [,3] [,4] [,5]
+[1,]   29   34   34   43   33
+[2,]    1   45   11   42   39
+[3,]   14   27   38    4    9
+[4,]    1   40   20   32   32
+[5,]   16   43    2   42   39
+
+, , 2
+
+     [,1] [,2] [,3] [,4] [,5]
+[1,]   49   13   18   42   24
+[2,]    9   17   27   34   36
+[3,]    7   31    9   17    3
+[4,]   37   35    9    7   34
+[5,]   18   41   20    0   30
+
+, , 3
+
+     [,1] [,2] [,3] [,4] [,5]
+[1,]   19   27    7    4   21
+[2,]   29   19   20   43    3
+[3,]   19   10   32   38   39
+[4,]   37   48   12   34   48
+[5,]    2   11   31   40   33</code></pre>
+</div>
+</div>
+</section>
+<section id="dataframes-tabular-data" class="level2">
+<h2 class="anchored" data-anchor-id="dataframes-tabular-data">Dataframes (Tabular Data)</h2>
+<p>Vectors and matrices are great when we have a single datatype we need to store. What if we need to store different datatypes for each sample?</p>
+<p>Data Frames:</p>
+<ul>
+<li>are 2-dimensional tabular structures</li>
+<li>allow multiple datatypes, but each column must be the same datatype.</li>
+<li>are similar to excel tables.</li>
+</ul>
+<p>Let’s create a data frame that holds some information about my herd of cats.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>catData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Fluffy"</span>, <span class="st">"Max"</span>, <span class="st">"Coco"</span>),</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">isFemale =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weight.lbs =</span> <span class="fu">c</span>(<span class="fl">9.0</span>, <span class="fl">11.5</span>, <span class="fl">15.0</span>),</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(catData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Name isFemale weight.lbs Age
+1 Fluffy     TRUE        9.0  15
+2    Max    FALSE       11.5   5
+3   Coco     TRUE       15.0   3</code></pre>
+</div>
+</div>
+<section id="accessing-data-in-vectors-matrices-and-data-frames" class="level3">
+<h3 class="anchored" data-anchor-id="accessing-data-in-vectors-matrices-and-data-frames">Accessing Data In Vectors, Matrices and Data Frames</h3>
+<p>Elements in these data structures can be accessed using indices. You will need one index for each dimension the structure has. We’ll access data in the example structures we made earlier. Note: Make sure you ran the code above to make sure the data structures have been defined. To ensure this is done, you can click on <code>Run</code> above and choose “Run All Chunks Above”.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VECTORS</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the 3rd value in num.vec</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>val <span class="ot">&lt;-</span> num.vec[<span class="dv">3</span>]</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(val)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the second through fourth values from num.vec</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> num.vec[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(vals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4.5  7.0 12.2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the first, third and fifth (non-contiguous) values from num.vec</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(num.vec[idx])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10  7  3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the value in the 3rd row, 6th column of matrix.2D</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix<span class="fl">.2</span>D[<span class="dv">3</span>,<span class="dv">6</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 32</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the value in the 4th row, second column, third dimension of matrix.3D</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix<span class="fl">.3</span>D[<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print Max's age from catData</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(catData[<span class="dv">2</span>,<span class="dv">4</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also </span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(catData[<span class="dv">2</span>,<span class="st">"Age"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="try-it-yourself" class="level2">
+<h2 class="anchored" data-anchor-id="try-it-yourself">Try It Yourself!</h2>
+<p>We showed how you can access a contiguous range or non-contiguous set of values in a vector.</p>
+<p>In the code chunk below try accessing the data in the matrices (2D &amp; 3D) and data frame using the methods we used with the vector, do it for one index or more than one.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>matrix<span class="fl">.2</span>D[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    6   18   29    8
+[2,]    0   49   32   42</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>matrix<span class="fl">.3</span>D[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>),<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , 1
+
+     [,1] [,2] [,3]
+[1,]    1   11   39
+[2,]   14   38    9
+[3,]    1   20   32
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,]    9   27   36
+[2,]    7    9    3
+[3,]   37    9   34</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>catData[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Fluffy" "Max"   </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>catData[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Name weight.lbs
+1 Fluffy        9.0
+2    Max       11.5
+3   Coco       15.0</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="quiz-4" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-4">QUIZ # 4</h2>
+<p>For the scenarios described below indicate what type of data structure would work. Use whether the data is a single data type or multiple and whether the structure of the data would make more sense in more than one dimension to decide. There may be multiple possibilities. In practice you may start with one structure and pivot to another one to take advantage of the new data structure’s strengths.</p>
+<ol type="1">
+<li>You want to store data about cars you are test driving this weekend. You want to store the make, model, year, price, mpg city and mpg highway.</li>
+</ol>
+<p>What type of data structure should you use and why?</p>
+<ol start="2" type="1">
+<li>You want to store the number of Fiction and Nonfiction Books you own on 4 shelves of your bookcase.</li>
+</ol>
+<p>What type of data structure should you use and why?</p>
+<ol start="3" type="1">
+<li>You want to store the weight of 6 beetles in grams.</li>
+</ol>
+<p>What type of data structure should you use and why?</p>
+<ol start="4" type="1">
+<li>You want to store temperatures for five days, from three different towns at 2 locations in each town.</li>
+</ol>
+<p>What type of data structure should you use and why?</p>
+</section>
+<section id="quiz-4-answers" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-4-answers">Quiz # 4 Answers</h2>
+<ol type="1">
+<li><p><strong>ANSWER</strong>: You have multiple data types and could store this in a 2D structure. Therefore, a data frame would work nicely.</p></li>
+<li><p><strong>ANSWER</strong>: You are storing a single data type: numeric. You could use a vector of length 8 (4 shelves x 2 types of books). However, it would probably be easier to create a 2-D matrix that has 4 x 2 or 2 x 4 dimensions.</p></li>
+<li><p><strong>ANSWER</strong>: You are storing a single data type: numeric. There doesn’t seem to be structure to the data that requires more than one dimension. Therefore, a vector would work nicely.</p></li>
+<li><p><strong>ANSWER</strong>: In this case you have one data type so you could use a vector or a matrix. The data suggests a natural 3-D structure, where one dimension could represent days, another towns and a third dimension the locations in each town.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="operators" class="level1">
+<h1>Operators</h1>
+<p>Operators are used to perform, not unsurprisingly, operations. They provide a way to manipulate and compare values and variables. Operators may sound exotic, but you’ve encountered them in any basic math class you’ve ever taken. We’ve covered the assignment operator…quick what is the assignment operator?</p>
+<p>We’ll cover the following kinds of operators:</p>
+<ul>
+<li>Arithmetic,</li>
+<li>Relational, and</li>
+<li>Logical (Boolean).</li>
+</ul>
+<section id="arithmetic" class="level2">
+<h2 class="anchored" data-anchor-id="arithmetic">Arithmetic</h2>
+<p>I’m sure you can already guess what these are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operator</th>
+<th style="text-align: center;">Operation</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">negation</td>
+<td style="text-align: center;">-5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">addition</td>
+<td style="text-align: center;"><code>amt1</code> + <code>amt2</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">subtraction</td>
+<td style="text-align: center;"><code>amt1</code> - <code>amt2</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">*</td>
+<td style="text-align: center;">multiplication</td>
+<td style="text-align: center;">2 * <code>amt1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">/</td>
+<td style="text-align: center;">division</td>
+<td style="text-align: center;"><code>amt1</code> / 2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">^ or **</td>
+<td style="text-align: center;">power</td>
+<td style="text-align: center;">2 ^ 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%%</td>
+<td style="text-align: center;">modulus</td>
+<td style="text-align: center;">10 %% 3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%/%</td>
+<td style="text-align: center;">integer division</td>
+<td style="text-align: center;">10 %/% 3</td>
+</tr>
+</tbody>
+</table>
+<p>Most of the arithmetic operators should be familiar. You can use variables or values as operands.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use operators with values only</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">-</span> <span class="dv">6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">/</span> <span class="dv">6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8333333</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">^</span> <span class="dv">6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15625</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">**</span> <span class="dv">6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15625</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define variables</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">=</span> <span class="dv">8</span></span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use operators with vars only</span></span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">+</span> var2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">-</span> var2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">*</span> var2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">/</span> var2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.25</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">^</span> var2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 256</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">**</span> var2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 256</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mix it up</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>var2 <span class="sc">-</span> <span class="dv">6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you get the idea.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Two operators may be new to you. These include the two operators that perform integer math. The modulus operator, <code>%%</code>, returns the remainder of integer division. While integer division operator, <code>%/%</code> returns the whole number quotient of the division operation of two integer operands.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Integer division</span></span>
+<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">%/%</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modulus</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>var1 <span class="sc">%%</span> var2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Both operators work with any combination of values and variables.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="i-digress-2" class="level2">
+<h2 class="anchored" data-anchor-id="i-digress-2">I Digress …</h2>
+<p>Operators can be referred to as <strong>unary</strong> or <strong>binary</strong>. From math class, you may recall that operators act upon <strong>operands</strong>. Unary means that an operator takes a single operand while binary indicates it takes two. The <code>-</code> operator is an example of an operator that can work as an unary (-2) or binary operator (5-2). It is not essential you know this, but if you hear it in the future you’ll know what it means.</p>
+</section>
+<section id="relational" class="level2">
+<h2 class="anchored" data-anchor-id="relational">Relational</h2>
+<p>Relational operators are used to compare two values. The result of using relational operators is a logical (Boolean) value: <code>TRUE</code> or <code>FALSE</code>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operator</th>
+<th style="text-align: center;">Operation</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">&lt;</td>
+<td style="text-align: center;">less than</td>
+<td style="text-align: center;"><code>mynum</code> &lt; 3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">&lt;=</td>
+<td style="text-align: center;">less than or equal to</td>
+<td style="text-align: center;"><code>mynum</code> &lt;= 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">&gt;</td>
+<td style="text-align: center;">greater than</td>
+<td style="text-align: center;"><code>mynum</code> &gt; 3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">&gt;=</td>
+<td style="text-align: center;">greater than or equal to</td>
+<td style="text-align: center;"><code>mynum</code> &gt;= 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">==</td>
+<td style="text-align: center;">equality</td>
+<td style="text-align: center;">“a” == “b”</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">!=</td>
+<td style="text-align: center;">inequality</td>
+<td style="text-align: center;">“a” != “b”</td>
+</tr>
+</tbody>
+</table>
+<p>While comparing decimal (double) numbers using <code>&gt;</code> or <code>&lt;</code> returns results we expect, using <code>&gt;=</code>, <code>&lt;=</code> or <code>==</code> is more complicated. You can do it and it will return an answer, but depending on what you are trying to do it may not return the answer you want or need.</p>
+<p>Say you are comparing weights of dogs, and you want to know if two dogs weight the same. Dog 1 (“Sparky”) weighs 70.0000 pounds while Dog 2 (“Bella”) weighs 70.0001 pounds. In principal are these two weights different? While technically Sparky weighs less than Bella, is this information useful? In most scenarios this difference would not be meaningful. This means if we use <code>==</code> we will not get the results we really want.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>wt.Sparky <span class="ot">=</span> <span class="dv">70</span></span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>wt.Bella <span class="ot">=</span> <span class="fl">70.01</span></span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>wt.Sparky <span class="sc">==</span> wt.Bella</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>If the desired behavior we want from this comparison is that the two weights are the same, simply comparing the two numbers using the equality operatory won’t work.</p>
+<p>Do address this situation, we have two options: 1. We can round the number to an appropriate precision. In this case, we might want to identify equality in terms of whole pounds or perhaps to the first decimal place. However, if we need to keep the precision for later calculations we have to make a new variable before we do the comparison. 2. An alternative is to use code that compares the absolute difference between the two value and indicates equality if the difference is less than a very small number which is related to the precision at which equality is met for our purposes.</p>
+<p>Let’s look at an example</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1 we want to compare </span></span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Sparky &amp; Bella's weights again and add a third dog, Fido.</span></span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>wt.Sparky <span class="ot">=</span> <span class="dv">70</span></span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a>wt.Bella <span class="ot">=</span> <span class="fl">70.01</span></span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a>wt.Fido <span class="ot">=</span> <span class="fl">70.1</span></span>
+<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-7"><a href="#cb128-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Scenario 1: Dogs weight the same if their integer weight in pounds is the  same. [All dogs weights are equal.]</span></span>
+<span id="cb128-8"><a href="#cb128-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-9"><a href="#cb128-9" aria-hidden="true" tabindex="-1"></a>prec1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb128-10"><a href="#cb128-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-11"><a href="#cb128-11" aria-hidden="true" tabindex="-1"></a><span class="co"># code to check equality at whole integer level</span></span>
+<span id="cb128-12"><a href="#cb128-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-13"><a href="#cb128-13" aria-hidden="true" tabindex="-1"></a>equal1 <span class="ot">&lt;-</span> <span class="fu">abs</span>(wt.Sparky<span class="sc">-</span>wt.Bella) <span class="sc">&lt;</span> prec1 <span class="co"># TRUE (e.g. weights are equal)</span></span>
+<span id="cb128-14"><a href="#cb128-14" aria-hidden="true" tabindex="-1"></a>equal2 <span class="ot">&lt;-</span> <span class="fu">abs</span>(wt.Sparky<span class="sc">-</span>wt.Fido) <span class="sc">&lt;</span> prec1 <span class="co"># TRUE (e.g. weights are equal)</span></span>
+<span id="cb128-15"><a href="#cb128-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-16"><a href="#cb128-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-17"><a href="#cb128-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Scenario 2: Dogs weight is the same if their integer weight in pounds is the same to the first decimal place. [Sparky and Bella weight the same, but Fido's weight is not equal to either.]</span></span>
+<span id="cb128-18"><a href="#cb128-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-19"><a href="#cb128-19" aria-hidden="true" tabindex="-1"></a>prec2 <span class="ot">&lt;-</span> .<span class="dv">1</span></span>
+<span id="cb128-20"><a href="#cb128-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-21"><a href="#cb128-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-22"><a href="#cb128-22" aria-hidden="true" tabindex="-1"></a>equal1 <span class="ot">&lt;-</span> <span class="fu">abs</span>(wt.Sparky<span class="sc">-</span>wt.Bella) <span class="sc">&lt;</span> prec2 <span class="co"># TRUE (e.g. weights are equal)</span></span>
+<span id="cb128-23"><a href="#cb128-23" aria-hidden="true" tabindex="-1"></a>equal2 <span class="ot">&lt;-</span> <span class="fu">abs</span>(wt.Sparky<span class="sc">-</span>wt.Fido) <span class="sc">&lt;</span> prec2 <span class="co"># FALSE (e.g. weights are not equal)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The issue with comparing doubles is further complicated by issues that arise from translating binary values (how the data is stored in the computer) to double (what we manipulate and use in R). The following code provides an example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's print out the absolute difference between Sparky and Bella's weights</span></span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>abs.dif <span class="ot">&lt;-</span> <span class="fu">abs</span>(wt.Sparky<span class="sc">-</span>wt.Bella) </span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(abs.dif) <span class="co"># prints out .01...Looks good!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># But....</span></span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="co"># look at value of abs.dif in the Environment pane....?!?! </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="logical-1" class="level2">
+<h2 class="anchored" data-anchor-id="logical-1">Logical</h2>
+<p>Logical operators are used to compare logical values, variables or relational expressions that evaluate to logical values. There are three logical operators: AND, OR and (different) NOT. The following operators compare any combination of boolean values, variables or expressions that evaluate to a boolean value, e.g.&nbsp;a relational expression.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operator</th>
+<th style="text-align: center;">Operation</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">&amp;&amp;</td>
+<td style="text-align: center;">Logical AND</td>
+<td style="text-align: center;">isCute &amp;&amp; isBig</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">||</td>
+<td style="text-align: center;">Logical OR</td>
+<td style="text-align: center;">isCute || isBig</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">!</td>
+<td style="text-align: center;">Logical NOT</td>
+<td style="text-align: center;">!isCute</td>
+</tr>
+</tbody>
+</table>
+<section id="and" class="level3">
+<h3 class="anchored" data-anchor-id="and">AND</h3>
+<p>The results of using logical operators can be summarized in a “truth table”. Essentially, the AND operator (&amp;&amp;) only returns <strong>TRUE</strong> if both of the variables (or expressions) are TRUE. The truth table for AND is shown below:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">var1/expr1</th>
+<th style="text-align: center;">var2/expr2</th>
+<th style="text-align: center;">var1/expr1 &amp;&amp; var2/expr2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using two variables</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>var3 <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1 <span class="sc">&amp;&amp;</span> var2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1 <span class="sc">&amp;&amp;</span> var3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using expressions (relational)</span></span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>val1 <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a><span class="co"># determine if value is between two numbers</span></span>
+<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a>log1 <span class="ot">&lt;-</span> (val1 <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="sc">&amp;&amp;</span> (val1 <span class="sc">&lt;</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="or" class="level3">
+<h3 class="anchored" data-anchor-id="or">OR</h3>
+<p>The OR operator (||) only returns <strong>FALSE</strong> if both of the variables (or expressions) are FALSE. The truth table for OR is shown below:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">var1/expr1</th>
+<th style="text-align: center;">var2/expr2</th>
+<th style="text-align: center;">var1/expr1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using two variables</span></span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a>var3 <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1 <span class="sc">||</span> var2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var1 <span class="sc">||</span> var3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using expressions (relational)</span></span>
+<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a>val1 <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-4"><a href="#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="co"># determine if value is between two numbers</span></span>
+<span id="cb141-5"><a href="#cb141-5" aria-hidden="true" tabindex="-1"></a>log1 <span class="ot">&lt;-</span> (val1 <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="sc">||</span> (val1 <span class="sc">&lt;</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="not" class="level3">
+<h3 class="anchored" data-anchor-id="not">NOT</h3>
+<p>The NOT operator (!) returns the opposite logical value of the value, variable or expression associated with it. The truth table for NOT is shown below:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">var1/expr1</th>
+<th style="text-align: center;">var2/expr2</th>
+<th style="text-align: center;">var1/expr1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="i-digress-3" class="level2">
+<h2 class="anchored" data-anchor-id="i-digress-3">I Digress…</h2>
+<p>The logical operators above compare single variables or values. However, sometimes you may want to compare to vectors, or matrices element by element. You can do this using the element-wise operators shown below.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operator</th>
+<th style="text-align: center;">Operation</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">&amp;</td>
+<td style="text-align: center;">Element-wise AND</td>
+<td style="text-align: center;">c(TRUE, TRUE, FALSE) &amp; c(FALSE, TRUE, FALSE)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">|</td>
+<td style="text-align: center;">Element-wise OR</td>
+<td style="text-align: center;">c(TRUE, TRUE, FALSE) | c(FALSE, TRUE, FALSE)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="quiz-5" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-5">Quiz # 5</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define some Boolean variables</span></span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>has_library_card     <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a>is_nc_state_student  <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb142-4"><a href="#cb142-4" aria-hidden="true" tabindex="-1"></a>is_faculty           <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb142-5"><a href="#cb142-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-6"><a href="#cb142-6" aria-hidden="true" tabindex="-1"></a>book_available       <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb142-7"><a href="#cb142-7" aria-hidden="true" tabindex="-1"></a>is_overdue           <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb142-8"><a href="#cb142-8" aria-hidden="true" tabindex="-1"></a>fine_paid             <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb142-9"><a href="#cb142-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-10"><a href="#cb142-10" aria-hidden="true" tabindex="-1"></a>item_type            <span class="ot">&lt;-</span> <span class="st">"reference"</span></span>
+<span id="cb142-11"><a href="#cb142-11" aria-hidden="true" tabindex="-1"></a>days_checked_out     <span class="ot">&lt;-</span> <span class="dv">21</span></span>
+<span id="cb142-12"><a href="#cb142-12" aria-hidden="true" tabindex="-1"></a>max_loan_days        <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb142-13"><a href="#cb142-13" aria-hidden="true" tabindex="-1"></a>requested_items      <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb142-14"><a href="#cb142-14" aria-hidden="true" tabindex="-1"></a>max_requests         <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb142-15"><a href="#cb142-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-16"><a href="#cb142-16" aria-hidden="true" tabindex="-1"></a>is_overdue_by_policy <span class="ot">&lt;-</span> days_checked_out <span class="sc">&gt;</span> max_loan_days   <span class="co"># TRUE  (21 &gt; 14)</span></span>
+<span id="cb142-17"><a href="#cb142-17" aria-hidden="true" tabindex="-1"></a>is_reference_item    <span class="ot">&lt;-</span> item_type <span class="sc">==</span> <span class="st">"reference"</span>           <span class="co"># TRUE</span></span>
+<span id="cb142-18"><a href="#cb142-18" aria-hidden="true" tabindex="-1"></a>under_request_limit  <span class="ot">&lt;-</span> requested_items <span class="sc">&lt;</span> max_requests     <span class="co"># TRUE  (3 &lt; 5)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A. Predict the output of the following logical expressions:</p>
+<ol type="1">
+<li><code>has_library_card &amp;&amp; book_available</code></li>
+<li><code>book_available || is_overdue</code></li>
+<li><code>!fine_paid</code></li>
+<li><code>is_overdue &amp;&amp; !fine_paid</code></li>
+<li><code>!(is_overdue || fine_paid)</code></li>
+<li><code>is_nc_state_student || is_faculty</code></li>
+</ol>
+<p>B. Scenario Questions</p>
+<p>For each scenario, write <strong>one R expression</strong> — using the variables above and <code>&amp;&amp;</code>, <code>||</code>, and/or <code>!</code> — that answers the question (Q.), then work out whether it’s <code>TRUE</code> or <code>FALSE</code>.</p>
+<p><strong>Scenario 1 — Checkout eligibility.</strong> Circulation policy: a patron may check out an item only if they have a library card <strong>and</strong> the item is currently available.</p>
+<blockquote class="blockquote">
+<p>Q. Can this patron check out this book?</p>
+</blockquote>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your expressions here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Scenario 2 — In-library access.</strong> Open-stacks policy: a person may use an item inside the library if they have a library card <strong>or</strong> the item is a reference item (reference material can always be used in-library without checkout).</p>
+<blockquote class="blockquote">
+<p>Q. May this person access this item in the library? <em>(Hint: use <code>is_reference_item</code>.)</em></p>
+</blockquote>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your expressions here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Scenario 3 — Blocked accounts.</strong> Account policy: an account is blocked from new checkouts if the patron has an overdue item <strong>and</strong> has <strong>not</strong> paid the associated fine.</p>
+<blockquote class="blockquote">
+<p>Q. Should this patron’s account be blocked?</p>
+</blockquote>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your expressions here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Scenario 4 — Overdue-fine exemption.</strong> Fine policy: an item is exempt from an overdue fine if it is a reference item <strong>or</strong> it has <strong>not</strong> exceeded the maximum loan period.</p>
+<blockquote class="blockquote">
+<p>Q. Is this item exempt from a fine? <em>(Hint: Use <code>is_reference_item</code> and <code>is_overdue_by_policy</code>.)</em></p>
+</blockquote>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your expressions here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="quiz-5-answers" class="level2">
+<h2 class="anchored" data-anchor-id="quiz-5-answers">Quiz # 5 Answers</h2>
+<ol type="A">
+<li><ol type="1">
+<li><code>FALSE</code> (<code>TRUE &amp;&amp; FALSE</code>)</li>
+<li><code>TRUE</code> (<code>FALSE || TRUE</code>)</li>
+<li><code>TRUE</code> (<code>!FALSE</code>)</li>
+<li><code>TRUE</code> (<code>TRUE &amp;&amp; !FALSE</code> -&gt; <code>TRUE &amp;&amp; TRUE</code>)</li>
+<li><code>FALSE</code> (<code>!(TRUE || FALSE)</code> -&gt; <code>!(TRUE)</code>)</li>
+<li><code>TRUE</code> (<code>TRUE || FALSE</code>)</li>
+</ol></li>
+<li><ol type="1">
+<li><code>has_library_card &amp;&amp; book_available</code> -&gt; <code>TRUE &amp;&amp; FALSE</code> -&gt; <code>FALSE</code></li>
+<li><code>has_library_card || is_reference_item</code> -&gt; <code>TRUE || TRUE</code> -&gt; <code>TRUE</code></li>
+<li><code>is_overdue &amp;&amp; !fine_paid</code> -&gt; <code>TRUE &amp;&amp; !FALSE</code> -&gt; <code>TRUE &amp;&amp; TRUE</code> -&gt; <code>TRUE</code></li>
+<li><code>is_reference_item || !is_overdue_by_policy</code> -&gt; <code>TRUE || !TRUE</code> -&gt; <code>TRUE || FALSE</code> -&gt; <code>TRUE</code></li>
+</ol></li>
+</ol>
+<hr>
+<p>In our next workshop, <strong>Control Flow and Functions</strong>, we’ll learn about and practice:</p>
+<ul>
+<li>Conditional and Flow Control Statements
+<ul>
+<li>if</li>
+<li>for</li>
+<li>while</li>
+</ul></li>
+<li>Functions, including
+<ul>
+<li>built-in</li>
+<li>library</li>
+<li>user-defined</li>
+</ul></li>
+<li>Getting help</li>
+<li>File Input and Output</li>
+</ul>
+</section>
+</section>
+<section id="before-you-go" class="level1">
+<h1>Before You Go</h1>
+<section id="take-our-survey" class="level2">
+<h2 class="anchored" data-anchor-id="take-our-survey">Take our Survey</h2>
+<p>We appreciate your input. Let us know how this Workshop went for you! We take your input seriously and appreciate the time you take to give it. Please fill out <a href="https://go.ncsu.edu/dss-workshop-eval">our survey</a>.</p>
+</section>
+<section id="need-additional-help" class="level2">
+<h2 class="anchored" data-anchor-id="need-additional-help">Need Additional Help?</h2>
+<p>We are available to help you with whatever question you have about this Workshop or programming in general. If you run into snags or questions (we all do), as you start to create programs for yourself, reach out to <a href="https://go.ncsu.edu/getdatahelp">us</a>. Send an email, make an appointment, or reserve a workstation! We are here to assist you to be successful in your data science journey.</p>
+<hr>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
