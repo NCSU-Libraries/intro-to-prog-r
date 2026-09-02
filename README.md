@@ -15,6 +15,19 @@
 
 ## Getting Started with R
 
+### Running in RStudio
+
+#### 📘 Included notebooks
+
+- 🧱 Fundamentals — variables, types, lists, dicts, and more.
+**COMING SOON!**
+- 🔁 Loops and Functions — conditionals, loops, functions, and scope.
+
+#### Download RStudio Materials
+The materials for this workshop are stored in GitHub. You can download these materials by clicking on the link below:
+- 📂 [Download Workshop Materials](https://github.com/NCSU-Libraries/intro-to-prog-r/releases#release-instruction-materials)
+
+
 ### Running in Google Colab
 
 #### Fundamentals  <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Fundamentals.ipynb"><img alt="Open in Colab — Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
@@ -27,19 +40,19 @@ These materials are used in NC State University Libraries' Data Science Services
 
 ---
 
-## 🚀 Quick start
+#### 🚀 Quick start
 
 1. Click a workshop badge above to open in Colab.
 2. Run the install cell when prompted (section below).
 3. Runtime → Restart runtime.
 4. Runtime → Run all. ✅
 
-## 📘 Included notebooks
+#### 📘 Included notebooks
 
 - 🧱 Fundamentals — variables, types, lists, dicts, and more.
 - 🔁 Loops and Functions — conditionals, loops, functions, and scope.
 
-## 🧩 Solutions
+#### 🧩 Solutions
 
 - Fundamentals — Solutions
   <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/Fundamentals_Answers.ipynb"><img alt="Open in Colab — Solutions: Basic Syntax and Operators" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
@@ -50,28 +63,24 @@ These materials are used in NC State University Libraries' Data Science Services
 - EDA — Solutions
   <a href="https://colab.research.google.com/github/NCSU-Libraries/intro-to-prog-R/blob/main/Colab Materials/EDA_Answers.ipynb"><img alt="Open in Colab — Solutions: Control Flow and Functions" src="https://colab.research.google.com/assets/colab-badge.svg"></a>  
 
-## 💻 Use on Google Colab
+#### 💻 Use on Google Colab
 
 This folder contains Python/Jupyter equivalents of the R workshop notebooks found in the "RStudio Materials" directory. You can run them directly in Google Colab without installing anything locally (e.g. R, RStudio).
 
-### 🔗 Open in Colab
+##### 🔗 Open in Colab
 
 1. Click a badge above to open directly in Colab.
 
 Alternatively, in Colab: File → Open Notebook → GitHub tab → paste the repo URL `https://github.com/NCSU-Libraries/intro-to-prog-r` and select the notebooks in the repository root.
 
-
-### 💾 Save outputs to Google Drive (optional)
-COMING SOON!
-
-### ▶️ Run the notebooks
+##### ▶️ Run the notebooks
 
 After installs finish:
 
 1. Runtime → Restart runtime (recommended) so freshly installed packages are active.
 2. Runtime → Run all.
 
-### 🛠️ Troubleshooting
+##### 🛠️ Troubleshooting
 
 - If a package fails to install, re-run the install cell; transient network issues are common.
 - For large installs, ensure you restarted the runtime before executing the rest of the notebook.
