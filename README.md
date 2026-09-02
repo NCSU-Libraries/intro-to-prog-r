@@ -23,10 +23,13 @@
 **COMING SOON!**
 - 🔁 Loops and Functions — conditionals, loops, functions, and scope.
 
+#### Access the Slides
+- 🛝 [Link to Slides](go.ncsu.edu/dss-r-fundamentals)
+
 #### Download RStudio Materials
 The materials for this workshop are stored in GitHub. You can download these materials by clicking on the link below:
 - 📂 [Download Workshop Materials](https://github.com/NCSU-Libraries/intro-to-prog-r/releases#release-instruction-materials)
-
+- :octocat: [Link to GitHub Repository](go.ncsu.edu/dss-r)
 
 ### Running in Google Colab
 
