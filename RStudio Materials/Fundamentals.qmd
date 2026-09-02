@@ -172,12 +172,6 @@ From the sidebar in the Options window, choose **Pane Layout**
 - Environment pane
 - Output pane
 
-## Quiz \# 1 ANSWERS
-
-1.  Environment tab in the Environment Pane
-2.  Plots tab of the Output pane
-3.  Source Pane
-
 ------------------------------------------------------------------------
 
 # Notebooks & Scripts
@@ -229,13 +223,15 @@ For a variable to be useful, you must give it a value. To set a variable to a va
 The code box below shows some example variables. Use the arrow to the left of the code box to run the code.
 
 ```{r}
+#| label: set-variables
+
 # Set some variables:
-wolf.name <- "Smiley"
-wolf.age <- 5
+
+
 
 # See the variable value
-print(wolf.name)
-print(wolf.age)
+# print(wolf.name)
+# print(wolf.age)
 ```
 
 ## I Digress ...
@@ -266,15 +262,6 @@ Using the rules listed above which of the following passwords will work?
 My_favoritePASSWORDofAlL.tymes <- 5
 
 ```
-
-## Quiz \# 2 Answers
-
-The acceptable passwords are:
-
-- My_favoritePASSWORDofAlL.tymes
-- PW6
-- PW6_myfav
-- If
 
 ------------------------------------------------------------------------
 
@@ -325,19 +312,21 @@ Let's look at some examples.
 #| label: numeric-type
 
 # Create some variables and set them to numeric values
-numWolves  <-  5
-pctWolves <-  .20
 
-print(numWolves)
-print(pctWolves)
 
-print(typeof(numWolves))
-print(typeof(pctWolves))
+# print(numWolves)
+# print(pctWolves)
 
-numWolves <- 5.0
-print(numWolves)
-print(typeof(numWolves))
-print(as.double(numWolves))
+# print(typeof(numWolves))
+# print(typeof(pctWolves))
+
+# Add a decimal place to numWolves
+
+
+# print(numWolves)
+# print(typeof(numWolves))
+# print(as.double(numWolves))
+
 ```
 
 ## Text
@@ -349,14 +338,13 @@ We've looked at the scary, scary numbers. Let's look at good old familiar text. 
 
 # Some text examples
 
-wolf.name <- "Scruffy"
-wolf.initial <- "D"
-wolf.FavoriteArtist <- "Prince"
 
-print(wolf.name)
-print(wolf.initial)
-print(wolf.FavoriteArtist)
-print(typeof(wolf.name))
+
+# print(wolf.name)
+# print(wolf.initial)
+# print(wolf.FavoriteArtist)
+# print(typeof(wolf.name))
+
 ```
 
 ### Storing Sentences
@@ -391,8 +379,9 @@ We can define a date as a string. The computer doesn't care. While we can print 
 ```{r}
 #| label: date-string 
 
-dateStr <- "07/15/2025"
-print(dateStr)
+# define a variable and set it to a text date
+
+# print(dateStr)
 # addDays <- dateStr + 4
 ```
 
@@ -402,15 +391,15 @@ To be able to manipulate dates you need to store or convert them to a date. In B
 # Let's try some dates
 
 # create text date
-wolf1.bday.str <- "8/18/2019"
+
 
 # convert using as.Date()
-wolf1.bday <- as.Date(wolf1.bday.str, format = "%m/%d/%Y")
-print(wolf1.bday)
+
+# print(bday.1)
 
 # convert using as.POSIXct()
-wolf2.bday <- as.POSIXct("11-01-2015", format="%m-%d-%Y")
-print(wolf2.bday)
+
+# print(bday.2)
 ```
 
 For a list of format codes like `%m` and what they represent, type `?strptime()` in the console and look in the **Details** section.
@@ -420,8 +409,10 @@ You may have noticed that when we print out the date, even though we provided th
 ```{r}
 #| label: format-dates
 
-wolf2.bday.long <- format(wolf2.bday, "%A, %B %d, %Y")
-print(wolf2.bday.long)
+# Define a date using long names
+
+
+# print(bday.long)
 
 ```
 
@@ -430,8 +421,10 @@ We can also now perform math on our dates:
 ```{r}
 #| label: date-math
 
-wolf1.anniversary <- wolf1.bday + 63
-print(wolf1.anniversary)
+# Define an anniversary date using bday.1
+
+
+# print(anniversary)
 
 ```
 
@@ -451,15 +444,6 @@ How can we print `wolf1.anniversary` in the same format as `wolf1.bday.long`?
 
 ```
 
-## Quiz \# 3 Answers
-
-```{r}
-#| label: Quiz-3-Answer
-
-wolf1.anniversay.long <- format(wolf1.anniversary, "%A, %B %d, %Y")
-print(wolf1.anniversay.long)
-```
-
 ## Logical
 
 A Boolean value is one that can take one of two values: 0 or 1. In R, these types of values are represented using the "logical" data type. The logical data type takes the value TRUE (1) or FALSE (0). It is good for setting flags and creating indices to subset data.
@@ -469,12 +453,10 @@ A Boolean value is one that can take one of two values: 0 or 1. In R, these type
 ```{r}
 #| label: logical-examples
 
-# Example of boolean variables based on picture
-isAlive = FALSE
-isWolf.1 = TRUE
+# Example of boolean variables based on picture. Define a values for isAlive and isWolf.1
 
-print(isWolf.1)
-print(isAlive)
+# print(isWolf.1)
+# print(isAlive)
 
 
 # What do you think? Uncomment the two lines below and set them to the value you think they should be and print them to screen.
@@ -531,13 +513,14 @@ In point of fact, R is a vectorized language. What does that mean? It means scal
 
 # Numeric
 # Since R sees integers and decimal data as double, vectors can contain both
-num.vec <- c(10, 4.5, 7, 12.2, 3.0)
-print(num.vec)
-print(typeof(num.vec))
+
+# print(num.vec)
+# print(typeof(num.vec))
 
 # Examples using other data types
-txt.vec <- c("Talley", "SAS Hall", "Hunt Library")
-log.vec <- c(TRUE, FALSE, TRUE, TRUE)
+# txt.vec <- 
+# log.vec <- 
+
 
 ```
 
@@ -548,6 +531,7 @@ Vectors only store one data type...really, really! But, what happens if you mix 
 
 # Let's store some info about a pet cat named Fluffy: name, weight, isFemale, birthdate and age
 mixed.vec <- c("Fluffy", 12.0, TRUE, as.Date("9/1/2024",format="%m/%d/%Y"), 2) # so far so good
+
 print(mixed.vec) # oops...
 ```
 
@@ -572,8 +556,10 @@ data <- sample(0:50, size = 35, replace = TRUE) # generates a vector
 print(data)
 
 # make a 2-D matrix out of data
-matrix.2D <-  matrix(data, nrow = 5, ncol = 7, byrow = FALSE)
-print(matrix.2D)
+
+
+
+# print(matrix.2D)
 
 ```
 
@@ -586,9 +572,9 @@ To create a matrix that has more than 2 dimensions, you must use the `array()` f
 data <- sample(0:50, size = 75, replace = TRUE)
 
 # make a 3-D matrix from data
-matrix.3D <- array(data, 
-                   dim = c(5, 5, 3))
-print(matrix.3D)
+
+
+# print(matrix.3D)
 
 ```
 
@@ -607,11 +593,12 @@ Let's create a data frame that holds some information about my herd of cats.
 ```{r}
 #| label: data-frame
 
-catData <- data.frame(Name = c("Fluffy", "Max", "Coco"),
-                      isFemale = c(TRUE, FALSE, TRUE),
-                      weight.lbs = c(9.0, 11.5, 15.0),
-                      Age = c(15, 5, 3))
-print(catData)
+
+
+
+
+# print(catData)
+
 ```
 
 ### Accessing Data In Vectors, Matrices and Data Frames
@@ -624,27 +611,28 @@ Elements in these data structures can be accessed using indices. You will need o
 # VECTORS
 
 # extract the 3rd value in num.vec
-val <- num.vec[3]
-print(val)
+
+# print(val)
 
 # extract the second through fourth values from num.vec
-vals <- num.vec[2:4]
-print(vals)
+
+# print(vals)
 
 # extract the first, third and fifth (non-contiguous) values from num.vec
-idx <- c(1, 3, 5)
-print(num.vec[idx])
+
+# print(num.vec[idx])
 
 # print the value in the 3rd row, 6th column of matrix.2D
-print(matrix.2D[3,6])
+# print(matrix.2D[ , ])
 
 # print the value in the 4th row, second column, third dimension of matrix.3D
-print(matrix.3D[4,2,3])
+# print(matrix.3D[ , , ])
 
 # print Max's age from catData
-print(catData[2,4])
+# print(catData[ , ])
+
 # You can also 
-print(catData[2,"Age"])
+# print(catData[ , ])
 
 ```
 
@@ -657,10 +645,13 @@ In the code chunk below try accessing the data in the matrices (2D & 3D) and dat
 ```{r}
 #| label: try-access-methods
 
-matrix.2D[2:3, 4:7]
-matrix.3D[2:4,c(1,3,5),1:2]
-catData[1:2,1]
-catData[1:3,c(1,3)]
+# Access the 2 and 3rd rows, and 4-7 columns of matrix.2D
+
+# Access the 2-4 rows, columns 1, 3, and 5, and dimensions 1 and 2 of matrix.3D 
+
+# Access rows 1 and 2 and column 1 of catData
+
+# Access rows 1-3 and columns 1 and 3 of catData
 
 ```
 
@@ -686,16 +677,6 @@ What type of data structure should you use and why?
 
 What type of data structure should you use and why?
 
-## Quiz \# 4 Answers
-
-1. **ANSWER**: You have multiple data types and could store this in a 2D structure. Therefore, a data frame would work nicely.
-
-2. **ANSWER**: You are storing a single data type: numeric. You could use a vector of length 8 (4 shelves x 2 types of books). However, it would probably be easier to create a 2-D matrix that has 4 x 2 or 2 x 4 dimensions.
-
-3. **ANSWER**: You are storing a single data type: numeric. There doesn't seem to be structure to the data that requires more than one dimension. Therefore, a vector would work nicely.
-
-4. **ANSWER**: In this case you have one data type so you could use a vector or a matrix. The data suggests a natural 3-D structure, where one dimension could represent days, another towns and a third dimension the locations in each town.
-
 ------------------------------------------------------------------------
 
 # Operators
@@ -714,49 +695,38 @@ I'm sure you can already guess what these are:
 
 |  Operator  |    Operation     |     Example     |
 |:----------:|:----------------:|:---------------:|
-|     \-     |     negation     |     -5          |
+|     \-     |     negation     |       -5        |
 |     \+     |     addition     | `amt1` + `amt2` |
 |     \-     |   subtraction    | `amt1` - `amt2` |
-|     \*     |  multiplication  |    2 \* `amt1`  |
-|     /      |     division     |  `amt1` / 2     |
+|     \*     |  multiplication  |   2 \* `amt1`   |
+|     /      |     division     |   `amt1` / 2    |
 | \^ or \*\* |      power       |     2 \^ 3      |
 |     %%     |     modulus      |     10 %% 3     |
 |    %/%     | integer division |    10 %/% 3     |
 
-Most of the arithmetic operators should be familiar. You can use variables or values as operands. 
+Most of the arithmetic operators should be familiar. You can use variables or values as operands.
 
 ```{r}
 #| label: arithmetic-operator-examples
 
 # Use operators with values only
-5 + 6
-5 - 6
-5 * 6
-5 / 6
-5 ^ 6
-5 ** 6
+
+
 
 # Define variables
-var1 = 2
-var2 = 8
+
 
 # Use operators with vars only
-var1 + var2
-var1 - var2
-var1 * var2
-var1 / var2
-var1 ^ var2
-var1 ** var2
+
 
 # mix it up
-var1 + 5
-var2 - 6
+
 
 # you get the idea.
 
 ```
 
-Two operators may be new to you. These include the two operators that perform integer math. The modulus operator, `%%`,  returns the remainder of integer division. While integer division operator, `%/%` returns the whole number quotient of the division operation of two integer operands.
+Two operators may be new to you. These include the two operators that perform integer math. The modulus operator, `%%`, returns the remainder of integer division. While integer division operator, `%/%` returns the whole number quotient of the division operation of two integer operands.
 
 ```{r}
 #| label: integer-division-examples
@@ -765,10 +735,8 @@ var1 = 10
 var2 = 3
 
 # Integer division
-var1 %/% 3
 
 # Modulus
-var1 %% var2
 
 # Both operators work with any combination of values and variables.
 
@@ -788,66 +756,78 @@ Relational operators are used to compare two values. The result of using relatio
 |   \<=    |  less than or equal to   | `mynum` \<= 3 |
 |    \>    |       greater than       | `mynum` \> 3  |
 |   \>=    | greater than or equal to | `mynum` \>= 3 |
-|    ==    |         equality         | "a" == "b"    |
-|    !=    |        inequality        | "a" != "b"    |
-
+|    ==    |         equality         |  "a" == "b"   |
+|    !=    |        inequality        |  "a" != "b"   |
 
 ```{r}
 #| label: relational-examples
 
+# Define some variables
+
+
+# Examine results of different relational expressions
+
+# print( )
+# print( )
+# print( )
 
 ```
 
+While comparing decimal (double) numbers using `>` or `<` returns results we expect, using `>=`, `<=` or `==` is more complicated. You can do it and it will return an answer, but depending on what you are trying to do it may not return the answer you want or need.
 
-While comparing decimal (double) numbers using `>` or `<` returns results we expect, using `>=`, `<=` or `==` is more complicated. You can do it and it will return an answer, but depending on what you are trying to do it may not return the answer you want or need. 
-
-Say you are comparing weights of dogs, and you want to know if two dogs weight the same. Dog 1 ("Sparky") weighs 70.0000 pounds while Dog 2 ("Bella") weighs 70.0001 pounds. In principal are these two weights different? While technically Sparky weighs less than Bella, is this information useful? In most scenarios this difference would not be meaningful. This means if we use `==` we will not get the results we really want. 
+Say you are comparing weights of dogs, and you want to know if two dogs weight the same. Dog 1 ("Sparky") weighs 70.0000 pounds while Dog 2 ("Bella") weighs 70.0001 pounds. In principal are these two weights different? While technically Sparky weighs less than Bella, is this information useful? In most scenarios this difference would not be meaningful. This means if we use `==` we will not get the results we really want.
 
 ```{r}
 #| label: equality-operator-double-example
 
-wt.Sparky = 70
-wt.Bella = 70.01
+# Define weights for Sparky & Bella
 
-wt.Sparky == wt.Bella
+# Check if the two weights are equal
+
 
 ```
 
 If the desired behavior we want from this comparison is that the two weights are the same, simply comparing the two numbers using the equality operatory won't work.
 
-Do address this situation, we have two options: 
-1. We can round the number to an appropriate precision. In this case, we might want to identify equality in terms of whole pounds or perhaps to the first decimal place. However, if we need to keep the precision for later calculations we have to make a new variable before we do the comparison.
-2. An alternative is to use code that compares the absolute difference between the two value and indicates equality if the difference is less than a very small number which is related to the precision at which equality is met for our purposes. 
+Do address this situation, we have two options: 1. We can round the number to an appropriate precision. In this case, we might want to identify equality in terms of whole pounds or perhaps to the first decimal place. However, if we need to keep the precision for later calculations we have to make a new variable before we do the comparison. 2. An alternative is to use code that compares the absolute difference between the two value and indicates equality if the difference is less than a very small number which is related to the precision at which equality is met for our purposes.
 
 Let's look at an example
 
 ```{r}
 #| label: better-double-equality-example
 
-# Example 1 we want to compare 
+# We want to compare weights of three dogs under two scenarios.
 # Define Sparky & Bella's weights again and add a third dog, Fido.
-wt.Sparky = 70
-wt.Bella = 70.01
-wt.Fido = 70.1
+
+
 
 # Scenario 1: Dogs weight the same if their integer weight in pounds is the  same. [All dogs weights are equal.]
 
-prec1 <- 1
+precision.1 <- 1
 
-# code to check equality at whole integer level
+# Check if weights are equal at the whole integer level
+# Define equal.1 to check if Sparky's weight = Bella's weight
 
-equal1 <- abs(wt.Sparky-wt.Bella) < prec1 # TRUE (e.g. weights are equal)
-equal2 <- abs(wt.Sparky-wt.Fido) < prec1 # TRUE (e.g. weights are equal)
 
+# Define equal.2 to check if Sparky's weight = Fido's weight
+
+
+# print(equal.1)
+# print(equal.2)
 
 # Scenario 2: Dogs weight is the same if their integer weight in pounds is the same to the first decimal place. [Sparky and Bella weight the same, but Fido's weight is not equal to either.]
 
-prec2 <- .1
+precision.2 <- .1
+
+# Check if weights are equal to one decimal place
+# Define equal.3 to check if Sparky's weight = Bella's weight
 
 
-equal1 <- abs(wt.Sparky-wt.Bella) < prec2 # TRUE (e.g. weights are equal)
-equal2 <- abs(wt.Sparky-wt.Fido) < prec2 # FALSE (e.g. weights are not equal)
+# Define equal.4 to check if Sparky's weight = Fido's weight
 
+
+# print(equal.3)
+# print(equal.4)
 
 
 ```
@@ -870,11 +850,11 @@ print(abs.dif) # prints out .01...Looks good!
 
 Logical operators are used to compare logical values, variables or relational expressions that evaluate to logical values. There are three logical operators: AND, OR and (different) NOT. The following operators compare any combination of boolean values, variables or expressions that evaluate to a boolean value, e.g. a relational expression.
 
-| Operator |    Operation     |         Example           |
-|:--------:|:----------------:|:-------------------------:|
-|    &&    |   Logical AND    |  isCute && isBig          |
-|   \|\|   |    Logical OR    |  isCute \|\| isBig        |
-|    !     |   Logical NOT    |    !isCute                |
+| Operator |  Operation  |      Example      |
+|:--------:|:-----------:|:-----------------:|
+|    &&    | Logical AND |  isCute && isBig  |
+|   \|\|   | Logical OR  | isCute \|\| isBig |
+|    !     | Logical NOT |      !isCute      |
 
 ### AND
 
@@ -882,59 +862,68 @@ The results of using logical operators can be summarized in a "truth table". Ess
 
 | var1/expr1 | var2/expr2 | var1/expr1 && var2/expr2 |
 |:----------:|:----------:|:------------------------:|
-|    FALSE   |    FALSE   |          FALSE           |
-|    FALSE   |     TRUE   |          FALSE           |
-|     TRUE   |    FALSE   |          FALSE           |
-|     TRUE   |     TRUE   |           TRUE           |
-
+|   FALSE    |   FALSE    |          FALSE           |
+|   FALSE    |    TRUE    |          FALSE           |
+|    TRUE    |   FALSE    |          FALSE           |
+|    TRUE    |    TRUE    |           TRUE           |
 
 ```{r}
 #| label: logical-AND-operator-example
 
-# Using two variables
-var1 <- TRUE
-var2 <- FALSE
-var3 <- TRUE
+# Using variables
+# Define 3 variables and set them to boolean values
 
-print(var1 && var2)
-print(var1 && var3)
 
-# Using expressions (relational)
-val1 <- 5
+# Define result.1 and result.2 each using two of the variables and the && operator
 
-# determine if value is between two numbers
-log1 <- (val1 > 5) && (val1 < 10)
+# print(result.1)
+# print(result.2)
 
+# Using relational expressions
+# Define a variable and set it to an integer value
+
+
+# Define a variable, logical.1, and use it to determine if value is between two numbers
+
+# print(logical.1)
 ```
 
 ### OR
 
-The OR operator (||) only returns **FALSE** if both of the variables (or expressions) are FALSE. The truth table for OR is shown below:
+The OR operator (\|\|) only returns **FALSE** if both of the variables (or expressions) are FALSE. The truth table for OR is shown below:
 
-| var1/expr1 | var2/expr2 | var1/expr1 || var2/expr2 |
-|:----------:|:----------:|:------------------------:|
-|    FALSE   |    FALSE   |          FALSE           |
-|    FALSE   |     TRUE   |           TRUE           |
-|     TRUE   |    FALSE   |           TRUE           |
-|     TRUE   |     TRUE   |           TRUE           |
-
+| var1/expr1 | var2/expr2 | var1/expr1 |
+|:----------:|:----------:|:----------:|
+|   FALSE    |   FALSE    |   FALSE    |
+|   FALSE    |    TRUE    |    TRUE    |
+|    TRUE    |   FALSE    |    TRUE    |
+|    TRUE    |    TRUE    |    TRUE    |
 
 ```{r}
 #| label: logical-OR-operator-example
 
-# Using two variables
-var1 <- TRUE
-var2 <- FALSE
-var3 <- FALSE
+# Using variables
+# Define 3 variables and set them to boolean values
 
-print(var1 || var2)
-print(var1 || var3)
+
+
+
+# Define result.1 and result.2 each using two of the variables and the && operator
+
+
+
+print(result.1)
+print(result.2)
 
 # Using expressions (relational)
-val1 <- 5
+# Define a variable and set it to an integer value
 
-# determine if value is between two numbers
-log1 <- (val1 > 5) || (val1 < 10)
+
+# Define a variable, logical.1, and use it to determine if value is between two numbers
+
+
+
+print(logical.1)
 
 ```
 
@@ -942,25 +931,43 @@ log1 <- (val1 > 5) || (val1 < 10)
 
 The NOT operator (!) returns the opposite logical value of the value, variable or expression associated with it. The truth table for NOT is shown below:
 
-| var1/expr1 | var2/expr2 | var1/expr1 || var2/expr2 |
-|:----------:|:----------:|:------------------------:|
-|    FALSE   |    FALSE   |          FALSE           |
-|    FALSE   |     TRUE   |           TRUE           |
-|     TRUE   |    FALSE   |           TRUE           |
-|     TRUE   |     TRUE   |           TRUE           |
+| var1/expr1 | var2/expr2 | var1/expr1 |
+|:----------:|:----------:|:----------:|
+|   FALSE    |   FALSE    |   FALSE    |
+|   FALSE    |    TRUE    |    TRUE    |
+|    TRUE    |   FALSE    |    TRUE    |
+|    TRUE    |    TRUE    |    TRUE    |
+
+```{r}
+{r}
+#| label: logical-NOT-operator-example
+
+# Define a boolean variable
+
+# Create another variable Use the not operator on your variable
+
+
+print(var.2)
+```
 
 ## I Digress...
 
 The logical operators above compare single variables or values. However, sometimes you may want to compare to vectors, or matrices element by element. You can do this using the element-wise operators shown below.
 
 | Operator |    Operation     |                    Example                    |
-|:----------------:|:----------------:|:----------------------------------:|
+|:-----------------:|:-----------------:|:---------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
 
 ```{r}
 #| label: element-wise-logical-example
 
+# Define two vectors
+log.vec1 <- c(TRUE, FALSE, TRUE)
+log.vec2 <- c(FALSE, FALSE, TRUE)
+
+print(log.vec1 & log.vec2)
+print(log.vec1 | log.vec2)
 
 ```
 
@@ -994,12 +1001,12 @@ under_request_limit  <- requested_items < max_requests     # TRUE  (3 < 5)
 
 A. Predict the output of the following logical expressions:
 
-   1. `has_library_card && book_available`
-   2. `book_available || is_overdue`
-   3. `!fine_paid`
-   4. `is_overdue && !fine_paid`
-   5. `!(is_overdue || fine_paid)`
-   6. `is_nc_state_student || is_faculty`
+1.  `has_library_card && book_available`
+2.  `book_available || is_overdue`
+3.  `!fine_paid`
+4.  `is_overdue && !fine_paid`
+5.  `!(is_overdue || fine_paid)`
+6.  `is_nc_state_student || is_faculty`
 
 B. Scenario Questions
 
@@ -1048,25 +1055,6 @@ For each scenario, write **one R expression** — using the variables above and 
 # Test your expressions here
 
 ```
-
-## Quiz \# 5 Answers
-
-A.
-
-  1. `FALSE` (`TRUE && FALSE`)
-  2. `TRUE` (`FALSE || TRUE`)
-  3. `TRUE` (`!FALSE`)
-  4. `TRUE` (`TRUE && !FALSE` -> `TRUE && TRUE`)
-  5. `FALSE` (`!(TRUE || FALSE)` -> `!(TRUE)`)
-  6. `TRUE` (`TRUE || FALSE`)
-
-B.
-
-  1. `has_library_card && book_available` -> `TRUE && FALSE` -> `FALSE`
-  2. `has_library_card || is_reference_item` -> `TRUE || TRUE` -> `TRUE`
-  3. `is_overdue && !fine_paid` -> `TRUE && !FALSE` -> `TRUE && TRUE` -> `TRUE`
-  4. `is_reference_item || !is_overdue_by_policy` 
-  -> `TRUE || !TRUE` -> `TRUE || FALSE` -> `TRUE`
 
 ------------------------------------------------------------------------
 
