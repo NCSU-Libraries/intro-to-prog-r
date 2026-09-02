@@ -432,15 +432,16 @@ We can also now perform math on our dates:
 
 ## QUIZ \# 3
 
-How can we print `wolf1.anniversary` in the same format as `wolf1.bday.long`?
+How can we print `anniversary` in the same format as `bday.long`?
 
 ```{r}
 #| label: Quiz-3
 
-# Uncomment the lines below to use as a template
+# Uncomment the line below to use as a template
 
-# wolf1.anniversay.long <- 
-# print()
+# bday.long <- format(bday.1, "%A, %B %d, %Y")
+
+# print(bday.long)
 
 ```
 
@@ -838,8 +839,8 @@ The issue with comparing doubles is further complicated by issues that arise fro
 #| label: example-double-conversion-from-binary
 
 # Let's print out the absolute difference between Sparky and Bella's weights
-abs.dif <- abs(wt.Sparky-wt.Bella) 
-print(abs.dif) # prints out .01...Looks good!
+# abs.dif <- abs(wt.Sparky-wt.Bella) 
+# print(abs.dif) # prints out .01...Looks good!
 
 # But....
 # look at value of abs.dif in the Environment pane....?!?! 
@@ -912,8 +913,8 @@ The OR operator (\|\|) only returns **FALSE** if both of the variables (or expre
 
 
 
-print(result.1)
-print(result.2)
+# print(result.1)
+# print(result.2)
 
 # Using expressions (relational)
 # Define a variable and set it to an integer value
@@ -923,7 +924,7 @@ print(result.2)
 
 
 
-print(logical.1)
+# print(logical.1)
 
 ```
 
@@ -939,7 +940,6 @@ The NOT operator (!) returns the opposite logical value of the value, variable o
 |    TRUE    |    TRUE    |    TRUE    |
 
 ```{r}
-{r}
 #| label: logical-NOT-operator-example
 
 # Define a boolean variable
@@ -947,7 +947,7 @@ The NOT operator (!) returns the opposite logical value of the value, variable o
 # Create another variable Use the not operator on your variable
 
 
-print(var.2)
+# print(var.2)
 ```
 
 ## I Digress...
@@ -955,7 +955,7 @@ print(var.2)
 The logical operators above compare single variables or values. However, sometimes you may want to compare to vectors, or matrices element by element. You can do this using the element-wise operators shown below.
 
 | Operator |    Operation     |                    Example                    |
-|:-----------------:|:-----------------:|:---------------------------------:|
+|:-----------------:|:-----------------:|:--------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
 

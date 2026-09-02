@@ -50,7 +50,7 @@ By the end of this Session, you will understand:
 
 There are four main window panes in RStudio: the Source, the Console, the Environments and the Output Window.
 
-[![RStudio Panes from Posit website](images/Rstudio_panes.png){width="6in"}](https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html)
+[![RStudio Panes from Posit website](../images/Rstudio_panes.png){width="6in"}](https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html)
 
 ## Source Pane
 
@@ -407,7 +407,7 @@ bday.str <- "8/18/2019"
 
 # convert using as.Date()
 bday.1 <- as.Date(bday.str, format = "%m/%d/%Y")
-print(bday)
+print(bday.1)
 
 # convert using as.POSIXct()
 bday.2 <- as.POSIXct("11-01-2015", format="%m-%d-%Y")
@@ -422,7 +422,7 @@ You may have noticed that when we print out the date, even though we provided th
 #| label: format-dates
 
 # Define a date using long names
-bday.long <- format(wolf2.bday, "%A, %B %d, %Y")
+bday.long <- format(bday.1, "%A, %B %d, %Y")
 print(bday.long)
 
 ```
@@ -443,15 +443,16 @@ print(anniversary)
 
 ## QUIZ \# 3
 
-How can we print `wolf1.anniversary` in the same format as `wolf1.bday.long`?
+How can we print `anniversary` in the same format as `bday.long`?
 
 ```{r}
 #| label: Quiz-3
 
-# Uncomment the lines below to use as a template
+# Uncomment the line below to use as a template
 
-# wolf1.anniversay.long <- 
-# print()
+# bday.long <- format(bday.1, "%A, %B %d, %Y")
+
+# print(bday.long))
 
 ```
 
@@ -460,7 +461,7 @@ How can we print `wolf1.anniversary` in the same format as `wolf1.bday.long`?
 ```{r}
 #| label: Quiz-3-Answer
 
-wolf1.anniversay.long <- format(wolf1.anniversary, "%A, %B %d, %Y")
+wolf1.anniversay.long <- format(anniversary, "%A, %B %d, %Y")
 print(wolf1.anniversay.long)
 ```
 
@@ -468,7 +469,7 @@ print(wolf1.anniversay.long)
 
 A Boolean value is one that can take one of two values: 0 or 1. In R, these types of values are represented using the "logical" data type. The logical data type takes the value TRUE (1) or FALSE (0). It is good for setting flags and creating indices to subset data.
 
-![Examples for logical values](images/logical_examples_w.png){width="6in"}
+![Examples for logical values](../images/logical_examples_w.png){width="6in"}
 
 ```{r}
 #| label: logical-examples
@@ -572,7 +573,8 @@ If you only need a 2-dimensional matrix (rows and columns only), you can use `ma
 #| label: matrix-2D
 
 # generate 35 random values between 0 and 50
-data <- sample(0:50, size = 35, replace = TRUE) print(data)
+data <- sample(0:50, size = 35, replace = TRUE) 
+print(data)
 
 # make a 2-D matrix out of data
 matrix.2D <-  matrix(data, nrow = 5, ncol = 7, byrow = FALSE)
@@ -992,7 +994,7 @@ The NOT operator (!) returns the opposite logical value of the value, variable o
 var.1 <- FALSE
 
 # Use the not operator
-var.2 <- !(log1)
+var.2 <- !(var.1)
 
 print(var.2)
 
@@ -1003,7 +1005,7 @@ print(var.2)
 The logical operators above compare single variables or values. However, sometimes you may want to compare to vectors, or matrices element by element. You can do this using the element-wise operators shown below.
 
 | Operator |    Operation     |                    Example                    |
-|:-----------------:|:-----------------:|:--------------------------------:|
+|:--------------:|:--------------:|:---------------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
 
