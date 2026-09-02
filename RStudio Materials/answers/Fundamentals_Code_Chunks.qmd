@@ -1,0 +1,474 @@
+---
+title: "Intro to Programming in R: Fundamentals (Code Chunks)"
+author: "Selene R. Schmittling"
+format:
+  pdf: 
+    colorlinks: true
+    urlcolor: blue
+    linkcolor: red
+    citecolor: green
+  html:
+    toc: TRUE
+editor: visual
+---
+
+# Variables in R
+
+## Will it Variable?
+
+```{r}
+#| label: set-variables
+
+# Set some variables:
+wolf.name <- "Smiley"
+wolf.age <- 5
+
+# See the variable value
+print(wolf.name)
+print(wolf.age)
+```
+
+# Data Types
+
+## Numeric
+
+```{r}
+#| label: numeric-type
+
+# Create some variables and set them to numeric values
+numWolves  <-  5
+pctWolves <-  .20
+
+
+# Add a decimal place to numWolves
+numWolves <- 5.0
+
+print(numWolves)
+print(typeof(numWolves))
+print(as.double(numWolves))
+```
+
+## Text
+
+```{r}
+#| label: text-type
+
+# Some text examples
+
+wolf.name <- "Scruffy"
+wolf.initial <- "D"
+wolf.FavoriteArtist <- "Prince"
+
+print(wolf.name)
+print(wolf.initial)
+print(wolf.FavoriteArtist)
+print(typeof(wolf.name))
+```
+
+## Dates & Times
+
+```{r}
+#| label: date-string 
+
+# define a variable and set it to a text date
+dateStr <- "07/15/2025"
+
+print(dateStr)
+# addDays <- dateStr + 4
+```
+
+```{r}
+# Let's try some dates
+
+# create text date
+bday.str <- "8/18/2019"
+
+# convert using as.Date()
+bday.1 <- as.Date(bday.str, format = "%m/%d/%Y")
+print(bday.1)
+
+# convert using as.POSIXct()
+bday.2 <- as.POSIXct("11-01-2015", format="%m-%d-%Y")
+print(bday.2)
+```
+
+```{r}
+#| label: format-dates
+
+# Define a date using long names
+bday.long <- format(bday.1, "%A, %B %d, %Y")
+print(bday.long)
+
+```
+
+```{r}
+#| label: date-math
+
+# Define an anniversary date using bday.1
+anniversary <- bday.1 + 63
+
+print(anniversary)
+
+```
+
+
+## Logical
+
+```{r}
+#| label: logical-examples
+
+# Example of boolean variables based on picture. Define a values for isAlive and isWolf.1
+isAlive = FALSE
+isWolf.1 = TRUE
+
+print(isWolf.1)
+print(isAlive)
+
+
+# What do you think? Uncomment the two lines below and set them to the value you think they should be and print them to screen.
+
+#isMajestic = 
+#isWolf.2 = 
+
+# print(isWolf.2)
+# print(isMajestic)
+
+```
+
+
+# Data Structures
+
+
+## Vectors (1-D Arrays)
+
+Vectors store data in one dimension. The allow only one data type.
+
+### How to Create Vectors
+
+```{r}
+#| label: vector-examples
+
+# EXAMPLES OF HOW TO CREATE VECTORS
+# (Single Data Type)
+
+# Numeric
+# Since R sees integers and decimal data as double, vectors can contain both
+num.vec <- c(10, 4.5, 7, 12.2, 3.0)
+print(num.vec)
+print(typeof(num.vec))
+
+# Examples using other data types
+txt.vec <- c("Talley", "SAS Hall", "Hunt Library")
+log.vec <- c(TRUE, FALSE, TRUE, TRUE)
+
+```
+
+
+
+```{r}
+#| label: mixed-data-type-vec
+
+# Let's store some info about a pet cat named Fluffy: name, weight, isFemale, birthdate and age
+mixed.vec <- c("Fluffy", 12.0, TRUE, as.Date("9/1/2024",format="%m/%d/%Y"), 2) # so far so good
+print(mixed.vec) # oops...
+```
+
+
+## Matrices (or n-D Arrays)
+
+
+```{r}
+#| label: matrix-2D
+
+# generate 35 random values between 0 and 50
+data <- sample(0:50, size = 35, replace = TRUE) 
+print(data)
+
+# make a 2-D matrix out of data
+matrix.2D <-  matrix(data, nrow = 5, ncol = 7, byrow = FALSE)
+print(matrix.2D)
+
+```
+
+
+
+
+```{r}
+#| label: 3D-matrix
+
+# generate 75 random values between 0 and 50
+data <- sample(0:50, size = 75, replace = TRUE)
+
+# make a 3-D matrix from data
+matrix.3D <- array(data, 
+                   dim = c(5, 5, 3))
+print(matrix.3D)
+
+```
+
+## Dataframes (Tabular Data)
+
+
+```{r}
+#| label: data-frame
+
+catData <- data.frame(Name = c("Fluffy", "Max", "Coco"),
+                      isFemale = c(TRUE, FALSE, TRUE),
+                      weight.lbs = c(9.0, 11.5, 15.0),
+                      Age = c(15, 5, 3))
+print(catData)
+```
+
+### Accessing Data In Vectors, Matrices and Data Frames
+
+
+```{r}
+#| label: access-data-in-structures
+
+# VECTORS
+
+# extract the 3rd value in num.vec
+val <- num.vec[3]
+print(val)
+
+# extract the second through fourth values from num.vec
+vals <- num.vec[2:4]
+print(vals)
+
+# extract the first, third and fifth (non-contiguous) values from num.vec
+idx <- c(1, 3, 5)
+print(num.vec[idx])
+
+# print the value in the 3rd row, 6th column of matrix.2D
+print(matrix.2D[3,6])
+
+# print the value in the 4th row, second column, third dimension of matrix.3D
+print(matrix.3D[4,2,3])
+
+# print Max's age from catData
+print(catData[2,4])
+# You can also 
+print(catData[2,"Age"])
+
+```
+
+
+# Operators
+
+## Arithmetic
+
+```{r}
+#| label: arithmetic-operator-examples
+
+# Use operators with values only
+5 + 6
+5 - 6
+5 * 6
+5 / 6
+5 ^ 6
+5 ** 6
+
+# Define variables
+var1 = 2
+var2 = 8
+
+# Use operators with vars only
+var1 + var2
+var1 - var2
+var1 * var2
+var1 / var2
+var1 ^ var2
+var1 ** var2
+
+# mix it up
+var1 + 5
+var2 - 6
+
+# you get the idea.
+
+```
+
+
+```{r}
+#| label: integer-division-examples
+
+var1 = 10
+var2 = 3
+
+# Integer division
+var1 %/% 3
+
+# Modulus
+var1 %% var2
+
+# Both operators work with any combination of values and variables.
+
+```
+
+
+## Relational
+
+
+```{r}
+#| label: relational-examples
+
+# Define some variables
+var1 = 5
+var2 = 7
+
+# Examine results of different relational expressions
+
+print(var1 < var2)
+print(var1 >= var2)
+print(var1 != var2)
+
+```
+
+
+
+```{r}
+#| label: equality-operator-double-example
+
+# Define weights for Sparky & Bella
+wt.Sparky = 70
+wt.Bella = 70.01
+
+# Check if the two weights are equal
+wt.Sparky == wt.Bella
+
+```
+
+
+```{r}
+#| label: better-double-equality-example
+
+# We want to compare weights of three dogs under two scenarios.
+# Define Sparky & Bella's weights again and add a third dog, Fido.
+wt.Sparky = 70
+wt.Bella = 70.01
+wt.Fido = 70.1
+
+# Scenario 1: Dogs weight the same if their integer weight in pounds is the  same. [All dogs weights are equal.]
+
+precision.1 <- 1
+
+# Check if weights are equal at the whole integer level
+# Define equal.1 to check if Sparky's weight = Bella's weight
+equal.1 <- abs(wt.Sparky-wt.Bella) < precision.1 # TRUE (e.g. weights are equal)
+
+
+# Define equal.2 to check if Sparky's weight = Fido's weight
+
+equal.2 <- abs(wt.Sparky-wt.Fido) < precision.1 # TRUE (e.g. weights are equal)
+
+print(equal.1)
+print(equal.2)
+
+# Scenario 2: Dogs weight is the same if their integer weight in pounds is the same to the first decimal place. [Sparky and Bella weight the same, but Fido's weight is not equal to either.]
+
+precision.2 <- .1
+
+# Check if weights are equal to one decimal place
+# Define equal.3 to check if Sparky's weight = Bella's weight
+equal.3 <- abs(wt.Sparky-wt.Bella) < precision.2 # TRUE (e.g. weights are equal)
+
+# Define equal.4 to check if Sparky's weight = Fido's weight
+equal.4 <- abs(wt.Sparky-wt.Fido) < precision.2 # FALSE (e.g. weights are not equal)
+
+print(equal.3)
+print(equal.4)
+
+```
+
+
+```{r}
+#| label: example-double-conversion-from-binary
+
+# Let's print out the absolute difference between Sparky and Bella's weights
+abs.dif <- abs(wt.Sparky-wt.Bella) 
+print(abs.dif) # prints out .01...Looks good!
+
+# But....
+# look at value of abs.dif in the Environment pane....?!?! 
+
+```
+
+## Logical
+
+### AND
+
+```{r}
+#| label: logical-AND-operator-example
+
+# Using variables
+# Define 3 variables and set them to boolean values
+var.1 <- TRUE
+var.2 <- FALSE
+var.3 <- TRUE
+
+# Define result.1 and result.2 each using two of the variables and the && operator
+result.1 <- var.1 && var.2 
+result.2 <- var.1 && var.3
+
+print(result.1)
+print(result.2)
+
+# Using expressions (relational)
+# Define a variable and set it to an integer value
+val.1 <- 5
+
+# Define a variable, logical.1, and use it to determine if value is between two numbers
+
+logical.1 <- (val.1 > 5) && (val.1 < 10)
+
+print(logical.1)
+```
+
+### OR
+
+
+```{r}
+#| label: logical-OR-operator-example
+
+# Using variables
+# Define 3 variables and set them to boolean values
+var1 <- TRUE
+var2 <- FALSE
+var3 <- FALSE
+
+# Define result.1 and result.2 each using two of the variables and the && operator
+result.1 <- var.1 && var.2 
+result.2 <- var.1 && var.3
+
+print(result.1)
+print(result.2)
+
+# Using expressions (relational)
+# Define a variable and set it to an integer value
+val.1 <- 5
+
+# Define a variable, logical.1, and use it to determine if value is between two numbers
+
+logical.1 <- (val.1 < 5) || (val.1 > 10)
+
+print(logical.1)
+
+
+```
+
+### NOT
+
+```{r}
+#| label: logical-NOT-operator-example
+
+# Define a boolean variable
+var.1 <- FALSE
+
+# Use the not operator
+var.2 <- !(var.1)
+
+print(var.2)
+
+```
+
+------------------------------------------------------------------------

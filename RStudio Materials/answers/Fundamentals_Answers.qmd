@@ -385,7 +385,7 @@ Dates are their own special kind of special. The Date/Time data type is useful f
 - Outputting dates so they look pretty and conform to the style you want them to (e.g., 8/26/2025, August 26, 2025; 25/08/2025).
 - Doing date math: how many weeks, days, months, years between two dates, etc.
 
-We can define a date as a string. The computer doesn't care. While we can print the data, we can perform any date math on it. Uncomment the last line in
+We can define a date as a string. The computer doesn't care. While we can print the data, we can't perform any date math on it. Uncomment the last line in the code chunk below to see what happens.
 
 ```{r}
 #| label: date-string 
@@ -522,10 +522,6 @@ We'll cover both.
 
 Vectors store data in one dimension. The allow only one data type.
 
-## I Digress ...
-
-In point of fact, R is a vectorized language. What does that mean? It means scalars (single values) in R are really 1-element vectors. Will this have a big impact on learning R? No, probably not. But you can whip this fact out at parties and amaze your friends.
-
 ### How to Create Vectors
 
 ```{r}
@@ -557,6 +553,10 @@ print(mixed.vec) # oops...
 ```
 
 While R will let you pass different types of data to an array, it will convert all values to a single type. How it converts these values depends on what types of values you put in it. To see that this may not always be text, remove "Fluffy" from the vector and print it out again.
+
+## I Digress ...
+
+In point of fact, R is a vectorized language. What does that mean? It means scalars (single values) in R are really 1-element vectors. Will this have a big impact on learning R? No, probably not. But you can whip this fact out at parties and amaze your friends.
 
 ## Matrices (or n-D Arrays)
 
@@ -1005,7 +1005,7 @@ print(var.2)
 The logical operators above compare single variables or values. However, sometimes you may want to compare to vectors, or matrices element by element. You can do this using the element-wise operators shown below.
 
 | Operator |    Operation     |                    Example                    |
-|:--------------:|:--------------:|:---------------------------------------:|
+|:---------------:|:---------------:|:------------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
 
