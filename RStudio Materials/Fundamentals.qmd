@@ -955,7 +955,7 @@ The NOT operator (!) returns the opposite logical value of the value, variable o
 The logical operators above compare single variables or values. However, sometimes you may want to compare to vectors, or matrices element by element. You can do this using the element-wise operators shown below.
 
 | Operator |    Operation     |                    Example                    |
-|:-----------------:|:-----------------:|:--------------------------------:|
+|:--------------:|:--------------:|:---------------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
 
@@ -1073,12 +1073,12 @@ In our next workshop, **Control Flow and Functions**, we'll learn about and prac
 
 # Before You Go
 
-## Take our Survey
+## Evaluate our Workshop
 
-We appreciate your input. Let us know how this Workshop went for you! We take your input seriously and appreciate the time you take to give it. Please fill out [our survey](https://go.ncsu.edu/dss-workshop-eval).
+We appreciate your input. Let us know how this Workshop went for you! We take your input seriously and appreciate the time you take to give it. Please fill out [our workshop evaluation](https://go.ncsu.edu/dss-workshop-eval).
 
 ## Need Additional Help?
 
-We are available to help you with whatever question you have about this Workshop or programming in general. If you run into snags or questions (we all do), as you start to create programs for yourself, reach out to [us](https://go.ncsu.edu/getdatahelp). Send an email, make an appointment, or reserve a workstation! We are here to assist you to be successful in your data science journey.
+We are available to help you with whatever question you have about this Workshop or programming in general. If you run into snags or questions (we all do), as you start to create programs for yourself, reach out to [Get Data Help](https://go.ncsu.edu/getdatahelp). Send an email, make an appointment, or reserve a workstation! We are here to assist you to be successful in your data science journey.
 
 ------------------------------------------------------------------------

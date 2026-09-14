@@ -1,0 +1,570 @@
+---
+title: "Loops and Functions"
+format:
+  pdf: 
+    colorlinks: true
+    urlcolor: blue
+    linkcolor: red
+    citecolor: green
+    fig-width: 7
+    fig-height: 5
+    code-overflow: wrap
+  html:
+    toc: TRUE
+    fig-width: 8
+    fig-height: 6
+    code-overflow: wrap
+editor: visual
+---
+
+# Learning Outcomes
+
+In this Session of our R Workshop, we will cover the following introductory aspects of R Studio & Programming:
+
+- Functions, including
+  - built-in
+  - library
+  - user-defined
+- File Input and Output
+- Getting help
+- Conditional and Flow Control Statements
+  - if
+  - for
+  - while
+
+By the end of this Session, you will understand:
+
+1.  The three types of functions
+2.  The anatomy of a function
+3.  How to install and use R Libraries
+4.  How to use documentation, get help in RStudio
+5.  How to import and save data
+6.  How to write an if statement and what to use it for
+7.  How to write a for loop, how it works and what to use if for
+8.  How to write a while loop, how it works and what to use it for
+
+------------------------------------------------------------------------
+
+## Functions
+
+We will look at three types of functions:
+
+- Built-in
+  - are available when R loads without further info
+- External packages
+  - need to be initially installed (into your library)
+  - when you want to use them you must load them using the `library()` command
+- User-defined functions
+  - Your babies. You make these to:
+    - perform discrete tasks
+    - automate repetitive tasks
+    - reduce errors
+    - make code more readable
+    - organize code
+
+We'll talk about each of these and explore some examples. There are two steps that need to be completed to use a function:
+
+> **define**: before a function can be used it must be defined. Built-in and functions in external packages have been defined for you. When you create your own functions (user-defined) you will create a definition for that function.
+>
+> **call**: once a function is defined, you can **call** it. Calling a function is just the act of using it in your code. Sensibly, You can't call a function before it is defined.
+
+A function has three main components:
+
+- name (because "hey, you!" won't get its attention)
+- parameters
+  - pieces of information the function needs to do it's job.
+  - parameters can be required or optional
+    - the function won't run without required parameters
+    - optional parameters will have a default value which is used if no value is passed for it
+    - the term "parameter" refers to the variables the function needs to do its job. These are found in the definition of the function.
+    - when you provide information to a function you "pass" the information
+    - "argument" refers the values you pass to the function when you call it.
+- return value
+  - this is a value that the function returns when it's done
+  - frequently we will store this value in a variable using the assignment operator
+  - the return value may be
+    - a value that was calculated
+    - data that has been manipulated in some way, or
+    - a status that indicates whether the function encountered any errors
+    - note return values can be values, data structures or objects
+
+### Built-In Functions
+
+Built-in functions are functions that are loaded when R is loaded. You don't have to do anything to use them.
+
+You can see what packages R loads by opening the Packages tab in the Output pane. If you haven't loaded any other packages, then the packages with check-marks are the built-in packages that get loaded.
+
+We saw an example of using built-in package in the Basic Syntax and Operators Workshop. Here's another example showing the use of two base R functions.
+
+```{r}
+#| label: example-built-in-function
+
+# load some data
+data.1 <- read.csv("data/EDA_Data_File_2.csv") # base R function
+
+# fix margin spacing so plot doesn't look wonky
+par(mar = c(5, 12, 2, 2)) # order: bottom, left, top, right margins
+
+# generate plot
+bp <- barplot(table(data.1$College), # base R function
+              horiz = TRUE,
+              las = 1,
+              col = "blue",
+              cex.names = .8,
+              cex.axis = .8,
+              xlab = "# of Students")
+
+bp
+
+```
+
+Want more information about a function? Use `?<function name>`.
+
+The `barplot()` function is part of Base R and is loaded by default. In the console window, type "?barplot" and hit enter. Let's use the vocabulary we covered earlier and read some documentation!
+
+Here is what we see in the Help pane:
+
+- name of the function and the package it is in: barplot {package}
+- title of the help page: Bar Plots
+- Description: gives a high-level description of what the function does
+- Usage:
+  - provides the function interface
+    - all parameters, required and optional
+      - optional parameters will be followed by an "=" sign
+    - different "flavors" of the function
+- Arguments
+  - lists all parameters
+  - sometimes indicates "optional", but not always
+  - includes acceptable values, data types and data structures
+- Value
+  - provides information about the return value
+- Authors, References, See Also and Examples
+  - self-explanatory
+  - click on "Run examples"
+
+### Practice Using Built-In Functions
+
+```{r}
+#| label: practice-builtin-functions
+
+# You can use the function built-in function hist() to 
+# create a histogram of data
+
+# Use ?hist() to learn how to call the function
+
+
+# Generate 50 values from a normal distribution with mean=0 and standard 
+# deviation=4.25
+data <- rnorm(50, mean = 0, sd = 4.25)
+
+# Call the function, pass only the data
+
+
+# add a breaks statement to increase the number of bars (bins)
+# hint: count the bars in the last plot and increase that number
+
+
+# NOTE: behind the scenes, R uses `pretty()` which will adjust your bin edges so # that they look pretty. This means the number of bins won't always be the 
+# number you asked for!
+
+# set the freq argument to TRUE and then FALSE 
+# look at the difference
+
+
+# set freq argument to FALSE
+
+
+```
+
+### Packages
+
+The Base R packages provide a lot of functionality and they will take you far. However, the beauty of open source languages is that creative, capable people like you can create packages and provide them for public use. The ability to expand R's functionality is limitless and free.
+
+Packages:
+
+- must be installed initially
+- once installed, they must be loaded using the `library()` function
+  - the function will stay loaded as long as the R-session is active and not closed.
+  - if the R session is closed (you exit out of R), you will need to run the `library()` command again
+
+Base R doesn't have a function for loading excel files. Let's explore a package that will be useful for this purpose: `readxl`.
+
+First, let's see what packages are installed.
+
+```{r}
+#| label: list-installed-pkgs
+#| output: false
+
+
+```
+
+This let's us see what packages pre-installed. If our package isn't installed, we need to install it. Let's install `readxl`.
+
+```{r}
+#| label: install-readxl
+
+#install.packages("readxl")
+
+```
+
+Once a package is installed, we can load it whenever we want to use it. When do we need to load a library? Each time we start R, we start an *R Session*. We need to load packages every time we start a new session. If you select **Session/New Session** from the menu, you need to reload your packages in the new session. We load a library using the `library()` function.
+
+```{r}
+#| label: load-library
+
+# load library
+
+
+# use library
+
+
+```
+
+We can use the `require()` function to check if a package is installed. If it isn't, we can install it and if it is we can just load it. `require()` returns true if the package IS installed. We want to install it if it isn't. The `if()` function below executes the code if the expression between the outer parentheses evaluates to `TRUE`. For this reason, we use the expression `!require(ggplot2)`.
+
+```{r}
+#| label: use-require
+
+# UNCOMMENT THE NEXT 4 LINES
+# If ggplot2 package isn't installed, install it
+# if (!require("ggplot2")) {
+#   install.packages("ggplot2")
+# }
+
+# load library
+library("ggplot2")
+
+# use the library
+ggplot(mtcars, aes(x=as.factor(cyl))) +
+  geom_bar(stat="count") +
+  labs(title = "Count of Cylinders in mtcar data",
+       x = "Cylinders",
+       y = "Count") +
+  theme_minimal()
+      
+
+```
+
+### User-defined Functions
+
+Functions should:
+
+- perform a discrete task or set of tasks
+- be written to be reusable
+
+Whether you are just starting out or a seasoned programmer, spending time with paper and pencil before programming is a good idea. Consider:
+
+- what will the function do?
+- what information (parameters) does it need to do it
+- what parameters will be required vs. optional
+  - it's ok to make everything required
+- what will the function return?
+
+```{r}
+#| label: example-user-defined-function
+
+# A function that calculates a library fine
+
+
+# Calling it with values
+
+
+
+# calling it with variables
+
+
+
+```
+
+### Practice Writing a User-Defined Function
+
+Your mission, if you choose to accept it (accept it! accept it!) is to write a function that converts a temperature from Celsius to Fahrenheit. Recall the conversion formula (where $C$ represents degrees Celsius and $F$ represents degrees Fahrenheit):
+
+$$F = \frac{9}{5}C + 32$$ {#eq-temp-conversion}
+
+To get started, articulate:
+
+1\. What info do you need to provide the function? This will define your parameters.
+
+2\. What info do you want to get back from the function? This will define your output (return value).
+
+3\. What steps do you need to take to use your parameters to generate the output (return value)? This will define the code steps you need in your function.
+
+```{r}
+#| label: user-defined-temp-converter
+
+# <fcn name>  <- function(<fcn parameters) {
+  # <fcn code>
+  # return(<fcn return value>)
+# }
+
+# test our code
+
+  
+  
+```
+
+You now know what built-in, package and user-defined functions are. You've used help to get more information about using built-in and package functions and you've written a simple function on your own.
+
+Next, we will explore conditional and control flow statements that will expand the ways you write code, including user-defined functions!
+
+## Conditional Statements and Flow Control
+
+### IF Statements (Conditional Flow)
+
+The `if` statement:
+
+- runs code based on whether a condition is met
+- if condition is met, code will be run once
+
+The expression you use for your condition must evaluate to `TRUE` or `FALSE`. Examples of these types of expressions include:
+
+- boolean/logical variables, e.g. runIF
+- relational expressions e.g. `mynumber > 5`
+- logical expressions e.g. `isHelpful && isAvailable`
+
+```{r}
+#| label: if-example
+
+# Logical variable
+
+
+
+
+# relational expression
+
+
+
+
+# logical operators
+
+
+
+
+```
+
+Sometimes, you want to do something **else** if our `if` condition isn't met. In these cases you can add an `else` statement.
+
+```{r}
+#| label: add-else-statement
+
+
+
+
+
+# You can use more than one else statement
+
+
+
+
+
+```
+
+NOTES:
+
+1.  It is important that you have open '{' and closed '}' braces for each part of your `if` statements (e.g. `if`, `else if`, and `else`)
+2.  You can check closure of your braces by putting your cursor next to a brace. This puts a little white box around the brace your cursor is next to as well as around the matching brace.
+3.  If you type `{`, R produces the closed brace.
+
+### FOR Loops
+
+A `for` loop:
+
+- runs a specific number of times
+- will run at least once
+- is useful for traversing data structures like vectors, matrices, and data frames.
+
+```{r}
+#| label: for-loop-examples
+
+# basic
+
+
+
+# iterate over a vector
+
+
+
+
+# nested for loop
+
+
+
+
+```
+
+A nested `for` loop is useful for accessing data in a matrix. **NOTE:** this takes some thought regarding what order you want to access elements in the matrix.
+
+```{r}
+#| label: for-loop-matrix-access
+
+# create some data
+data <- sample(1:50, 35, replace=TRUE)
+
+# Put data in matrix form
+matrix.2D <- matrix(data=data, nrow=5, ncol=7, byrow=FALSE)
+print(matrix.2D)
+
+# iterate over columns then rows to print elements in your matrix
+
+
+
+```
+
+The code above prints each row column by column. What if you wanted to print each column row by row? What changes would you need to make? Can you just swap `i` and `j`?
+
+```{r}
+#| label: swap-col-row-printing
+
+# create some data
+data <- sample(1:50, 35, replace=TRUE)
+
+# Put data in matrix form
+matrix.2D <- matrix(data=data, nrow=5, ncol=7, byrow=FALSE)
+
+# copy the for loop above and make changes to it so values are printed out
+# column by column
+
+
+
+
+
+```
+
+### WHILE Loops
+
+A while loop:
+
+- executes code by testing a condition
+- code may execute once, several times or not at all
+- can be used to run code in response to a changing condition
+- the condition can be a relational expression or logical expression
+- the condition can be a logical variable, however, we'll see that this can be inefficient
+
+NOTES:
+
+- the variables associated with the condition being tested must be set before the while loop runs
+- the condition must be updated within the while loop
+
+The example below uses a relational expression (with relational operator) to "drive" the while loop.
+
+```{r}
+#| label: while-loop-relational-example
+
+
+```
+
+You can also "drive" the while loop with logical operators.
+
+```{r}
+#| label: while-loop-logical-example
+
+# Using a logical expression
+
+
+
+
+
+
+
+```
+
+Good code is:
+
+- code that works and
+- that can be understood by others.
+
+### Code Efficiency
+
+Efficiency comes with practice and in exploring different ways to write the same code.
+
+Let's look at some code and see how we can make it more efficient.
+
+```{r}
+#| label: inefficient-while-loop
+
+# Initialize variables
+logical.1 <- TRUE
+val1 <- 16
+
+while (logical.1 == TRUE) {
+  # A wolf leaves
+  val1 = val1 - 1
+
+  # the number drops below five, they get unhappy
+  if (val1 <= 5) {
+    logical.1 = FALSE
+  }
+  print(paste('Val1: ', val1))
+}
+
+# Walk through the steps in your head. Is there anything that seems 
+# duplicative? Focus on the "if" statement used above to change the 
+# value of "logical.1".
+
+```
+
+```{r}
+#| label: its-smug-efficient-brother
+# More efficient while loop
+
+
+# we can directly check val1, but we need to change the 
+# relational operator (why?)
+while (val1 > 5) {
+  # reduce val1 by 1
+  val1 = val1 - 1
+  # output the value
+  print(paste('Val1: ', val1))
+}
+
+# check outputs for the inefficient version and this one.
+# Are the outputs the same?
+
+```
+
+Inefficient while loops are likely to occur if you use a logical variable for the while loop test condition. The logical variable will have to be updated using a logical expression (using relational or logical operators). It is usually more efficient to use the logical expression directly than use a logical variable that is updated using the logical expression. However, you may decide to use the inefficient code to maintain readability/interpretability, i.e. make clear to other users what your code is doing.
+
+Some important considerations with while loops:
+
+- make sure you initialize condition values BEFORE the while loop starts
+
+- make sure values in the test condition are getting updated appropriately within the loop
+
+## I digress ...
+
+Sometimes you need to exit an if, for, or while loop before all the code is executed. Most languages, including R, have a reserved word you can use to exit a loop, if needed. This word is break. While we won't cover it today, it is an important enough concept that I want to provide an example.
+
+```{r}
+#| label: break-statement-not-dancing
+
+# Use a for loop as an example, but this will work with if and while statements
+# too
+
+for (i in 1:10) {
+  print(paste("Current value:", i))
+  
+  # if value = 7 print a different message and exit loop
+  if (i == 7) {
+    print("Elvis has left the building. Bye!")
+    break # this statement will end the loop
+    # What would happen if you changed the 7 to 11?
+  }
+}
+
+
+```
+
+Thank you for attending the second workshop in our two workshop Introduction to R Series. To see a list of our other upcoming workshops, visit [upcoming workshops](https://go.ncsu.edu/dss-workshops).
+
+# Before You Go
+
+## Take our Survey
+
+We appreciate your input. Let us know how this Workshop went for you! We take your input seriously and appreciate the time you take to give it. Please fill out [our workshop evaluation](https://go.ncsu.edu/dss-workshop-eval).
+
+## Need Additional Help?
+
+We are available to help you with whatever question you have about this Workshop or programming in general. If you run into snags or questions (we all do), as you start to create programs for yourself, reach out to [Get Data Help](https://go.ncsu.edu/getdatahelp). Send an email, make an appointment, or reserve a workstation! We are here to assist you to be successful in your data science journey.
+
+------------------------------------------------------------------------
