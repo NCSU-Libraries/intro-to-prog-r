@@ -130,12 +130,6 @@ In the notebook this looks messy, let's use our history file to call this in the
 
 ### Question: What do you notice about the data?
 
-### POSSIBLE ANSWERS:
-
-1.  There are 50 rows (observations) and 22 columns (variables)
-2.  There is missing data.
-3.  There is a mix of character and numeric data (\<int\> and \<dbl\>)
-
 ------------------------------------------------------------------------
 
 ### Values
@@ -191,12 +185,6 @@ Again, the console will work better for output. The summary provides the followi
 
 ### Question: What do you notice about the summarized data?
 
-### POSSIBLE ANSWERS:
-
-1.  Some of the character data have 50 unique values.
-2.  A few of the numeric fields have a lot of NAs.
-3.  Weight is a character field.
-4.  Dates are treated as character data, but years are not.
 
 ------------------------------------------------------------------------
 
@@ -286,9 +274,6 @@ summary(data$Interview.Date)
 
 ### Question: How can we tell that our Interview.Date has been converted to a date?
 
-### ANSWERS:
-
-The summary shows numeric attributes, e.g. Min., 1st Qu., Median, Mean, 3rd Qu., and Max.
 
 ------------------------------------------------------------------------
 
@@ -300,21 +285,18 @@ Using the code above as a template, convert `Hire.Date` and `Termination.Date` f
 #| label: try-text-to-date
 
 # Hire.Date
-data$Hire.Date <- as.Date(data$Hire.Date,
-                               format = "%Y-%m-%d")
+
+
 
 # Check converted data
-glimpse(data$Hire.Date)
-summary(data$Hire.Date)
+
 
 
 # Termination.Date
-data$Termination.Date <- as.Date(data$Termination.Date,
-                          format = "%Y-%m-%d")
+
 
 # Check converted data
-glimpse(data$Termination.Date)
-summary(data$Termination.Date)
+
 
 ```
 
@@ -345,31 +327,11 @@ summary(data$Offer.Sent)
 3.  Is **factor** a data type? (Hard question)
 4.  Can we do math on this field?
 
-### ANSWERS:
-
-1.  You can use `typeof()` to see what data type `Offer.Sent` has.
-2.  `typeof()` returns <integer>.
-3.  Technically, a factor is a data object, we can see this by running `class(data$Offer.Sent)`. This command returns "factor" which indicates the class of the object.
-4.  We can issues `sum(data$Offer.Sent)` to check if R sees this as a numeric value.
 
 ```{r}
 #| label: factor-qs
 
-# 1. and 2. Use typeof() to see what data type the field is
-typeof(data$Offer.Sent)
-
-# 3. We can use class() to see that Offer.Sent is and object of class "factor"
-class(data$Offer.Sent)
-
-# 4. We can use sum() to test whether we can do math on a factor Uncomment the line below to try it out.
-
-# sum(data$Offer.Sent)
-
-# We can use as.numeric() to force R to generate a sum. However, what does it mean?
-sum(as.numeric(data$Offer.Sent))
-
-# maybe this is more helpful
-table(data$Offer.Sent)
+# Area to use code to answer your questions.
 
 ```
 
@@ -384,24 +346,18 @@ Using the code above as a template, convert `Biter` and `Hired` from `int` to a 
 
 
 # Biter
-data$Biter <- factor(data$Biter,
-                     levels = c(0,1),
-                     labels = c("Doesn't Bite",
-                                "Bites"))
+
+
 # Check converted data
-glimpse(data$Biter)
-summary(data$Biter)
 
 
 
 # Hired
-data$Hired <- factor(data$Hired,
-                     levels = c(0,1),
-                     labels = c("Not Hired",
-                                "Hired"))
+
+
 # Check converted data
-glimpse(data$Hired)
-summary(data$Hired)
+
+
 
 ```
 
@@ -447,17 +403,7 @@ for (c in char.fields) {
 
 1.  What observations can we make about our character data?
 
-### POSSIBLE ANSWERS:
-
-1.  `Post.Employment.Position`, `Termination.Reason` and `Fur.Color` all have a small number of unique values but a large number of blanks.
-
-2.  `Nick.Name` has more blanks than values. It has 21 non-blanks which have 15 unique values.
-
-3.  `Temperment` has only 1 blank and 12 unique values.
-
-4.  `Species`, `Prior.Employer`, `Prior Position`, and `Breed` have low numbers of missing values but many non-unique values.
-
-5.  `Name` has no blanks and 50 unique values. For this data set, `Name` could be used as a unique identifier for a row.
+------------------------------------------------------------------------
 
 For fields with a low to moderate number of unique values we can look at the unique values to get a sense of what they represent. To see the unique values we can use the `table()` command.
 
@@ -479,16 +425,16 @@ Using the code above as a template, look at the unique values for `Termination.R
 
 
 # Termination Reason
-table(data$Termination.Reason)
+
 
 # Fur Color
-table(data$Fur.Color)
+
 
 # Nick Name
-table(data$Nick.Name)
+
 
 # Temperment
-table(data$Temperment)
+
 
 ```
 
@@ -513,11 +459,9 @@ Using the code above as a template, look at the unique values for `Prior.Positio
 ```{r}
 #| label: try-distinct-select
 
-
 # Prior Position
-data |>
-  distinct(Prior.Position, .keep_all = TRUE) |>
-  select(Prior.Position)
+
+
 
 
 ```
@@ -559,12 +503,6 @@ hist(data$Height,
 
 What observations can we make from our histogram?
 
-### POSSIBLE ANSWERS:
-
-1.  Most of the heights occur below 10 inches.
-2.  No heights occur between 40 and 50 inches
-3.  A small number of weights are \> 50 inches
-4.  The maximum height is 80 inches.
 
 ------------------------------------------------------------------------
 
@@ -587,11 +525,7 @@ hist(data$Height,
 
 What observations can we make from our histogram with more bins?
 
-### POSSIBLE ANSWERS:
 
-1.  There is more variation in Height \< 40 than is clear from the default histogram.
-2.  The most observations occur around 5 in.
-3.  We can now see a gap between the \# of observations around 60 vs. 80 inches.
 
 ------------------------------------------------------------------------
 
@@ -645,12 +579,6 @@ boxplot(data$Height,
 
 What observations can we make from our boxplot?
 
-### POSSIBLE ANSWERS:
-
-1.  Four outliers occur above 50 inches.
-2.  Heights are right tailed or left-skewed.
-3.  50% of the data points occur below \~ 15 inches.
-4.  No outliers occur in the lower region.
 
 ------------------------------------------------------------------------
 
@@ -662,33 +590,24 @@ Using the code provided in the histogram and boxplot sections. Visually explore 
 #| label: try-hist-and-box
 
 # Weight - Histogram
-hist(data$Weight,
-     xlab = "Weight (lbs)",
-     main = "Histogram of Weight",
-     breaks = 25)
+
+
 
 # Weight - Boxplot
-boxplot(data$Weight,
-        xlab = "Weight (lbs)")
+
 
 # Age - Histogram
-hist(data$Age,
-     xlab = "Age (yrs)",
-     main = "Histogram of Age")
+
 
 # Age - Boxplot
-boxplot(data$Age,
-        xlab = 'Age (yrs)')
+
 
 # Starting Salary - Histogram
-hist(data$Starting.Salary,
-     xlab = "Starting Salary ($)",
-     main = "Histogram of Starting Salary")
+
 
 
 # Starting Salary - Boxplot
-boxplot(data$Starting.Salary,
-        xlab = 'Starting Salary ($)')
+
 
 
 ```
@@ -737,7 +656,7 @@ There are some tweaks we can make to this which include adjusting the plot margi
 
 # Provide a label for blanks
 names(cnts)
-names(cnts)[1] <- "blank"
+names(cnts)[1] <- "blank" # there is no label for the 1st item.
 
 # change borders on plot by modifying
 # the mar parameter
@@ -794,34 +713,16 @@ Using the code above make some bar plots for other categorical fields in our dat
 #| label: try-it-barplots
 
 # Temperment
-val.counts <- data |>
-  group_by(Temperment) |>
-  count() |>
-  arrange(n)
 
-val.counts$Temperment[1] <- "blank"
 
-barplot(val.counts$n,
-        names.arg = val.counts$Temperment,
-        horiz = TRUE,
-        xlab = "Temperment",
-        las = 1,
-        cex.names = .5) # need to make text even smaller to fit everything!
 
 # Species
-barplot(table(data$Species),
-        horiz = TRUE,
-        las = 1,
-        cex.names = .5) # need to make text even smaller to fit everything!
 
 # Offer.Sent
-barplot(table(data$Offer.Sent))
 
 # Biter
-barplot(table(data$Biter))
 
 # Hired
-barplot(table(data$Hired))
 
 ```
 
@@ -877,17 +778,14 @@ Using the code above make bar plots using the date functions shown above for our
 #| label: try-it-date-charts
 
 # Interview Date
-cnts <- table(year(data$Interview.Date))
-barplot(cnts,
-        horiz = TRUE,
-        las = 1,
-        cex.names = .4)
+
+
 # Is this chart helpful...not really
 # maybe try other functions!
 
 # Termination Date
-cnts <- table(day(data$Termination.Date))
-barplot(cnts)
+
+
 # did you find a helpful chart by trying different date functions?
 # I didn't... not enough information in this field.
 ```
