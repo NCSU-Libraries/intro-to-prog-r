@@ -26,6 +26,7 @@
 #### Access the Slides
 - 🛝 [Link to Slides for Fundamentals Workshop](https://go.ncsu.edu/dss-r-fundamentals)
 - 🛝 [Link to Slides for Loops & Functions Workshop](https://go.ncsu.edu/dss-r-loops)
+- 🛝 [Link to Slides for EDA Workshop](https://go.ncsu.edu/dss-r-eda) 
 
 #### Download RStudio Materials
 The materials for this workshop are stored in GitHub. You can download these materials by clicking on the link below:
