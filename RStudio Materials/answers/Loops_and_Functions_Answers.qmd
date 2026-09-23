@@ -1,5 +1,6 @@
 ---
 title: "Loops and Functions (Answers)"
+author: "Selene Schmittling, PhD"
 format:
   pdf: 
     colorlinks: true

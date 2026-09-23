@@ -1,6 +1,6 @@
 ---
 title: "Intro to Programming in R: Fundamentals (Answers)"
-author: "Selene R. Schmittling"
+author: "Selene Schmittling, PhD"
 format:
   pdf: 
     colorlinks: true
@@ -50,7 +50,7 @@ By the end of this Session, you will understand:
 
 There are four main window panes in RStudio: the Source, the Console, the Environments and the Output Window.
 
-[![RStudio Panes from Posit website](../images/Rstudio_panes.png){width="6in"}](https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html)
+[![RStudio Panes from Posit website](../images/Rstudio_panes.png){width="6in"}(https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html)
 
 ## Source Pane
 
@@ -99,7 +99,8 @@ The output pane has a variety of tabs that provide access to different types of 
 - Plots
   - this is where plots will show up when you generate them
 
-```{r Plot_tab_example}
+```{r}
+#| label: plot_tab_example
 # Lets create a little plot
 # create some data
 data <- data.frame(a = c(72,41,54,36), b=c('East','West','North','South'))
@@ -1005,7 +1006,7 @@ print(var.2)
 The logical operators above compare single variables or values. However, sometimes you may want to compare to vectors, or matrices element by element. You can do this using the element-wise operators shown below.
 
 | Operator |    Operation     |                    Example                    |
-|:--------------:|:--------------:|:---------------------------------------:|
+|:----------------:|:----------------:|:----------------------------------:|
 |    &     | Element-wise AND | c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)  |
 |    \|    | Element-wise OR  | c(TRUE, TRUE, FALSE) \| c(FALSE, TRUE, FALSE) |
 
