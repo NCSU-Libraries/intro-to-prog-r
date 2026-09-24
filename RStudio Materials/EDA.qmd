@@ -26,7 +26,7 @@ editor_options:
 
 By the end of this workshop, you will be able to
 
-- Load data into a dataframe
+- Load data into a data frame
 
 - Assess general characteristics of your data (e.g. data types, column names)
 
@@ -78,7 +78,7 @@ library(tidyverse)
 
 
 # Create variable to hold file name of data
-f.name <- "../data/EDA_Data_File_1.csv"
+f.name <- "data/EDA_Data_File_1.csv"
 
 # read in data
 data <- read.csv(f.name)
@@ -185,7 +185,6 @@ Again, the console will work better for output. The summary provides the followi
 
 ### Question: What do you notice about the summarized data?
 
-
 ------------------------------------------------------------------------
 
 [Next steps]{.underline}:
@@ -227,6 +226,7 @@ From our summary we saw that `Weight` is character data. This is not an appropri
 summary(data$Weight)
 
 # Convert Weight to numeric value
+# SHOULD WE SAVE THE ORIGINAL DATA? NAME NEW FIELD DIFFERENTLY?
 data$Weight <- as.numeric(data$Weight)
 
   # Check converted data
@@ -274,7 +274,6 @@ summary(data$Interview.Date)
 
 ### Question: How can we tell that our Interview.Date has been converted to a date?
 
-
 ------------------------------------------------------------------------
 
 ### TRY IT!
@@ -302,7 +301,7 @@ Using the code above as a template, convert `Hire.Date` and `Termination.Date` f
 
 #### Boolean Flags to Factor
 
-There are three boolean fields in our data: `Offer.sent`, `Biter` and `Hired` boolean data frequently represent flags, which are categorical variables in practice. Factors let you associate a level and a label to a categorical variable. Converting a categorical variable to a factor can simplify analysis and visualization in R.
+There are three boolean fields in our data: `Offer.sent`, `Biter` and `Hired`. Boolean data frequently represent flags, which are categorical variables in practice. Factors let you associate a level and a label to a categorical variable. Converting a categorical variable to a factor can simplify analysis and visualization in R.
 
 ```{r}
 #| label: convert-to-factor
@@ -326,7 +325,6 @@ summary(data$Offer.Sent)
 2.  What data type is it?
 3.  Is **factor** a data type? (Hard question)
 4.  Can we do math on this field?
-
 
 ```{r}
 #| label: factor-qs
@@ -446,7 +444,7 @@ For `Prior.Employer`, we can use a different method to explore unique values.
 #| label: method2-unique-vals
 
 data |>
-  distinct(Prior.Employer, .keep_all = TRUE) |>
+  distinct(Prior.Employer) |>
   select(Prior.Employer)
 ```
 
@@ -490,7 +488,7 @@ Let's compare the histogram and boxplot for Height.
 ```{r}
 #| label: height-histogram
 
-# make a histogram of Weight
+# make a histogram of Height
 hist(data$Height,
      xlab = "Height",
      main = "Histogram of Height")
@@ -502,7 +500,6 @@ hist(data$Height,
 ### Question:
 
 What observations can we make from our histogram?
-
 
 ------------------------------------------------------------------------
 
@@ -524,8 +521,6 @@ hist(data$Height,
 ### Question:
 
 What observations can we make from our histogram with more bins?
-
-
 
 ------------------------------------------------------------------------
 
@@ -562,7 +557,7 @@ Next, let's compare the histogram to the boxplot.
 
 Recall that a boxplot provides us with the following information:
 
-![Boxplot features](images/boxplot_features_2-01.png){width="4in"}
+![Boxplot features](images/boxplot_features_2.png){width="4in"}
 
 Let's generate a boxplot for Height.
 
@@ -578,7 +573,6 @@ boxplot(data$Height,
 ### Question:
 
 What observations can we make from our boxplot?
-
 
 ------------------------------------------------------------------------
 
@@ -743,6 +737,9 @@ We can use functions like: `year()`, `month()`, `day()` and `wday()` to visualiz
 ```{r}
 #| label: date-barplots
 
+# Make sure Hire.Date is a date data type
+data$Hire.Date <- as.Date(data$Hire.Date,
+                               format = "%Y-%m-%d")
 # Use year()
 cnts <- table(year(data$Hire.Date))
 barplot(cnts)
@@ -847,18 +844,20 @@ barplot(data2$Salary,
 ```{r}
 #| label: scatter-use-factor
 
+plt.colors <- c("red", "blue")
+
 # Using a factor
 plot(data$Weight, data$Height, # 2 numerical
+     col = plt.colors[factor(data$Offer.Sent)], # 1 categorical
      pch = 19,
-     col = data$Offer.Sent, # 1 categorical
      xlab = "Weight (lbs)",
-     ylab = "Height (in)")
-
+     ylab = "Height (in)",
+     )
 legend('bottomright',
-       col = c('red','black'),
-       pch = 19,
-       legend = levels(data$Offer.Sent),
-       bty = 'n')
+       legend = levels(factor(data$Offer.Sent)),
+       col = plt.colors,
+       pch = 19
+)
 ```
 
 ```{r}

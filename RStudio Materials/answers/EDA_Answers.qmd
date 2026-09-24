@@ -26,7 +26,7 @@ editor_options:
 
 By the end of this workshop, you will be able to
 
-- Load data into a dataframe
+- Load data into a data frame
 
 - Assess general characteristics of your data (e.g. data types, column names)
 
@@ -239,6 +239,7 @@ From our summary we saw that `Weight` is character data. This is not an appropri
 summary(data$Weight)
 
 # Convert Weight to numeric value
+# SHOULD WE SAVE THE ORIGINAL DATA? NAME NEW FIELD DIFFERENTLY?
 data$Weight <- as.numeric(data$Weight)
 
   # Check converted data
@@ -320,7 +321,7 @@ summary(data$Termination.Date)
 
 #### Boolean Flags to Factor
 
-There are three boolean fields in our data: `Offer.sent`, `Biter` and `Hired` boolean data frequently represent flags, which are categorical variables in practice. Factors let you associate a level and a label to a categorical variable. Converting a categorical variable to a factor can simplify analysis and visualization in R.
+There are three boolean fields in our data: `Offer.sent`, `Biter` and `Hired`. Boolean data frequently represent flags, which are categorical variables in practice. Factors let you associate a level and a label to a categorical variable. Converting a categorical variable to a factor can simplify analysis and visualization in R.
 
 ```{r}
 #| label: convert-to-factor
@@ -500,7 +501,7 @@ For `Prior.Employer`, we can use a different method to explore unique values.
 #| label: method2-unique-vals
 
 data |>
-  distinct(Prior.Employer, .keep_all = TRUE) |>
+  distinct(Prior.Employer) |>
   select(Prior.Employer)
 ```
 
@@ -546,7 +547,7 @@ Let's compare the histogram and boxplot for Height.
 ```{r}
 #| label: height-histogram
 
-# make a histogram of Weight
+# make a histogram of Height
 hist(data$Height,
      xlab = "Height",
      main = "Histogram of Height")
@@ -950,17 +951,21 @@ barplot(data2$Salary,
 #| label: scatter-use-factor
 
 # Using a factor
-plot(data$Weight, data$Height, # 2 numerical
-     pch = 19,
-     col = data$Offer.Sent, # 1 categorical
-     xlab = "Weight (lbs)",
-     ylab = "Height (in)")
 
+plt.colors <- c("red", "blue")
+
+# Using a factor
+plot(data$Weight, data$Height, # 2 numerical
+     col = plt.colors[factor(data$Offer.Sent)], # 1 categorical
+     pch = 19,
+     xlab = "Weight (lbs)",
+     ylab = "Height (in)",
+)
 legend('bottomright',
-       col = c('red','black'),
-       pch = 19,
-       legend = levels(data$Offer.Sent),
-       bty = 'n')
+       legend = levels(factor(data$Offer.Sent)),
+       col = plt.colors,
+       pch = 19
+)
 ```
 
 ```{r}
